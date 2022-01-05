@@ -15,7 +15,7 @@ export default class UsernotesProvider {
     private constructor() { }
 
     public getUsernotesPage() : Promise<Snoowrap.WikiPage>{
-        return RedditProvider.Instance.getRedditClient().getSubreddit(OrFail(process.env.REDDIT_SUBREDDIT)).getWikiPage("usernotes").fetch()
+        return RedditProvider.Instance.getTargetSubreddit().getWikiPage("usernotes").fetch()
     }
 
     public addUsernote( user: Snoowrap.RedditUser, note: string) : void{
