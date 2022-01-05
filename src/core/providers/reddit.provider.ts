@@ -2,7 +2,7 @@
 import dotenv from 'dotenv';
 import Snoowrap from 'snoowrap';
 import SnooStream from '../lib/snoostream.lib'
-import { OrFail,  } from '../lib/helper.lib'
+import { OrFail } from '../lib/helper.lib'
 import Pollify from '../lib/pollify.lib'
 import EventEmitter from 'events'
 
