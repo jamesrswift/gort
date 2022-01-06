@@ -14,7 +14,15 @@ export class arrayIncludes extends condition{
     }
 
     public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
-        return this._lhs.execute(user, target) == this._rhs.execute(user, target)
+        const haystack : string[] = this._lhs.execute(user, target)
+        const needles : string[] = this._rhs.execute(user, target)
+        for ( let needle of needles){
+            if ( haystack.includes(needle)){
+                return true;
+            }
+        }
+        
+        return false
     }
 
 }
