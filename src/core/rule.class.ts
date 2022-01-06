@@ -1,5 +1,6 @@
 import Snoowrap from 'snoowrap'
 import action from './action.class';
+import condition from './condition.class';
 
 export default abstract class ruleBase {
 
@@ -7,7 +8,7 @@ export default abstract class ruleBase {
 
     abstract target : 'Submissions' | 'Comments' | 'Both'
 
-    abstract predicate( user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission) : Promise<boolean>
+    abstract Condition: condition
 
     abstract Action : action;
 

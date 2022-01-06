@@ -5,16 +5,16 @@ import Snoowrap from "snoowrap";
 export class equals extends condition {
 
     private _property: countable;
-    private _rhs: number;
+    private _rhs: countable;
 
-    public constructor(property: countable, rhs: number) {
+    public constructor(property: countable, rhs: countable) {
         super();
         this._property = property;
         this._rhs = rhs;
     }
 
-    public execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
-        return this._property.execute(user, target) == this._rhs
+    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
+        return this._property.execute(user, target) == this._rhs.execute(user, target)
     }
 
 }
@@ -22,16 +22,16 @@ export class equals extends condition {
 export class notequals extends condition {
 
     private _property: countable;
-    private _rhs: number;
+    private _rhs: countable;
 
-    public constructor(property: countable, rhs: number) {
+    public constructor(property: countable, rhs: countable) {
         super();
         this._property = property;
         this._rhs = rhs;
     }
 
-    public execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
-        return this._property.execute(user, target) != this._rhs
+    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
+        return this._property.execute(user, target) != this._rhs.execute(user, target)
     }
     
 }
@@ -39,16 +39,16 @@ export class notequals extends condition {
 export class greaterThan extends condition {
 
     private _property: countable;
-    private _rhs: number;
+    private _rhs: countable;
 
-    public constructor(property: countable, rhs: number) {
+    public constructor(property: countable, rhs: countable) {
         super();
         this._property = property;
         this._rhs = rhs;
     }
 
-    public execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
-        return this._property.execute(user, target) > this._rhs
+    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
+        return this._property.execute(user, target) > this._rhs.execute(user, target)
     }
     
 }
@@ -56,16 +56,16 @@ export class greaterThan extends condition {
 export class lessThan extends condition {
 
     private _property: countable;
-    private _rhs: number;
+    private _rhs: countable;
 
-    public constructor(property: countable, rhs: number) {
+    public constructor(property: countable, rhs: countable) {
         super();
         this._property = property;
         this._rhs = rhs;
     }
 
-    public execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
-        return this._property.execute(user, target) < this._rhs
+    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
+        return this._property.execute(user, target) < this._rhs.execute(user, target)
     }
     
 }
@@ -73,16 +73,16 @@ export class lessThan extends condition {
 export class greaterThanOrEquals extends condition {
 
     private _property: countable;
-    private _rhs: number;
+    private _rhs: countable;
 
-    public constructor(property: countable, rhs: number) {
+    public constructor(property: countable, rhs: countable) {
         super();
         this._property = property;
         this._rhs = rhs;
     }
 
-    public execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
-        return this._property.execute(user, target) >= this._rhs
+    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
+        return this._property.execute(user, target) >= this._rhs.execute(user, target)
     }
     
 }
@@ -90,16 +90,16 @@ export class greaterThanOrEquals extends condition {
 export class lessThanOrEquals extends condition {
 
     private _property: countable;
-    private _rhs: number;
+    private _rhs: countable;
 
-    public constructor(property: countable, rhs: number) {
+    public constructor(property: countable, rhs: countable) {
         super();
         this._property = property;
         this._rhs = rhs;
     }
 
-    public execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
-        return this._property.execute(user, target) <= this._rhs
+    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
+        return this._property.execute(user, target) <= this._rhs.execute(user, target)
     }
     
 }

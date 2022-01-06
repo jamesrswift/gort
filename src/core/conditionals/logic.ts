@@ -10,7 +10,7 @@ export class and extends condition {
         this._conditions = args;
     }
 
-    public execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
+    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
         for (let condition of this._conditions) {
             if (condition.execute(user, target) == false) {
                 return false;
@@ -30,7 +30,7 @@ export class or extends condition {
         this._conditions = args;
     }
 
-    public execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
+    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
         for (let condition of this._conditions) {
             if (condition.execute(user, target) == true) {
                 return true;
@@ -50,7 +50,7 @@ export class not extends condition {
         this._rhs = rhs;
     }
 
-    public execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
+    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
         return !(this._rhs.execute(user, target))
     }
 

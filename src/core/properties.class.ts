@@ -1,25 +1,28 @@
 import Snoowrap from "snoowrap";
 
-export abstract class countable {
+export class countable {
 
-    public constructor() {}
+    private _quantity: number;
+    public constructor(quantity: number = 0) {this._quantity = quantity}
 
-    public abstract execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission) : number 
-
-}
-
-export abstract class listable {
-
-    public constructor() {}
-
-    public abstract execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission) : string[] 
+    public execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission) : number { return this._quantity }
 
 }
 
-export abstract class legible {
+export class listable {
 
-    public constructor() {}
+    private _array: string[]
+    public constructor(array: string[] = new Array<string>()) { this._array = array}
 
-    public abstract execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission) : string 
+    public execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission) : string[] { return this._array;}
+
+}
+
+export class legible {
+
+    private _string: string;
+    public constructor(str: string = "") {this._string = str}
+
+    public execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission) : string { return this._string }
 
 }
