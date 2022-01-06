@@ -13,16 +13,17 @@ export class arrayIncludes extends condition {
         this._rhs = rhs
     }
 
-    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
-        const haystack: string[] = this._lhs.execute(user, target)
-        const needles: string[] = this._rhs.execute(user, target)
-        for (let needle of needles) {
-            if (haystack.includes(needle)) {
-                return true;
+    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): Promise<boolean> {
+        return new Promise<boolean>( async (resolve, reject) => {
+            const haystack: string[] = await this._lhs.execute(user, target)
+            const needles: string[] = await this._rhs.execute(user, target)
+            for (let needle of needles) {
+                if (haystack.includes(needle)) {
+                    resolve(true);
+                }
             }
-        }
-
-        return false
+            resolve(false)
+        })
     }
 
 }

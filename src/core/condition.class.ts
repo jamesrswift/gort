@@ -4,6 +4,6 @@ export default abstract class condition {
 
     public constructor() { }
 
-    public abstract execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean
+    public abstract execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): Promise<boolean>
 
 }

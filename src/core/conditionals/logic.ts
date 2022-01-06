@@ -10,13 +10,20 @@ export class and extends condition {
         this._conditions = args;
     }
 
-    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
+    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): Promise<boolean> {
+        // Build promise array
+        let promiseArray: Promise<boolean>[] = [];
         for (let condition of this._conditions) {
-            if (condition.execute(user, target) == false) {
-                return false;
-            }
+            promiseArray.push(condition.execute(user, target))
         }
-        return true;
+
+        // Build return promise
+        return new Promise<boolean>((resolve, reject) => {
+            Promise.all(promiseArray).then((results) => {
+                for (let conditionResult of results) { if (!conditionResult) { resolve(false) } }
+                resolve(true)
+            }).catch((reason) => { reject(reason) })
+        })
     }
 
 }
@@ -30,14 +37,22 @@ export class or extends condition {
         this._conditions = args;
     }
 
-    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
+    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): Promise<boolean> {
+        // Build promise array
+        let promiseArray: Promise<boolean>[] = [];
         for (let condition of this._conditions) {
-            if (condition.execute(user, target) == true) {
-                return true;
-            }
+            promiseArray.push(condition.execute(user, target))
         }
-        return false;
+
+        // Build return promise
+        return new Promise<boolean>((resolve, reject) => {
+            Promise.all(promiseArray).then((results) => {
+                for (let conditionResult of results) { if (conditionResult) { resolve(true) } }
+                resolve(false)
+            }).catch((reason) => { reject(reason) })
+        })
     }
+
 
 }
 
@@ -50,8 +65,10 @@ export class not extends condition {
         this._rhs = rhs;
     }
 
-    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
-        return !(this._rhs.execute(user, target))
+    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            this._rhs.execute(user, target).then((result: boolean) => { resolve(!result) }).catch((reason) => { reject(reason) })
+        })
     }
 
 }

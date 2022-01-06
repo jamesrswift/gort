@@ -1,6 +1,7 @@
 import condition from "../condition.class";
 import { countable } from "../properties.class";
 import Snoowrap from "snoowrap";
+import { lchownSync } from "fs";
 
 export class equals extends condition {
 
@@ -13,8 +14,12 @@ export class equals extends condition {
         this._rhs = rhs;
     }
 
-    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
-        return this._property.execute(user, target) == this._rhs.execute(user, target)
+    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            Promise.all([this._property.execute(user, target), this._rhs.execute(user, target)]).then((results) => {
+                resolve(results[0] == results[1])
+            }).catch((reason) => { reject(reason) })
+        })
     }
 
 }
@@ -30,8 +35,12 @@ export class notequals extends condition {
         this._rhs = rhs;
     }
 
-    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
-        return this._property.execute(user, target) != this._rhs.execute(user, target)
+    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            Promise.all([this._property.execute(user, target), this._rhs.execute(user, target)]).then((results) => {
+                resolve(results[0] != results[1])
+            }).catch((reason) => { reject(reason) })
+        })
     }
 
 }
@@ -47,8 +56,12 @@ export class greaterThan extends condition {
         this._rhs = rhs;
     }
 
-    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
-        return this._property.execute(user, target) > this._rhs.execute(user, target)
+    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            Promise.all([this._property.execute(user, target), this._rhs.execute(user, target)]).then((results) => {
+                resolve(results[0] > results[1])
+            }).catch((reason) => { reject(reason) })
+        })
     }
 
 }
@@ -64,8 +77,12 @@ export class lessThan extends condition {
         this._rhs = rhs;
     }
 
-    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
-        return this._property.execute(user, target) < this._rhs.execute(user, target)
+    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            Promise.all([this._property.execute(user, target), this._rhs.execute(user, target)]).then((results) => {
+                resolve(results[0] < results[1])
+            }).catch((reason) => { reject(reason) })
+        })
     }
 
 }
@@ -81,8 +98,12 @@ export class greaterThanOrEquals extends condition {
         this._rhs = rhs;
     }
 
-    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
-        return this._property.execute(user, target) >= this._rhs.execute(user, target)
+    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            Promise.all([this._property.execute(user, target), this._rhs.execute(user, target)]).then((results) => {
+                resolve(results[0] >= results[1])
+            }).catch((reason) => { reject(reason) })
+        })
     }
 
 }
@@ -98,8 +119,12 @@ export class lessThanOrEquals extends condition {
         this._rhs = rhs;
     }
 
-    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
-        return this._property.execute(user, target) <= this._rhs.execute(user, target)
+    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            Promise.all([this._property.execute(user, target), this._rhs.execute(user, target)]).then((results) => {
+                resolve(results[0] <= results[1])
+            }).catch((reason) => { reject(reason) })
+        })
     }
 
 }
