@@ -8,7 +8,7 @@ export default class DiscordProvider {
     // Singleton Pattern
     //
     private static _instance?: DiscordProvider;
-    public static get Instance():DiscordProvider { return this._instance || (this._instance = new DiscordProvider()) }
+    public static get Instance(): DiscordProvider { return this._instance || (this._instance = new DiscordProvider()) }
 
     private constructor() {
         dotenv.config();
@@ -23,25 +23,25 @@ export default class DiscordProvider {
     //
     // Event Handling
     //
-    onConnection(){ }
-    onMessage(message: Discord.Message){ }
+    onConnection() { }
+    onMessage(message: Discord.Message) { }
 
     //
     // Channel Management
     //
     private _channelList: Map<string, Discord.AnyChannel | null> = new Map<string, Discord.AnyChannel>();
 
-    public async getChannel(channelID : string) : Promise<Discord.AnyChannel | null | undefined> {
-        if ( this._channelList.has(channelID)) return this._channelList.get(channelID)
-        return new Promise( (resolve: (value: Discord.AnyChannel | PromiseLike<Discord.AnyChannel | null | undefined> | null | undefined) => void, reject: (reason?: any) => void) => {
-            void this._client.channels.fetch(channelID).then( channel => {
+    public async getChannel(channelID: string): Promise<Discord.AnyChannel | null | undefined> {
+        if (this._channelList.has(channelID)) return this._channelList.get(channelID)
+        return new Promise((resolve: (value: Discord.AnyChannel | PromiseLike<Discord.AnyChannel | null | undefined> | null | undefined) => void, reject: (reason?: any) => void) => {
+            void this._client.channels.fetch(channelID).then(channel => {
                 this._channelList.set(channelID, channel)
-                resolve( channel )
+                resolve(channel)
             })
         })
     }
 
-    public async sendMessage( options: string | Discord.MessagePayload | Discord.MessageOptions, channelID?: string): Promise<Discord.Message>{
+    public async sendMessage(options: string | Discord.MessagePayload | Discord.MessageOptions, channelID?: string): Promise<Discord.Message> {
         // Check if muted first
         return (await this.getChannel(OrDefault(channelID, OrFail(process.env.DISCORD_CHANNEL))) as Discord.TextChannel)?.send(options)
     }

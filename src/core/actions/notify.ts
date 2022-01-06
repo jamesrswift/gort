@@ -37,7 +37,6 @@ export default class notifyAction extends action {
             .addField( 'Trigger Reason', this._sOpts.message)
             .setFooter({ text: "Provided by CensorshipCo" });
 
-        // TODO: Send to channelID or default through DiscordProvider
         DiscordProvider.Instance.sendMessage({embeds: [embed]}, this._sOpts.channelID)
     }
 

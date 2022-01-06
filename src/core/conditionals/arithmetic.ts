@@ -33,7 +33,7 @@ export class notequals extends condition {
     public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
         return this._property.execute(user, target) != this._rhs.execute(user, target)
     }
-    
+
 }
 
 export class greaterThan extends condition {
@@ -50,7 +50,7 @@ export class greaterThan extends condition {
     public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
         return this._property.execute(user, target) > this._rhs.execute(user, target)
     }
-    
+
 }
 
 export class lessThan extends condition {
@@ -67,7 +67,7 @@ export class lessThan extends condition {
     public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
         return this._property.execute(user, target) < this._rhs.execute(user, target)
     }
-    
+
 }
 
 export class greaterThanOrEquals extends condition {
@@ -84,7 +84,7 @@ export class greaterThanOrEquals extends condition {
     public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
         return this._property.execute(user, target) >= this._rhs.execute(user, target)
     }
-    
+
 }
 
 export class lessThanOrEquals extends condition {
@@ -101,5 +101,5 @@ export class lessThanOrEquals extends condition {
     public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
         return this._property.execute(user, target) <= this._rhs.execute(user, target)
     }
-    
+
 }

@@ -11,7 +11,7 @@ import ruleBase from '../core/rule.class';
 export default class testRule extends ruleBase {
 
     name: string = "Test Rule";
-    target : 'Submissions' | 'Comments' | 'Both' = 'Both';
+    target: 'Submissions' | 'Comments' | 'Both' = 'Both';
 
     Condition: condition = new and(
         new or(
@@ -28,6 +28,6 @@ export default class testRule extends ruleBase {
         )
     )
 
-    Action : action = new ban({});
+    Action: action = new ban({});
 
 }

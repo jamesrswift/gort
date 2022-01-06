@@ -6,10 +6,10 @@ export default abstract class ruleBase {
 
     abstract name: string;
 
-    abstract target : 'Submissions' | 'Comments' | 'Both'
+    abstract target: 'Submissions' | 'Comments' | 'Both'
 
     abstract Condition: condition
 
-    abstract Action : action;
+    abstract Action: action;
 
 }

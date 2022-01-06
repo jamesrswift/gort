@@ -10,7 +10,7 @@ export declare interface subredditStream {
     on(event: 'error', listener: (...data: any[]) => void): this
 }
 
-export class subredditStream extends EventEmitter{
+export class subredditStream extends EventEmitter {
 
     private _redditProvider: RedditProvider;
     private _streamer: SnooStream;
@@ -18,11 +18,12 @@ export class subredditStream extends EventEmitter{
     private _submissionStream?: Pollify;
     private _subreddit: string;
 
-    public constructor(redditProvider: RedditProvider, subreddit: string){
+    public constructor(redditProvider: RedditProvider, subreddit: string) {
         super()
         this._redditProvider = redditProvider;
         this._streamer = new SnooStream(this._redditProvider.getRedditClient());
         this._subreddit = subreddit
+        this.createListeners();
     }
 
     private createListeners(): void {

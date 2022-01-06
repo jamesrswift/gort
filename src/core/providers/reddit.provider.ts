@@ -42,8 +42,8 @@ export class RedditProvider extends EventEmitter {
     // Manage Polling
     //
 
-    public createListeners( subreddit: string = OrFail(process.env.REDDIT_SUBREDDIT) ) : subredditStream {
-        return new subredditStream( this, subreddit )
+    public createListeners(subreddit: string = OrFail(process.env.REDDIT_SUBREDDIT)): subredditStream {
+        return new subredditStream(this, subreddit)
     }
-   
+
 }

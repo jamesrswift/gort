@@ -1,6 +1,6 @@
 import action from '../action.class'
 import Snoowrap from 'snoowrap'
-import {OrDefault} from '../lib/helper.lib'
+import { OrDefault } from '../lib/helper.lib'
 
 interface replyActionOptions {
     distinguish: boolean;
@@ -27,14 +27,14 @@ export default class replyAction extends action {
 
         // Comment: Not sure I like the below type casting, but from what I can tell from the documentation,
         //          Snoowrap.Comment.reply and Snoowrap.Submission.reply should both return a Promise<Snoowrap.Comment>
-        (<Promise<Snoowrap.Comment>>target.reply( this._replyText(user, target) )).then( (comment: Snoowrap.Comment) => {
-            if ( this._sOpts.distinguish || this._sOpts.sticky ){
+        (<Promise<Snoowrap.Comment>>target.reply(this._replyText(user, target))).then((comment: Snoowrap.Comment) => {
+            if (this._sOpts.distinguish || this._sOpts.sticky) {
                 comment.distinguish({
                     status: this._sOpts.distinguish,
                     sticky: this._sOpts.sticky
                 })
             }
-            if ( this._sOpts.lock ){
+            if (this._sOpts.lock) {
                 // @ts-ignore
                 comment.lock()
             }

@@ -9,7 +9,7 @@ export default class lockAction extends action {
 
     public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission) {
         // @ts-ignore
-        if ( !item.locked ){
+        if (!item.locked) {
             // @ts-ignore
             item.lock()
         }
