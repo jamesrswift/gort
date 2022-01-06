@@ -2,12 +2,13 @@ import action from '../action.class'
 import Snoowrap from 'snoowrap'
 import Discord from 'discord.js';
 import {OrDefault, textEllipsis} from '../lib/helper.lib'
+import DiscordProvider from "../providers/discord.provider"
 
 interface notifyActionOptions{
     message: string;
     color?: string,
     description?: string,
-    // TODO: ChannelID or default
+    channelID?: string
 }
 
 export default class notifyAction extends action {
@@ -37,7 +38,7 @@ export default class notifyAction extends action {
             .setFooter({ text: "Provided by CensorshipCo" });
 
         // TODO: Send to channelID or default through DiscordProvider
-
+        DiscordProvider.Instance.sendMessage({embeds: [embed]}, this._sOpts.channelID)
     }
 
 }

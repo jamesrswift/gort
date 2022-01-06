@@ -1,5 +1,5 @@
 import Discord from 'discord.js';
-import { OrFail, textEllipsis } from '../lib/helper.lib'
+import { OrDefault, OrFail, textEllipsis } from '../lib/helper.lib'
 import dotenv from 'dotenv';
 
 export default class DiscordProvider {
@@ -41,8 +41,8 @@ export default class DiscordProvider {
         })
     }
 
-    public async sendMessage( channelID: string, options: string | Discord.MessagePayload | Discord.MessageOptions): Promise<Discord.Message>{
+    public async sendMessage( options: string | Discord.MessagePayload | Discord.MessageOptions, channelID?: string): Promise<Discord.Message>{
         // Check if muted first
-        return (await this.getChannel(channelID) as Discord.TextChannel)?.send(options)
+        return (await this.getChannel(OrDefault(channelID, OrFail(process.env.DISCORD_CHANNEL))) as Discord.TextChannel)?.send(options)
     }
 }
