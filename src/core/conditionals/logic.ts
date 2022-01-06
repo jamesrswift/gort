@@ -40,3 +40,18 @@ export class or extends condition {
     }
 
 }
+
+export class not extends condition {
+
+    private _rhs: condition;
+
+    public constructor(rhs: condition) {
+        super();
+        this._rhs = rhs;
+    }
+
+    public execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): boolean {
+        return !(this._rhs.execute(user, target))
+    }
+
+}
