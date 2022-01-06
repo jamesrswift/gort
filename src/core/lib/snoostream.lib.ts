@@ -69,4 +69,10 @@ export default class SnooStream {
         return this.postStream(pollFn, subreddit, opts)
     }
 
+    modqueueStream(subreddit: string, opts?: IPostStreamOptions): Pollify {
+        const sub = this.snoowrap.getSubreddit(subreddit)
+        const pollFn = sub.getModqueue.bind(sub);
+        return this.postStream(pollFn);
+    }
+
 }
