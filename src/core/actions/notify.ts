@@ -7,6 +7,7 @@ interface notifyActionOptions{
     message: string;
     color?: string,
     description?: string,
+    // TODO: ChannelID or default
 }
 
 export default class notifyAction extends action {
@@ -28,12 +29,14 @@ export default class notifyAction extends action {
             
             // Below relies on undefined behind as false
             .addField( 'Content Body', textEllipsis(  (<Snoowrap.Comment>target).body || (<Snoowrap.Submission>target).selftext, 500))
-            
+
             .addField( 'Account Age (days)', (Math.ceil(((Date.now() / 1000) - user.created) / (60 * 60 * 24))).toString(), true)
             .addField( 'Link Karma', user.link_karma.toString(), true)
             .addField( 'Comment Karma', user.comment_karma.toString(), true)
             .addField( 'Trigger Reason', this._sOpts.message)
             .setFooter({ text: "Provided by CensorshipCo" });
+
+        // TODO: Send to channelID or default through DiscordProvider
 
     }
 

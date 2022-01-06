@@ -1,18 +1,17 @@
 import action from '../action.class'
 import Snoowrap from 'snoowrap'
 
-export default class removeAction extends action {
+export default class lockAction extends action {
 
-    private _bSpam: boolean;
-
-    constructor(spam: boolean = false) {
+    constructor() {
         super();
-        this._bSpam = spam;
     }
 
     public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission) {
-        if ((<Snoowrap.Submission>target).lock !== undefined) {
-            (<Snoowrap.Submission>target).lock(); // Comments cannot presently be locked.
+        // @ts-ignore
+        if ( !item.locked ){
+            // @ts-ignore
+            item.lock()
         }
     }
 

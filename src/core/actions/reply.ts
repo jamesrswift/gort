@@ -2,12 +2,9 @@ import action from '../action.class'
 import Snoowrap from 'snoowrap'
 import {OrDefault} from '../lib/helper.lib'
 
-// TODO:    Comments cannot presently be locked due to an error in the typescript declarations for Snoowrap.Comment. This could
-//          be addressed by temporarily recasting as Snoowrap.Submission, but that would be one hell of a code smell.
-
 interface replyActionOptions {
     distinguish: boolean;
-    //lock: boolean;
+    lock: boolean;
     sticky: boolean;
 }
 
@@ -20,7 +17,7 @@ export default class replyAction extends action {
         super();
         this._sOpts = {
             distinguish: OrDefault(options.distinguish, false),
-            //lock: OrDefault(options.lock, false),
+            lock: OrDefault(options.lock, false),
             sticky: OrDefault(options.sticky, false)
         }
         this._replyText = text;
@@ -37,6 +34,11 @@ export default class replyAction extends action {
                     sticky: this._sOpts.sticky
                 })
             }
+            if ( this._sOpts.lock ){
+                // @ts-ignore
+                comment.lock()
+            }
+
         })
     }
 
