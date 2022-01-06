@@ -95,9 +95,17 @@ export class subredditHistory extends listable {
     constructor(){super()}
 
     public override execute(user: Snoowrap.RedditUser) : Promise<string[]>{
-        // TODO: Retrieving a user history is asynchronous. Not sure how I'm
-        //       going to work this in.
-        return Promise.resolve([])
+        return new Promise<string[]>( (resolve, reject) => {
+            user.getComments().then( (listing: Snoowrap.Listing<Snoowrap.Comment>) => {
+                let subreddits: string[] = [];
+                listing.forEach( comment => {
+                    if ( !(subreddits.includes(comment.subreddit.display_name.toLowerCase()) ) ){
+                        subreddits.push(comment.subreddit.display_name.toLowerCase())
+                    }
+                })
+                resolve(subreddits)
+            }).catch( (error) => {reject(error)}) // May cause issues if reddit connection is interrupted?
+        })
     }
     
 }
