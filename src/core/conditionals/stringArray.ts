@@ -1,8 +1,7 @@
-import condition from "../condition.class";
-import { listable } from "../properties.class";
+import {conditional, listable} from "../condition.class";
 import Snoowrap from "snoowrap";
 
-export class arrayIncludes extends condition {
+export class arrayIncludes extends conditional {
 
     private _lhs: listable;
     private _rhs: listable

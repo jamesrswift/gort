@@ -1,7 +1,6 @@
 import { notify } from "../core/actions";
-import condition from "../core/condition.class";
+import { conditional, listable } from "../core/condition.class";
 import { arrayIncludes } from "../core/conditionals/stringArray";
-import { listable } from "../core/properties.class";
 import { subredditHistory } from "../core/properties/user";
 import ruleBase from "../core/rule.class";
 

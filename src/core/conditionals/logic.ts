@@ -1,11 +1,11 @@
-import condition from "../condition.class";
+import { conditional } from "../condition.class";
 import Snoowrap from "snoowrap";
 
-export class and extends condition {
+export class and extends conditional {
 
-    private _conditions: condition[];
+    private _conditions: conditional[];
 
-    public constructor(...args: condition[]) {
+    public constructor(...args: conditional[]) {
         super();
         this._conditions = args;
     }
@@ -28,11 +28,11 @@ export class and extends condition {
 
 }
 
-export class or extends condition {
+export class or extends conditional {
 
-    private _conditions: condition[];
+    private _conditions: conditional[];
 
-    public constructor(...args: condition[]) {
+    public constructor(...args: conditional[]) {
         super();
         this._conditions = args;
     }
@@ -56,11 +56,11 @@ export class or extends condition {
 
 }
 
-export class not extends condition {
+export class not extends conditional {
 
-    private _rhs: condition;
+    private _rhs: conditional;
 
-    public constructor(rhs: condition) {
+    public constructor(rhs: conditional) {
         super();
         this._rhs = rhs;
     }

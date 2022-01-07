@@ -1,9 +1,8 @@
-import condition from "../condition.class";
-import { countable } from "../properties.class";
+import { conditional, countable, legible, listable } from "../condition.class";
 import Snoowrap from "snoowrap";
 import { lchownSync } from "fs";
 
-export class equals extends condition {
+export class equals extends conditional {
 
     private _property: countable;
     private _rhs: countable;
@@ -24,7 +23,7 @@ export class equals extends condition {
 
 }
 
-export class notequals extends condition {
+export class notequals extends conditional {
 
     private _property: countable;
     private _rhs: countable;
@@ -45,7 +44,7 @@ export class notequals extends condition {
 
 }
 
-export class greaterThan extends condition {
+export class greaterThan extends conditional {
 
     private _property: countable;
     private _rhs: countable;
@@ -66,7 +65,7 @@ export class greaterThan extends condition {
 
 }
 
-export class lessThan extends condition {
+export class lessThan extends conditional {
 
     private _property: countable;
     private _rhs: countable;
@@ -87,7 +86,7 @@ export class lessThan extends condition {
 
 }
 
-export class greaterThanOrEquals extends condition {
+export class greaterThanOrEquals extends conditional {
 
     private _property: countable;
     private _rhs: countable;
@@ -108,7 +107,7 @@ export class greaterThanOrEquals extends condition {
 
 }
 
-export class lessThanOrEquals extends condition {
+export class lessThanOrEquals extends conditional {
 
     private _property: countable;
     private _rhs: countable;

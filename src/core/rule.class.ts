@@ -1,6 +1,6 @@
 import Snoowrap from 'snoowrap'
 import action from './action.class';
-import condition from './condition.class';
+import { conditional } from './condition.class';
 
 export default abstract class ruleBase {
 
@@ -8,7 +8,7 @@ export default abstract class ruleBase {
 
     abstract target: 'Submissions' | 'Comments' | 'Both'
 
-    abstract Condition: condition
+    abstract Condition: conditional
 
     abstract Action: action;
 
