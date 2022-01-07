@@ -1,7 +1,7 @@
 import action from "../core/action.class";
 import { notify } from "../core/actions";
 import { conditional, countable } from "../core/condition.class";
-import { lessThanOrEquals } from "../core/conditionals/arithmetic";
+import { lessThanOrEquals } from "../core/conditionals/relational";
 import { comment_karma } from "../core/properties/user";
 import ruleBase from "../core/rule.class";
 

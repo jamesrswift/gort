@@ -2,7 +2,7 @@ import Snoowrap from 'snoowrap'
 import action from '../core/action.class';
 import { ban } from '../core/actions';
 import { conditional, listable, countable } from "../core/condition.class";
-import { greaterThan } from '../core/conditionals/arithmetic';
+import { greaterThan } from '../core/conditionals/relational';
 import { and, or } from '../core/conditionals/logic';
 import { arrayIncludes } from '../core/conditionals/stringArray';
 import ruleBase from '../core/rule.class';
