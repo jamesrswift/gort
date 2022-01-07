@@ -1,6 +1,9 @@
 import action from '../action.class'
 import Snoowrap from 'snoowrap'
 import { OrDefault } from '../lib/helper.lib'
+import { logging } from '../logging';
+
+const logger = logging.getLogger('core.action.reply');
 
 interface replyActionOptions {
     distinguish: boolean;
@@ -24,6 +27,8 @@ export default class replyAction extends action {
     }
 
     public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission) {
+
+        logger.info(`Executing reply action on ${target.id}`);
 
         // Comment: Not sure I like the below type casting, but from what I can tell from the documentation,
         //          Snoowrap.Comment.reply and Snoowrap.Submission.reply should both return a Promise<Snoowrap.Comment>

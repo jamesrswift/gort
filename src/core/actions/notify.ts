@@ -3,6 +3,9 @@ import Snoowrap from 'snoowrap'
 import Discord from 'discord.js';
 import {OrDefault, textEllipsis} from '../lib/helper.lib'
 import DiscordProvider from "../providers/discord.provider"
+import { logging } from '../logging';
+
+const logger = logging.getLogger('core.action.notify');
 
 interface notifyActionOptions{
     message: string;
@@ -38,6 +41,7 @@ export default class notifyAction extends action {
             .setFooter({ text: "Provided by CensorshipCo" });
 
         DiscordProvider.Instance.sendMessage({embeds: [embed]}, this._sOpts.channelID)
+        logger.info(`Executing notify action on ${target.id}`)
     }
 
 }

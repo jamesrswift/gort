@@ -1,6 +1,9 @@
 import action from '../action.class'
 import Snoowrap from 'snoowrap'
 import { RedditProvider } from '../providers/reddit.provider';
+import { logging } from '../logging';
+
+const logger = logging.getLogger('core.action.ban');
 
 interface BanOptions {
     banMessage?: string;
@@ -19,6 +22,7 @@ export default class banAction extends action {
     }
 
     public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission) {
+        logger.info(`Executing ban action on ${user.name}`);
         RedditProvider.Instance.getTargetSubreddit().banUser({
             name: user.name,
             banMessage: this._sOpts.banMessage,
