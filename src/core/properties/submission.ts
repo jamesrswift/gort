@@ -7,7 +7,7 @@ function redditSubmissionProperties<K extends keyof Snoowrap.Submission>(propert
         public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): Promise<Snoowrap.Submission[K]> {
             if (propertyName in Snoowrap.Submission && (<Snoowrap.Submission>target)[propertyName] !== undefined) {
                 // @ts-ignore because we will be sensible.
-                Promise.resolve((<Snoowrap.Submission>target)[propertyName])
+                return Promise.resolve((<Snoowrap.Submission>target)[propertyName])
             }
             // @ts-ignore because we will be sensible.
             return Promise.reject()
@@ -50,37 +50,3 @@ export class url extends redditSubmissionProperties('url') { };
 export class visited extends redditSubmissionProperties('visited') { };
 export class whitelist_status extends redditSubmissionProperties('whitelist_status') { };
 export class wls extends redditSubmissionProperties('wls') { };
-
-//----------------------------------------------------------------------------------
-//  Properties made available through Snoowrap.VoteableContent<Snoowrap.Submission>
-//----------------------------------------------------------------------------------
-
-export class archived extends redditSubmissionProperties('archived') { };
-export class author_fullname extends redditSubmissionProperties('author_fullname') { };
-export class author_patreon_flair extends redditSubmissionProperties('author_patreon_flair') { };
-export class can_gild extends redditSubmissionProperties('can_gild') { };
-export class can_mod_post extends redditSubmissionProperties('can_mod_post') { };
-export class downs extends redditSubmissionProperties('downs') { };
-export class gilded extends redditSubmissionProperties('gilded') { };
-export class mod_note extends redditSubmissionProperties('mod_note') { };
-export class mod_reason_by extends redditSubmissionProperties('mod_reason_by') { };
-export class mod_reason_title extends redditSubmissionProperties('mod_reason_title') { };
-export class no_follow extends redditSubmissionProperties('no_follow') { };
-export class num_reports extends redditSubmissionProperties('num_reports') { };
-export class permalink extends redditSubmissionProperties('permalink') { };
-export class saved extends redditSubmissionProperties('saved') { };
-export class score extends redditSubmissionProperties('score') { };
-export class send_replies extends redditSubmissionProperties('send_replies') { };
-export class stickied extends redditSubmissionProperties('stickied') { };
-export class subreddit_id extends redditSubmissionProperties('subreddit_id') { };
-export class subreddit_name_prefixed extends redditSubmissionProperties('subreddit_name_prefixed') { };
-export class ups extends redditSubmissionProperties('ups') { };
-
-//----------------------------------------------------------------------------------
-//  Properties made available through Snoowrap.RedditContent<Snoowrap.Submission>
-//----------------------------------------------------------------------------------
-
-export class created_utc extends redditSubmissionProperties('created_utc') { };
-export class created extends redditSubmissionProperties('created') { };
-export class id extends redditSubmissionProperties('id') { };
-export class name extends redditSubmissionProperties('name') { };
