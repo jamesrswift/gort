@@ -5,7 +5,7 @@ function redditCommentProperties<K extends keyof Snoowrap.Comment>(propertyName:
     return class extends executable<Snoowrap.Comment[K]> {
         constructor() { super() }
         public override execute(args: executableArguments): Promise<Snoowrap.Comment[K]> {
-            if (args.targetType != 'comment') return Promise.reject();
+            if (args.targetType != 'Comment') return Promise.reject();
             if (propertyName in Snoowrap.Comment && (<Snoowrap.Comment>args.target)[propertyName] !== undefined) {
                 // @ts-ignore because we will be sensible.
                 return Promise.resolve((<Snoowrap.Comment>target)[propertyName])

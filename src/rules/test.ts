@@ -5,12 +5,12 @@ import { conditional, listable, countable } from "../core/condition.class";
 import { greaterThan } from '../core/conditionals/relational';
 import { and, or } from '../core/conditionals/logic';
 import { arrayIncludes } from '../core/conditionals/stringArray';
-import ruleBase from '../core/rule.class';
+import ruleBase, { targetType } from '../core/rule.class';
 
 export default class testRule extends ruleBase {
 
     name: string = "Test Rule";
-    target: 'Submissions' | 'Comments' | 'Both' = 'Both';
+    targetType: targetType = 'Both';
 
     Condition = new and(
         new or(

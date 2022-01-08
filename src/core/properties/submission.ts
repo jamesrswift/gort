@@ -5,7 +5,7 @@ function redditSubmissionProperties<K extends keyof Snoowrap.Submission>(propert
     return class extends executable<Snoowrap.Submission[K]> {
         constructor() { super() }
         public override execute(args: executableArguments): Promise<Snoowrap.Submission[K]> {
-            if (args.targetType != 'submission') return Promise.reject();
+            if (args.targetType != 'Submission') return Promise.reject();
             if (propertyName in Snoowrap.Submission && (<Snoowrap.Submission>args.target)[propertyName] !== undefined) {
                 // @ts-ignore because we will be sensible.
                 return Promise.resolve((<Snoowrap.Submission>target)[propertyName])

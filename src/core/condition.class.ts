@@ -1,9 +1,10 @@
 import Snoowrap from 'snoowrap'
+import { targetType } from './rule.class';
 
 export interface executableArguments{
     user: Snoowrap.RedditUser,
     target: Snoowrap.Comment | Snoowrap.Submission,
-    targetType: 'comment' | 'submission',
+    targetType: Exclude< targetType, 'Both' >,
     cookies: any[]; // This can be used to pass pertinent information between both the condition and the action
 }
 

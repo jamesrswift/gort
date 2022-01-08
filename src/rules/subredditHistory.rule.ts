@@ -2,12 +2,12 @@ import { notify } from "../core/actions";
 import { conditional, listable } from "../core/condition.class";
 import { arrayIncludes } from "../core/conditionals/stringArray";
 import { subredditHistory } from "../core/properties/user";
-import ruleBase from "../core/rule.class";
+import ruleBase, { targetType } from "../core/rule.class";
 
 export default class subredditHistoryRule extends ruleBase{
 
     name: string = "UserSubredditHistory";
-    target: 'Submissions' | 'Comments' | 'Both' = 'Both';
+    targetType: targetType = 'Both';
 
     badSubreddits: Array<string> = [
         'nonewnormal',
