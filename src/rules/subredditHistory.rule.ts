@@ -9,7 +9,7 @@ export default class subredditHistoryRule extends ruleBase{
     name: string = "UserSubredditHistory";
     targetType: targetType = 'Both';
 
-    badSubreddits: Array<string> = [
+    badSubreddits: listable = new listable([
         'nonewnormal',
         'lockdownskepticism',
         'lockdowncriticalleft',
@@ -32,11 +32,11 @@ export default class subredditHistoryRule extends ruleBase{
         'churchofcovid',
         'covidrebellionuk',
         'antiwork'
-    ];
+    ]);
 
     Condition = new arrayIncludesAny (
         new subredditHistory(),
-        new listable( this.badSubreddits )
+        this.badSubreddits
     )
 
     Action = new notify( {color: '#db3838', message: 'User contributed to "bad" subreddits'} )
