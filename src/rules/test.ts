@@ -1,10 +1,10 @@
 import Snoowrap from 'snoowrap'
 import action from '../core/action.class';
 import { ban } from '../core/actions';
-import { conditional, listable, countable } from "../core/condition.class";
+import { listable, countable } from "../core/condition.class";
 import { greaterThan } from '../core/conditionals/relational';
 import { and, or } from '../core/conditionals/logic';
-import { arrayIncludes } from '../core/conditionals/stringArray';
+import { arrayIncludesAny } from '../core/conditionals/array';
 import ruleBase, { targetType } from '../core/rule.class';
 
 export default class testRule extends ruleBase {
@@ -14,7 +14,7 @@ export default class testRule extends ruleBase {
 
     Condition = new and(
         new or(
-            new arrayIncludes(
+            new arrayIncludesAny(
                 new listable(["hello", "world"]),
                 new listable(["world"])
             ),

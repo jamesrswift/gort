@@ -1,6 +1,6 @@
 import { notify } from "../core/actions";
-import { conditional, listable } from "../core/condition.class";
-import { arrayIncludes } from "../core/conditionals/stringArray";
+import { listable } from "../core/condition.class";
+import { arrayIncludesAny } from "../core/conditionals/array";
 import { subredditHistory } from "../core/properties/user";
 import ruleBase, { targetType } from "../core/rule.class";
 
@@ -34,7 +34,7 @@ export default class subredditHistoryRule extends ruleBase{
         'antiwork'
     ];
 
-    Condition = new arrayIncludes (
+    Condition = new arrayIncludesAny (
         new subredditHistory(),
         new listable( this.badSubreddits )
     )
