@@ -1,9 +1,10 @@
 import Snoowrap from 'snoowrap'
+import { executableArguments } from './condition.class';
 
 export default abstract class action {
 
     public constructor() { }
 
-    public abstract execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): void
+    public abstract execute(args: executableArguments): void
 
 }

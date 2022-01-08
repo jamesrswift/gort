@@ -1,6 +1,7 @@
 import action from '../action.class'
 import Snoowrap from 'snoowrap'
 import { logging } from '../logging';
+import { executableArguments } from '../condition.class';
 
 const logger = logging.getLogger('core.action.waterfall');
 
@@ -13,9 +14,9 @@ export default class waterfallAction extends action {
         this._waterfall = args;
     }
 
-    public override execute( user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission ){
+    public override execute(args: executableArguments){
         logger.info(`Executing waterfall action...`)
-        this._waterfall.forEach(element => element.execute(user, target))
+        this._waterfall.forEach(element => element.execute(args))
         logger.info(`Executing waterfall action... finished`)
     }
 

@@ -1,6 +1,7 @@
 import action from '../action.class'
 import Snoowrap from 'snoowrap'
 import { logging } from '../logging';
+import { executableArguments } from '../condition.class';
 
 const logger = logging.getLogger('core.action.remove');
 
@@ -13,9 +14,9 @@ export default class removeAction extends action {
         this._bSpam = spam;
     }
 
-    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission) {
-        target.remove({ spam: this._bSpam })
-        logger.info(`Executing remove action on ${target.id}`)
+    public override execute(args: executableArguments) {
+        args.target.remove({ spam: this._bSpam })
+        logger.info(`Executing remove action on ${args.target.id}`)
     }
 
 }

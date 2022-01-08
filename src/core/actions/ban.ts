@@ -2,6 +2,7 @@ import action from '../action.class'
 import Snoowrap from 'snoowrap'
 import { RedditProvider } from '../providers/reddit.provider';
 import { logging } from '../logging';
+import { executableArguments } from '../condition.class';
 
 const logger = logging.getLogger('core.action.ban');
 
@@ -21,10 +22,10 @@ export default class banAction extends action {
         this._sOpts = opts
     }
 
-    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission) {
-        logger.info(`Executing ban action on ${user.name}`);
+    public override execute(args: executableArguments) {
+        logger.info(`Executing ban action on ${args.user.name}`);
         RedditProvider.Instance.getTargetSubreddit().banUser({
-            name: user.name,
+            name: args.user.name,
             banMessage: this._sOpts.banMessage,
             banReason: this._sOpts.banReason,
             duration: this._sOpts.duration,
