@@ -1,12 +1,12 @@
 import Snoowrap from "snoowrap";
-import { executable, conditional, countable, legible, listable } from "../condition.class";
+import { executable, conditional, countable, legible, listable, executableArguments } from "../condition.class";
 
 function redditUserProperty<K extends keyof Snoowrap.RedditUser>(propertyName: K) {
     return class extends executable<Snoowrap.RedditUser[K]> {
         constructor() { super() }
-        public override execute(user: Snoowrap.RedditUser): Promise<Snoowrap.RedditUser[K]> { 
+        public override execute(args: executableArguments): Promise<Snoowrap.RedditUser[K]> { 
             // @ts-ignore because we will be sensible.
-            return Promise.resolve(user[propertyName])
+            return Promise.resolve(args.user[propertyName])
         }
     }
 }
@@ -44,9 +44,9 @@ export class subredditHistory extends listable {
 
     constructor() { super() }
 
-    public override execute(user: Snoowrap.RedditUser): Promise<string[]> {
+    public override execute(args: executableArguments): Promise<string[]> {
         return new Promise<string[]>((resolve, reject) => {
-            user.getComments().then((listing: Snoowrap.Listing<Snoowrap.Comment>) => {
+            args.user.getComments().then((listing: Snoowrap.Listing<Snoowrap.Comment>) => {
                 let subreddits: string[] = [];
                 listing.forEach(comment => {
                     if (!(subreddits.includes(comment.subreddit.display_name.toLowerCase()))) {

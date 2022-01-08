@@ -1,11 +1,12 @@
 import Snoowrap from "snoowrap";
-import { executable, conditional, countable, legible, listable } from "../condition.class";
+import { executable, executableArguments } from "../condition.class";
 
 function redditSubmissionProperties<K extends keyof Snoowrap.Submission>(propertyName: K) {
     return class extends executable<Snoowrap.Submission[K]> {
         constructor() { super() }
-        public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): Promise<Snoowrap.Submission[K]> {
-            if (propertyName in Snoowrap.Submission && (<Snoowrap.Submission>target)[propertyName] !== undefined) {
+        public override execute(args: executableArguments): Promise<Snoowrap.Submission[K]> {
+            if (args.targetType != 'submission') return Promise.reject();
+            if (propertyName in Snoowrap.Submission && (<Snoowrap.Submission>args.target)[propertyName] !== undefined) {
                 // @ts-ignore because we will be sensible.
                 return Promise.resolve((<Snoowrap.Submission>target)[propertyName])
             }

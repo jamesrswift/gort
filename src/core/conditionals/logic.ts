@@ -1,4 +1,4 @@
-import { conditional } from "../condition.class";
+import { conditional, executableArguments } from "../condition.class";
 import Snoowrap from "snoowrap";
 
 export class and extends conditional {
@@ -10,11 +10,11 @@ export class and extends conditional {
         this._conditions = args;
     }
 
-    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): Promise<boolean> {
+    public override execute(args: executableArguments): Promise<boolean> {
         // Build promise array
         let promiseArray: Promise<boolean>[] = [];
         for (let condition of this._conditions) {
-            promiseArray.push(condition.execute(user, target))
+            promiseArray.push(condition.execute(args))
         }
 
         // Build return promise
@@ -37,11 +37,11 @@ export class or extends conditional {
         this._conditions = args;
     }
 
-    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): Promise<boolean> {
+    public override execute(args: executableArguments): Promise<boolean> {
         // Build promise array
         let promiseArray: Promise<boolean>[] = [];
         for (let condition of this._conditions) {
-            promiseArray.push(condition.execute(user, target))
+            promiseArray.push(condition.execute(args))
         }
 
         // Build return promise
@@ -65,9 +65,9 @@ export class not extends conditional {
         this._rhs = rhs;
     }
 
-    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): Promise<boolean> {
+    public override execute(args: executableArguments): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
-            this._rhs.execute(user, target).then((result: boolean) => { resolve(!result) }).catch((reason) => { reject(reason) })
+            this._rhs.execute(args).then((result: boolean) => { resolve(!result) }).catch((reason) => { reject(reason) })
         })
     }
 

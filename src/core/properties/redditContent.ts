@@ -1,11 +1,11 @@
 import Snoowrap from "snoowrap";
-import { executable, conditional, countable, legible, listable } from "../condition.class";
+import { executable, executableArguments } from "../condition.class";
 
-function redditVoteableProperties<K extends keyof Snoowrap.RedditContent<Snoowrap.Comment | Snoowrap.Submission> >(propertyName: K) {
+function redditVoteableProperties<K extends keyof Snoowrap.RedditContent<Snoowrap.Comment | Snoowrap.Submission>>(propertyName: K) {
     return class extends executable<Snoowrap.RedditContent<Snoowrap.Comment | Snoowrap.Submission>[K]> {
         constructor() { super() }
-        public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): Promise<Snoowrap.RedditContent<Snoowrap.Comment | Snoowrap.Submission>[K]> {
-            return Promise.resolve((<Snoowrap.RedditContent<Snoowrap.Comment | Snoowrap.Submission>>target)[propertyName])
+        public override execute(args: executableArguments): Promise<Snoowrap.RedditContent<Snoowrap.Comment | Snoowrap.Submission>[K]> {
+            return Promise.resolve((<Snoowrap.RedditContent<Snoowrap.Comment | Snoowrap.Submission>>args.target)[propertyName])
         }
     }
 }

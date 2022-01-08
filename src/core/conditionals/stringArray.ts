@@ -1,4 +1,4 @@
-import {conditional, listable} from "../condition.class";
+import {conditional, executableArguments, listable} from "../condition.class";
 import Snoowrap from "snoowrap";
 
 export class arrayIncludes extends conditional {
@@ -12,10 +12,10 @@ export class arrayIncludes extends conditional {
         this._rhs = rhs
     }
 
-    public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): Promise<boolean> {
+    public override execute(args: executableArguments): Promise<boolean> {
         return new Promise<boolean>( async (resolve, reject) => {
-            const haystack: string[] = await this._lhs.execute(user, target)
-            const needles: string[] = await this._rhs.execute(user, target)
+            const haystack: string[] = await this._lhs.execute(args)
+            const needles: string[] = await this._rhs.execute(args)
             for (let needle of needles) {
                 if (haystack.includes(needle)) {
                     resolve(true);
