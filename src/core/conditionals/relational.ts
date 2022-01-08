@@ -1,4 +1,4 @@
-import { conditional, countable, executable, legible, listable } from "../condition.class";
+import { conditional, countable, executable, executableArguments, legible, listable } from "../condition.class";
 import Snoowrap from "snoowrap";
 
 //----------------------------------------------------------------------------------
@@ -15,9 +15,9 @@ function relationalOperator<tLHS, tRHS, tReturn>(predicate: (lhs: tLHS, rhs: tRH
             this._lhs = lhs;
             this._rhs = rhs;
         }
-        public override execute(user: Snoowrap.RedditUser, target: Snoowrap.Comment | Snoowrap.Submission): Promise<tReturn> {
+        public override execute(args: executableArguments): Promise<tReturn> {
             return new Promise<tReturn>(async (resolve, reject) => {
-                resolve(this._predicate(await this._lhs.execute(user, target), await this._rhs.execute(user, target)))
+                resolve(this._predicate(await this._lhs.execute(args), await this._rhs.execute(args)))
             })
         }
     }
