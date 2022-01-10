@@ -1,22 +1,20 @@
-import action from '../action.class'
-import Snoowrap from 'snoowrap'
+import action from '../action.class';
+import Snoowrap from 'snoowrap';
 import { logging } from '../logging';
 import { executableArguments } from '../condition.class';
 
 const logger = logging.getLogger('core.action.remove');
 
 export default class removeAction extends action {
+	private _bSpam: boolean;
 
-    private _bSpam: boolean;
+	constructor(spam: boolean = false) {
+		super();
+		this._bSpam = spam;
+	}
 
-    constructor(spam: boolean = false) {
-        super();
-        this._bSpam = spam;
-    }
-
-    public override execute(args: executableArguments) {
-        args.target.remove({ spam: this._bSpam })
-        logger.info(`Executing remove action on ${args.target.id}`)
-    }
-
+	public override execute(args: executableArguments) {
+		args.target.remove({ spam: this._bSpam });
+		logger.info(`Executing remove action on ${args.target.id}`);
+	}
 }
