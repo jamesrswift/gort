@@ -45,7 +45,7 @@ export class arrayPop<Type> extends executable<Type>{
         return new Promise<Type>( async (resolve, reject)=>{
             const returnValue = (await this._lhs.execute(args)).pop()
             if ( returnValue != undefined ) return resolve(returnValue);
-            reject()
+            reject("Empty array in arrayPop<Type>")
         })
     }
 }
