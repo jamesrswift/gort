@@ -13,7 +13,7 @@ export default class removeAction extends action {
 		this._bSpam = spam;
 	}
 
-	public override execute(args: executableArguments) {
+	public override async execute(args: executableArguments) {
 		args.target.remove({ spam: this._bSpam });
 		logger.info(`Executing remove action on ${args.target.id}`);
 	}

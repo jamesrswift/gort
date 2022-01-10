@@ -35,7 +35,7 @@ export default class replyAction extends action {
 		this._replyText = text;
 	}
 
-	public override execute(args: executableArguments) {
+	public override async execute(args: executableArguments) {
 		logger.info(`Executing reply action on ${args.target.id}`);
 
 		// Comment: Not sure I like the below type casting, but from what I can tell from the documentation,

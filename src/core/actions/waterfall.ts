@@ -13,9 +13,9 @@ export default class waterfallAction extends action {
 		this._waterfall = args;
 	}
 
-	public override execute(args: executableArguments) {
+	public override async execute(args: executableArguments) {
 		logger.info(`Executing waterfall action...`);
-		this._waterfall.forEach((element) => element.execute(args));
+		this._waterfall.forEach(async (element) => await element.execute(args));
 		logger.info(`Executing waterfall action... finished`);
 	}
 }

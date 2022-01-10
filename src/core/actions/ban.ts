@@ -21,7 +21,7 @@ export default class banAction extends action {
 		this._sOpts = opts;
 	}
 
-	public override execute(args: executableArguments) {
+	public override async execute(args: executableArguments) {
 		logger.info(`Executing ban action on ${args.user.name}`);
 		RedditProvider.Instance.getTargetSubreddit().banUser({
 			name: args.user.name,

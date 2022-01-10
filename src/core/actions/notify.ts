@@ -23,7 +23,7 @@ export default class notifyAction extends action {
 		this._sOpts = options;
 	}
 
-	public override execute(args: executableArguments) {
+	public override async execute(args: executableArguments) {
 		const embed = new Discord.MessageEmbed()
 			.setTitle('Gort Notification')
 			.setURL('http://reddit.com' + args.target.permalink + '?context=2')

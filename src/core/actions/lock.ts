@@ -10,7 +10,7 @@ export default class lockAction extends action {
 		super();
 	}
 
-	public override execute(args: executableArguments) {
+	public override async execute(args: executableArguments) {
 		logger.info(`Executing lock action on ${args.target.id}`);
 		// @ts-ignore
 		if (!target.locked) {
