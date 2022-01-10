@@ -11,7 +11,7 @@ export default abstract class commandBase {
 	abstract description: string;
 	abstract usage: string;
 
-	abstract execute(args: string[], cmd: string): string | undefined | null;
+	async execute(args: string[], cmd: string, message: Discord.Message): Promise<string | undefined | null> { return undefined};
 }
 
 export class commandHandler {
@@ -105,7 +105,7 @@ export class commandHandler {
 		this.handleInvokeCommand(message, command, args, cmd);
 	}
 
-	private handleInvokeCommand(
+	private async handleInvokeCommand(
 		message: Discord.Message,
 		command: commandBase,
 		args: string[],
@@ -113,7 +113,7 @@ export class commandHandler {
 	) {
 		try {
 			logger.info(`Chat command called: ${cmd}`);
-			const response = command.execute(args, cmd);
+			const response = await command.execute(args, cmd, message);
 			if (response != undefined && response != null) {
 				message.reply(response);
 			}
