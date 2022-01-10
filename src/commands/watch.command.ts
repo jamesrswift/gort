@@ -21,7 +21,7 @@ class watchCommand extends commandBase {
 
 		// Validate usage
 		if (username == undefined) {
-			return `Malformed command, nothing was done! Correct usage: ${this.usage}`;
+			return `Malformed command, no action taken! Correct usage: ${this.usage}`;
 		}
 
 		// Check if user is already watched
@@ -59,6 +59,35 @@ class watchCommand extends commandBase {
 	}
 }
 
+class unwatchCommand extends commandBase {
+	name = 'unwatch';
+	description = 'remove a user to the watchlist';
+	usage = 'watch <name>';
+
+	override async execute(
+		args: string[],
+		cmd: string,
+		discordMessage: Discord.Message
+	): Promise<string | undefined | null> {
+		let cmdArguments = [...args];
+
+		const username = cmdArguments.shift()?.toLowerCase();
+		const message = cmdArguments.join(' ');
+
+		// Validate usage
+		if (username == undefined) {
+			return `Malformed command, no action taken! Correct usage: ${this.usage}`;
+		}
+
+		if (!(await watchedManager.Instance.isUserWatched(username))) {
+			return `User ${username} is not presently being watched. No action taken.`;
+		}
+
+		await watchedManager.Instance.removeWatchedUser(username);
+		return `User ${username} has been removed from the watchlist.`;
+	}
+}
+
 export default {
-	commands: [new watchCommand()],
+	commands: [new watchCommand(), new unwatchCommand()],
 };
