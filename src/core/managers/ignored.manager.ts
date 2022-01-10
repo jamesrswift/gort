@@ -20,9 +20,13 @@ export default class ignoredManager {
 	}
 	private constructor() {}
 
-	addIgnoredUser(name: string, actioner: string): any {
+	async addIgnoredUser(name: string, actioner: string): Promise<any> {
 		// TO DO: Check if user is already ignored?
 		// TO DO: Unwatch user if necessary
+
+		if (await this.isUserIgnored(name)) {
+			return;
+		}
 
 		logger.info(
 			`Adding ${name} to list of ignored users. Actioned by ${actioner}.`
@@ -35,12 +39,18 @@ export default class ignoredManager {
 		return ignore;
 	}
 
-	removeIgnoredUser(name: string): void {
-		logger.info(`Removing ${name} from list of ignored users.`);
-		IgnoredUser.findOneAndDelete({ name: name.toLowerCase() }).exec();
+	async removeIgnoredUser(name: string) {
+		IgnoredUser.findOneAndDelete(
+			{ name: name.toLowerCase() },
+			undefined,
+			(error, entry) => {
+				if (error) return;
+				logger.info(`Removing ${name} from list of ignored users.`);
+			}
+		);
 	}
 
-	isUserIgnored(user: string): Promise<boolean> {
+	async isUserIgnored(user: string): Promise<boolean> {
 		return IgnoredUser.exists({ name: user.toLowerCase() });
 	}
 }
