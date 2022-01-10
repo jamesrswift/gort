@@ -23,16 +23,24 @@ export default class notifyAction extends action {
 		this._sOpts = options;
 	}
 
-	public async buildEmbed( args: executableArguments, embed: Discord.MessageEmbed ){
-		embed.addField(
-			'Account Age (days)',
-			Math.ceil(
-				(Date.now() / 1000 - args.user.created) / (60 * 60 * 24)
-			).toString(),
-			true
-		)
-		.addField('Link Karma', args.user.link_karma.toString(), true)
-		.addField('Comment Karma', args.user.comment_karma.toString(), true)
+	public async buildEmbed(
+		args: executableArguments,
+		embed: Discord.MessageEmbed
+	) {
+		embed
+			.addField(
+				'Account Age (days)',
+				Math.ceil(
+					(Date.now() / 1000 - args.user.created) / (60 * 60 * 24)
+				).toString(),
+				true
+			)
+			.addField('Link Karma', args.user.link_karma.toString(), true)
+			.addField(
+				'Comment Karma',
+				args.user.comment_karma.toString(),
+				true
+			);
 	}
 
 	public override async execute(args: executableArguments) {
@@ -56,7 +64,7 @@ export default class notifyAction extends action {
 						(<Snoowrap.Submission>args.target).selftext,
 					500
 				)
-			)
+			);
 
 		await this.buildEmbed(args, embed);
 
