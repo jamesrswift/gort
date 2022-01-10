@@ -32,10 +32,10 @@ export class ruleHandler{
     public static get Instance(): ruleHandler { return this._instance || (this._instance = new ruleHandler()) }
 
     private constructor() {
-        this.LoadRules()
+        this.loadRules()
     }
 
-    private LoadRules() : void {
+    private loadRules() : void {
         logger.info("Loading rules ...")
         const ruleFiles = fs.readdirSync(this._rulesDirectory).filter(file => file.endsWith('.js'));
         for ( const file of ruleFiles){
