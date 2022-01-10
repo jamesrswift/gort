@@ -14,8 +14,9 @@ class helpCommand extends commandBase {
 		let output: string = 'List of commands: \n';
 
 		const commands = commandHandler.Instance.getCommands();
+		const commandHandle = commandHandler.Instance.getHandle()
 		for (let [commandName, command] of commands) {
-			output += `\t${command.name}, \t${command.description}, \t${command.usage}`;
+			output += `\t${command.name}, \t${command.description}, \t${commandHandle} ${command.usage}`;
 		}
 
 		return output;
