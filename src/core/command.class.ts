@@ -82,29 +82,21 @@ export class commandHandler {
 		return this._commandArray;
 	}
 
+	public getHandle(): string {
+		return commandHandler._config.prefix + commandHandler._config.name;
+	}
+
 	public onMessage(message: Discord.Message): void {
 		if (message.author.bot) return;
 		if (
 			message.content
-				.substring(
-					0,
-					commandHandler._config.prefix.length +
-						commandHandler._config.name.length
-				)
-				.toLowerCase() !=
-			(
-				commandHandler._config.prefix + commandHandler._config.name
-			).toLowerCase()
+				.substring(0, this.getHandle().length)
+				.toLowerCase() != this.getHandle().toLowerCase()
 		) {
 			return;
 		}
 
-		const cmd = message.content
-			.slice(
-				commandHandler._config.prefix.length +
-					commandHandler._config.name.length
-			)
-			.trim();
+		const cmd = message.content.slice(this.getHandle().length).trim();
 		const args = cmd.split(/ +/);
 		const commandName = args.shift()?.toLowerCase() ?? '';
 
