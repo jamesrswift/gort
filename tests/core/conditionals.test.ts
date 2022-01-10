@@ -1,6 +1,7 @@
 import { assert, expect } from 'chai'
 import { executableArguments, executable } from '../../src/core/condition.class'
-import { arrayConcat, arrayIncludes, arrayIncludesAny, arrayPop, arrayPush } from '../../src/core/conditionals/array'
+import { arrayConcat, arrayIncludes, arrayIncludesAny, arrayPop, arrayPush, arrayIndexOf } from '../../src/core/conditionals/array'
+import { and, not, notArray, or } from '../../src/core/conditionals/logic'
 import { RedditProvider } from '../../src/core/providers/reddit.provider'
 
 let testArguments: executableArguments = {
@@ -97,7 +98,7 @@ describe("conditionals", function () {
             })
         })
 
-        describe("#arrayPush<type>", function(){
+        describe("#arrayPush<Type>", function(){
             it("should return array containing new value at end", function(done){
                 (new arrayPush(new executable([1,2,3]), new executable(4))).execute(testArguments).then((value)=>{
                     expect(value).to.deep.equal([1,2,3,4]);
@@ -106,7 +107,9 @@ describe("conditionals", function () {
             })
         })
 
-        describe("#arrayConcat<type>", function(){
+        // export class arraySort<Type> extends executable<Type[]>{
+
+        describe("#arrayConcat<Type>", function(){
             it("should return array containing new values at end", function(done){
                 (new arrayConcat(new executable([1,2,3]), new executable([4,5,6]))).execute(testArguments).then((value)=>{
                     expect(value).to.deep.equal([1,2,3,4,5,6]);
@@ -115,6 +118,167 @@ describe("conditionals", function () {
             })
         })
 
+        describe("#arrayIndexOf<Type>", function() {
+            it("should return index of value in array", function(done){
+                (new arrayIndexOf(new executable([1,2,3]), new executable(2))).execute(testArguments)
+                .then(value=>{
+                    expect(value).to.equal(1)
+                    done()
+                }).catch(done)
+            })
+
+            it("should return -1 if value not in array", function(done){
+                (new arrayIndexOf(new executable([1,2,3]), new executable(4))).execute(testArguments)
+                .then(value=>{
+                    expect(value).to.equal(-1)
+                    done()
+                }).catch(done)
+            })
+        })
+
+        // export class arrayCopyWithin<Type> extends executable<Type[]>{
+
+        // export class arrayFill<Type> extends executable<Type[]>{
+
+        // export class arrayShift<Type> extends executable<Type>{
+
+        // export class arraySort<Type> extends executable<Type[]>{
+
+        // export class arrayUnshift<Type> extends executable<Type[]>{
+
+        // export class arrayJoin<Type> extends executable<string>{
+
+        // export class arrayLastIndexOf<Type> extends executable<number>{
+
+        // export class arraySlice<Type> extends executable<Type[]>{
+
+        // export class arrayToString<Type> extends executable<string>{
+
+        // export class arrayToLocalString<Type> extends executable<string>{
+
+    })
+
+    describe("#logic", function(){
+
+        describe("#and", function(){
+            it("should return true when all values are true, values as list", function(done){
+                (new and(new executable(true),new executable(true),new executable(true)))
+                .execute(testArguments).then((value=>{
+                    expect(value).to.be.true;
+                    done()
+                })).catch(done)
+            })
+
+            it("should return true when all values are true, values as array", function(done){
+                (new and(new executable([true, true, true])))
+                .execute(testArguments).then((value=>{
+                    expect(value).to.be.true;
+                    done()
+                })).catch(done)
+            })
+
+            it("should return false when any value is false, values as list", function(done){
+                (new and(new executable(true),new executable(false),new executable(true)))
+                .execute(testArguments).then((value=>{
+                    expect(value).to.be.false;
+                    done()
+                })).catch(done)
+            })
+
+            it("should return false when any value is false, values as array", function(done){
+                (new and(new executable([true, false, true])))
+                .execute(testArguments).then((value=>{
+                    expect(value).to.be.false;
+                    done()
+                })).catch(done)
+            })
+        })
+
+        describe("#or", function(){
+            it("should return true when all values are true, values as list", function(done){
+                (new or(new executable(true),new executable(true),new executable(true)))
+                .execute(testArguments).then((value=>{
+                    expect(value).to.be.true;
+                    done()
+                })).catch(done)
+            })
+
+            it("should return true when all values are true, values as array", function(done){
+                (new or(new executable([true, true, true])))
+                .execute(testArguments).then((value=>{
+                    expect(value).to.be.true;
+                    done()
+                })).catch(done)
+            })
+
+            it("should return true when any value is true, values as list", function(done){
+                (new or(new executable(true),new executable(false),new executable(true)))
+                .execute(testArguments).then((value=>{
+                    expect(value).to.be.true;
+                    done()
+                })).catch(done)
+            })
+
+            it("should return true when any value is true, values as array", function(done){
+                (new or(new executable([true, false, true])))
+                .execute(testArguments).then((value=>{
+                    expect(value).to.be.true;
+                    done()
+                })).catch(done)
+            })
+
+            it("should return false when no values are true, values as list", function(done){
+                (new or(new executable(false),new executable(false),new executable(false)))
+                .execute(testArguments).then((value=>{
+                    expect(value).to.be.false;
+                    done()
+                })).catch(done)
+            })
+
+            it("should return false when no values are true, values as array", function(done){
+                (new or(new executable([false, false, false])))
+                .execute(testArguments).then((value=>{
+                    expect(value).to.be.false;
+                    done()
+                })).catch(done)
+            })
+        })
+
+        describe("#not", function(){
+            it("should return false when value is true", function(done){
+                (new not(new executable(true))).execute(testArguments)
+                .then(value=>{
+                    expect(value).to.be.false
+                    done()
+                }).catch(done)
+            })
+
+            it("should return true when value is false", function(done){
+                (new not(new executable(false))).execute(testArguments)
+                .then(value=>{
+                    expect(value).to.be.true
+                    done()
+                }).catch(done)
+            })
+        })
+
+        describe("#notArray", function(){
+            it("should return the opposite of given values, values as list", function(done){
+                (new notArray(new executable(true), new executable(false), new executable(true)))
+                .execute(testArguments).then(value=>{
+                    expect(value).to.be.deep.equal([false, true, false])
+                    done()
+                }).catch(done)
+            })
+
+            it("should return the opposite of given values, values as array", function(done){
+                (new notArray(new executable([true,false,true])))
+                .execute(testArguments).then(value=>{
+                    expect(value).to.be.deep.equal([false, true, false])
+                    done()
+                }).catch(done)
+            })
+        })
     })
 
 })

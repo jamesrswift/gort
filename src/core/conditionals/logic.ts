@@ -9,15 +9,12 @@ export class and extends executable<boolean>{
     private _conditions: executable<boolean>[] | executable<boolean[]>;
     public constructor(first: executable<boolean> | executable<boolean[]>, ...remainder: executable<boolean>[]){
         super();
-        if ( !Array.isArray(first) ){
+        if ( remainder.length > 0){
             this._conditions = [ (<executable<boolean>>first), ...remainder];
             this._conditionsType = 'executable<boolean>[]';
         }else{
-            this._conditions = first;
+            this._conditions = <executable<boolean[]>>first;
             this._conditionsType = 'executable<boolean[]>';
-            if ( remainder.length > 0 ){
-                logger.error("`And` predicate is malformed, arg2.length > 0")
-            }
         }
     }
     public override execute(args: executableArguments): Promise<boolean> {
@@ -31,7 +28,7 @@ export class and extends executable<boolean>{
 
             // Build return promise
             return new Promise<boolean>((resolve, reject) => {
-                Promise.all(promiseArray).then((results) => { resolve(this.logic(results))}).catch((reason) => { reject(reason) })
+                Promise.all(promiseArray).then((results) => { resolve(this.logic(results))})
             })
         } else { // this._conditionsType == 'executable<boolean[]>'
             return new Promise<boolean>( async (resolve, reject) => {
@@ -49,15 +46,12 @@ export class or extends executable<boolean>{
     private _conditions: executable<boolean>[] | executable<boolean[]>;
     public constructor(first: executable<boolean> | executable<boolean[]>, ...remainder: executable<boolean>[]){
         super();
-        if ( !Array.isArray(first) ){
+        if ( remainder.length > 0 ){
             this._conditions = [ (<executable<boolean>>first), ...remainder];
             this._conditionsType = 'executable<boolean>[]';
         }else{ // this._conditionsType == 'executable<boolean[]>'
-            this._conditions = first;
+            this._conditions = <executable<boolean[]>>first;
             this._conditionsType = 'executable<boolean[]>';
-            if ( remainder.length > 0 ){
-                logger.error("`Or` predicate is malformed, arg2.length > 0")
-            }
         }
     }
     public override execute(args: executableArguments): Promise<boolean> {
@@ -71,7 +65,7 @@ export class or extends executable<boolean>{
 
             // Build return promise
             return new Promise<boolean>((resolve, reject) => {
-                Promise.all(promiseArray).then((results) => { resolve(this.logic(results))}).catch((reason) => { reject(reason) })
+                Promise.all(promiseArray).then((results) => { resolve(this.logic(results))})
             })
         } else { // this._conditionsType == 'executable<boolean[]>'
             return new Promise<boolean>( async (resolve, reject) => {
@@ -92,7 +86,7 @@ export class not extends executable<boolean> {
     }
     public override execute(args: executableArguments): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
-            this._rhs.execute(args).then((result: boolean) => { resolve(!result) }).catch((reason) => { reject(reason) })
+            this._rhs.execute(args).then((result: boolean) => { resolve(!result) })
         })
     }
 }
@@ -102,15 +96,12 @@ export class notArray extends executable<boolean[]> {
     private _conditions: executable<boolean>[] | executable<boolean[]>;
     public constructor(first: executable<boolean> | executable<boolean[]>, ...remainder: executable<boolean>[]){
         super();
-        if ( !Array.isArray(first) ){
+        if ( remainder.length > 0  ){
             this._conditions = [ (<executable<boolean>>first), ...remainder];
             this._conditionsType = 'executable<boolean>[]';
         }else{
-            this._conditions = first;
+            this._conditions = <executable<boolean[]>>first;
             this._conditionsType = 'executable<boolean[]>';
-            if ( remainder.length > 0 ){
-                logger.error("`Not` predicate is malformed, arg2.length > 0")
-            }
         }
     }
     public override execute(args: executableArguments) : Promise<boolean[]> {
@@ -125,7 +116,7 @@ export class notArray extends executable<boolean[]> {
             return new Promise<boolean[]>((resolve, reject) => {
                 Promise.all(promiseArray).then((results) => { 
                     resolve(this.logic(results))
-                }).catch((reason) => { reject(reason) })
+                })
             })
         } else { // this._conditionsType == 'executable<boolean[]>'
             return new Promise<boolean[]>( async (resolve, reject) => {
