@@ -2,6 +2,7 @@ import commandBase from '../core/command.class';
 import ignoredManager from '../core/managers/ignored.manager';
 import watchedManager from '../core/managers/watched.manager';
 import Discord from 'discord.js';
+import UsernotesProvider from '../core/providers/usernotes.provider';
 
 class watchCommand extends commandBase {
 	name = 'watch';
@@ -37,12 +38,18 @@ class watchCommand extends commandBase {
 			await ignoredManager.Instance.removeIgnoredUser(username);
 		}
 
-		// Add user to watchlist and notify
+		// Add user to watchlist
 		watchedManager.Instance.addWatchedUser(
 			username,
 			discordMessage.author.username,
 			message
 		);
+
+		// Add usernote
+		UsernotesProvider.Instance.addUsernoteByName(username, `[GORT] User was added to watchlist by ${discordMessage.author.username}. Message: ${message}`)
+
+
+		// Notify
 		return (
 			`Adding ${username} to the watched list.` +
 			(bIgnored ? 'User was unignored in the process.' : '')
