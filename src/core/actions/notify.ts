@@ -36,7 +36,7 @@ export default class notifyAction extends action {
 			.setTimestamp()
 			.addField('username', args.user.name)
 
-			// Below relies on undefined behind as false
+			// Below relies on undefined behaving as false
 			.addField(
 				'Content Body',
 				textEllipsis(
