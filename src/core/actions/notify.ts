@@ -23,6 +23,18 @@ export default class notifyAction extends action {
 		this._sOpts = options;
 	}
 
+	public async buildEmbed( args: executableArguments, embed: Discord.MessageEmbed ){
+		embed.addField(
+			'Account Age (days)',
+			Math.ceil(
+				(Date.now() / 1000 - args.user.created) / (60 * 60 * 24)
+			).toString(),
+			true
+		)
+		.addField('Link Karma', args.user.link_karma.toString(), true)
+		.addField('Comment Karma', args.user.comment_karma.toString(), true)
+	}
+
 	public override async execute(args: executableArguments) {
 		const embed = new Discord.MessageEmbed()
 			.setTitle('Gort Notification')
@@ -46,17 +58,10 @@ export default class notifyAction extends action {
 				)
 			)
 
-			.addField(
-				'Account Age (days)',
-				Math.ceil(
-					(Date.now() / 1000 - args.user.created) / (60 * 60 * 24)
-				).toString(),
-				true
-			)
-			.addField('Link Karma', args.user.link_karma.toString(), true)
-			.addField('Comment Karma', args.user.comment_karma.toString(), true)
-			.addField('Trigger Reason', this._sOpts.message)
-			.setFooter({ text: 'Provided by CensorshipCo' });
+		await this.buildEmbed(args, embed);
+
+		embed.addField('Trigger Reason', this._sOpts.message);
+		embed.setFooter({ text: 'Provided by CensorshipCo' });
 
 		DiscordProvider.Instance.sendMessage(
 			{ embeds: [embed] },
