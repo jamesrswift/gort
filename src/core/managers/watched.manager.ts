@@ -27,8 +27,6 @@ export default class watchedManager {
 		actioner: string,
 		message: string
 	): Promise<any> {
-		// TO DO: Check if user is presently ignored
-		// TO DO: Check that user isn't already watched
 
 		if (await this.isUserWatched(name)) {
 			return;
