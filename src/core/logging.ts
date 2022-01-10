@@ -2,6 +2,7 @@
 
 import { EventEmitter } from "stream";
 
+/* istanbul ignore next */
 export class LogManager extends EventEmitter {
 
     private _sOptions: LogOptions = {
@@ -81,6 +82,7 @@ export interface LogOptions {
 
 export const logging = new LogManager();
 
+/* istanbul ignore next */
 export class Logger {
     private _logManager: EventEmitter;
     private _minLevel: number;

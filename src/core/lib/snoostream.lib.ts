@@ -1,7 +1,7 @@
 import Snoowrap from 'snoowrap';
 import Pollify from './pollify.lib';
 
-
+/* istanbul ignore next */
 function isSnoowrap(obj: any): boolean {
     return typeof obj.getNew == 'function' && typeof obj.getNewComments == 'function';
 }
@@ -17,6 +17,7 @@ interface IPostStreamCacheObject {
     cache: any[]
 }
 
+/* istanbul ignore next */
 export default class SnooStream {
 
     snoowrap: Snoowrap;

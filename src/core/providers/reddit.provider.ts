@@ -34,6 +34,8 @@ export class RedditProvider extends EventEmitter {
 
     private _client: Snoowrap
     public getRedditClient(): Snoowrap { return this._client; }
+    
+    /* istanbul ignore next */
     public getTargetSubreddit() {
         return this._client.getSubreddit(OrFail(process.env.REDDIT_SUBREDDIT))
     }
@@ -42,6 +44,7 @@ export class RedditProvider extends EventEmitter {
     // Manage Polling
     //
 
+    /* istanbul ignore next */
     public createListeners(subreddit: string = OrFail(process.env.REDDIT_SUBREDDIT)): subredditStream {
         return new subredditStream(this, subreddit)
     }

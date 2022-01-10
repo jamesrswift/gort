@@ -10,6 +10,7 @@ export declare interface subredditStream {
     on(event: 'error', listener: (...data: any[]) => void): this
 }
 
+/* istanbul ignore next */
 export class subredditStream extends EventEmitter {
 
     private _redditProvider: RedditProvider;

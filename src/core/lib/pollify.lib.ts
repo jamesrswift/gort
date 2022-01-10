@@ -9,6 +9,7 @@ export interface IPollifyDelegate {
     (...args: any[]): Promise<void>
 }
 
+/* istanbul ignore next */
 const PollTypes: { [key: string]: (self: Pollify, startTime: number, ...args: any[]) => void } = {
 
     "promise": function (self: Pollify, startTime: number, ...args: any[]): void {
@@ -43,6 +44,7 @@ interface IPollify {
     emit(event: 'data', ...any: any[]): void;
 }
 
+/* istanbul ignore next */
 export default class Pollify extends EventEmitter implements IPollify {
 
     stopped = false;
