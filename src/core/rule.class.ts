@@ -48,6 +48,7 @@ export class ruleHandler{
         if ( this._ruleArray.has(rule.name) ){
             return logger.error(`Attempting to redefine rule ${rule.name}`)
         }
+        logger.info(`Loading rule: ${rule.name}`)
         this._ruleArray.set(rule.name,rule);
     }
 
