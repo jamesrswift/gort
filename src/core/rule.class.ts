@@ -32,7 +32,7 @@ export class ruleHandler{
     public static get Instance(): ruleHandler { return this._instance || (this._instance = new ruleHandler()) }
 
     private constructor() {
-        this.LoadRules
+        this.LoadRules()
     }
 
     private LoadRules() : void {
