@@ -1,8 +1,9 @@
 import Discord from 'discord.js';
 import fs from 'fs';
 import { OrDefault } from './lib/helper.lib';
-
+import dotenv from 'dotenv';
 import { logging } from './logging';
+
 const logger = logging.getLogger('core.command');
 
 export default abstract class commandBase {
@@ -24,6 +25,7 @@ export class commandHandler {
     private static _config: { prefix: string, name: string } = { prefix: "&", name: "gort" };
 
     private constructor() {
+        dotenv.config();
         commandHandler._config.prefix = OrDefault(process.env.DISCORD_COMMAND_PREFIX, commandHandler._config.prefix);
         commandHandler._config.name = OrDefault(process.env.DISCORD_COMMAND_PREFIX, commandHandler._config.name);
         this.loadCommands()
