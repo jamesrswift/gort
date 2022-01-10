@@ -1,10 +1,16 @@
-import action from '../core/action.class';
+import { MessageEmbed } from 'discord.js';
+import notifyAction from '../core/actions/notify';
 import { executableArguments } from '../core/condition.class';
 import { isWatched } from '../core/conditionals/watched';
+import watchedManager from '../core/managers/watched.manager';
 import ruleBase, { targetType } from '../core/rule.class';
 
-class watchedAction extends action {
-	public async execute(args: executableArguments) {}
+class watchedAction extends notifyAction {
+	public override async buildEmbed(args: executableArguments, embed: MessageEmbed): Promise<void> {
+        const info = await watchedManager.Instance.getWatchedUserInfo(args.user.name.toLowerCase())
+        embed.addField("Actioner", info.actioner);
+        embed.addField("Message", info.message);
+    }
 }
 
 export default class watchedRule extends ruleBase {
@@ -12,5 +18,10 @@ export default class watchedRule extends ruleBase {
 	targetType: targetType = 'Both';
 	Condition = new isWatched();
 
-	Action = new watchedAction();
+	Action = new watchedAction({
+        message: '',
+    	//color?: string;
+	    description: 'A watched user has commented on r/CoronavirusUK and has triggered this warning!',
+	    //channelID?: string;    
+    });
 }
