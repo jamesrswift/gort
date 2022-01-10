@@ -27,7 +27,6 @@ export default class watchedManager {
 		actioner: string,
 		message: string
 	): Promise<any> {
-
 		if (await this.isUserWatched(name)) {
 			return;
 		}

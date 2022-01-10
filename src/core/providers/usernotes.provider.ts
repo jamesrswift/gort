@@ -21,10 +21,10 @@ export default class UsernotesProvider {
 	}
 
 	public addUsernote(user: Snoowrap.RedditUser, note: string): void {
-		this.addUsernoteByName(user.name, note)
+		this.addUsernoteByName(user.name, note);
 	}
 
-	public addUsernoteByName( user: string, note: string) : void {
+	public addUsernoteByName(user: string, note: string): void {
 		void this.getUsernotesPage().then((wiki: Snoowrap.WikiPage) => {
 			const usernotes = new toolbox.UsernotesData(wiki.content_md);
 			usernotes.addUsernote(user, note);
