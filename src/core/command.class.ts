@@ -11,7 +11,13 @@ export default abstract class commandBase {
 	abstract description: string;
 	abstract usage: string;
 
-	async execute(args: string[], cmd: string, message: Discord.Message): Promise<string | undefined | null> { return undefined};
+	async execute(
+		args: string[],
+		cmd: string,
+		message: Discord.Message
+	): Promise<string | undefined | null> {
+		return undefined;
+	}
 }
 
 export class commandHandler {
