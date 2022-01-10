@@ -78,6 +78,10 @@ export class commandHandler {
 		});
 	}
 
+	public getCommands(): Map<string, commandBase> {
+		return this._commandArray;
+	}
+
 	public onMessage(message: Discord.Message): void {
 		if (message.author.bot) return;
 		if (
