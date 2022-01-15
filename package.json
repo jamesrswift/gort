@@ -6,7 +6,7 @@
 	"scripts": {
 		"build": "tsc",
 		"pretty": "npx prettier --write .",
-		"start": "npm run build && node dist/index.js",
+		"start": "npm run build && node --trace-deprecation dist/index.js",
 		"test": "mocha -r ts-node/register tests/**/*.test.ts",
 		"coverage": "nyc -r lcov -e .ts -x \"*.test.ts\" npm run test && start ./coverage/lcov-report/index.html"
 	},
