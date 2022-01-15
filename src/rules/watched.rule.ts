@@ -24,7 +24,7 @@ export class watchedRule extends ruleBase {
 	Condition = new isWatched();
 
 	Action = new watchedAction({
-		message: '',
+		message: 'User is on watch list',
 		//color?: string;
 		description:
 			'A watched user has commented on r/CoronavirusUK and has triggered this warning!',
