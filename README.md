@@ -130,6 +130,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Roadmap
 
+<<<<<<< HEAD
 -   [] Detect repeat posts automatically
 -   [] Detect whether a user is making a comment in your subreddit for the first time
 -   [] Catch editted and modqueued items aswell, not only new comments/submissions
@@ -138,6 +139,16 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 -   [] Web interface
     -   [] Persistent variables and customisation from web for rules
     -   [] Stats interface to monitor subreddit health
+=======
+- [ ] Detect repeat posts automatically
+- [ ] Detect whether a user is making a comment in your subreddit for the first time
+- [ ] Catch editted and modqueued items aswell, not only new comments/submissions
+- [ ] Modmail notifications
+- [ ] Call commands as a comment, to make mobile moderation easier
+- [ ] Web interface
+    - [ ] Persistent variables and customisation from web for rules
+    - [ ] Stats interface to monitor subreddit health
+>>>>>>> 2fed47a85b36702e93e3b0bf2c1ac773615b796e
 
 See the [open issues](https://github.com/jamesxx/gort/issues) for a full list of proposed features (and known issues).
 
