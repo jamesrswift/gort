@@ -1,6 +1,6 @@
 import * as toolbox from 'toolbox-api';
 import { RedditProvider } from './reddit.provider';
-import Snoowrap from 'snoowrap';
+import Snoowrap, { Subreddit } from 'snoowrap';
 import { OrFail } from '../lib/helper.lib';
 
 export default class UsernotesProvider {
@@ -15,9 +15,12 @@ export default class UsernotesProvider {
 	private constructor() {}
 
 	public getUsernotesPage(): Promise<Snoowrap.WikiPage> {
-		return RedditProvider.Instance.getTargetSubreddit()
-			.getWikiPage('usernotes')
-			.fetch();
+		return new Promise<Snoowrap.WikiPage>( (resolve, reject) =>{
+			console.log( RedditProvider.Instance.getTargetSubreddit() )
+			RedditProvider.Instance.getTargetSubreddit().fetch().then( (subreddit: Subreddit) =>{
+				resolve(subreddit.getWikiPage('usernotes').fetch());
+			})
+		})
 	}
 
 	public addUsernote(user: Snoowrap.RedditUser, note: string): void {
