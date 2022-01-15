@@ -40,26 +40,9 @@ export class LogManager extends EventEmitter {
 		if (this._bConsoleLoggerRegistered) return this;
 
 		this.onLogEntry((logEntry) => {
-			const msg = `${logEntry.location} [${logEntry.module}] ${logEntry.message}`;
-			switch (logEntry.level) {
-				case 'trace':
-					console.trace(msg);
-					break;
-				case 'debug':
-					console.debug(msg);
-					break;
-				case 'info':
-					console.info(msg);
-					break;
-				case 'warn':
-					console.warn(msg);
-					break;
-				case 'error':
-					console.error(msg);
-					break;
-				default:
-					console.log(`{${logEntry.level}} ${msg}`);
-			}
+			console.log(
+				`{${logEntry.level}} ${logEntry.location} [${logEntry.module}] ${logEntry.message}`
+			);
 		});
 
 		this._bConsoleLoggerRegistered = true;
