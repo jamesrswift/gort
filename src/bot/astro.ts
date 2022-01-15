@@ -5,6 +5,7 @@ import Discord from 'discord.js';
 import { DiscordProvider } from '../core/providers/discord.provider';
 
 import { logging } from '../core/logging';
+import brigadeManager from '../core/managers/brigade.manager';
 
 const logger = logging.getLogger('bot.astro');
 
@@ -94,9 +95,10 @@ export default class astro {
 
 	private containsLinkToSubreddit(text: string): string | undefined {
 		const match = text.match(
-			/(?:(?:https?:\/\/)?(?:(?:www|old|new|i|m|[a-z]{2})\.)?reddit\.com)?\/r\/CoronavirusUK\/(?:comments\/)?([a-z0-9]{6})/gm
+			/(?:(?:https?:\/\/)?(?:(?:www|old|new|i|m|[a-z]{2})\.)?reddit\.com)?\/r\/CoronavirusUK\/(?:comments\/)?(?<target>[a-z0-9]{6})/gm
 		);
 		if (match != null && match.length > 0) {
+			console.log(match);
 			return match.pop();
 		}
 		return undefined;
@@ -115,18 +117,30 @@ export default class astro {
 
 	private onError(...data: any[]) {}
 
-	private output(item: astroNotifyInterface) {
+	private async output(item: astroNotifyInterface) {
 		if (
-			(item.keyword == undefined ||
-			null) &&
-			(item.linked == undefined ||
-			null)
+			(item.keyword == undefined || null) &&
+			(item.linked == undefined || null)
 		) {
 			return; // Do nothing
 		}
 
-		logger.info(`${item.type} from ${item.target.author.name} on ${item.target.subreddit_name_prefixed}`)
+		// Log output in console
+		logger.info(
+			`${item.type} from ${item.target.author.name} on ${item.target.subreddit_name_prefixed}`
+		);
 
+		item.target.subreddit.fetch().then( (subreddit) => {
+			// Add entry to brigadeManager
+			brigadeManager.Instance.addBrigadeEntry(
+				subreddit.display_name, // origin
+				item.target.author.name, // originator
+				item.linked? // TO DO: Get target thread id from linked string
+			);
+		})
+
+
+		// Notify discord
 		let embed = new Discord.MessageEmbed()
 			.setColor('#0099ff')
 			.setTitle("We've been mentioned!")
@@ -145,7 +159,7 @@ export default class astro {
 				{
 					name: 'Subreddit',
 					value: item.target.subreddit_name_prefixed,
-				},
+				}
 				//{ name: 'Thread Title', value: item.target. }
 			)
 			.setFooter({ text: 'Provided by CensorshipCo' });
