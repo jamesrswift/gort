@@ -68,7 +68,7 @@ export default class notifyAction extends action {
 
 		await this.buildEmbed(args, embed);
 
-		embed.addField('Trigger Reason', this._sOpts.message);
+		embed.addField('Trigger Reason', this._sOpts.message ?? "UNDEFINED");
 		embed.setFooter({ text: 'Provided by CensorshipCo' });
 
 		DiscordProvider.Instance.sendMessage(
