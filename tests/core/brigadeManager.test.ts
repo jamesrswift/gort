@@ -30,15 +30,11 @@ describe( "brigadeManager", () => {
             "www.reddit.com/r/CoronavirusUK/comments/s4pk8w/unsolicited_dms_sent_to_rcoronavirusuk_users/",
             "old.reddit.com/r/CoronavirusUK/comments/s4pk8w/",
             "np.reddit.com/r/CoronavirusUK/comments/s4pk8w/unsolicited_dms_sent_to_rcoronavirusuk_users/hssml66/",
-
-            "r/CoronavirusUK/comments/s4pk8w/unsolicited_dms_sent_to_rcoronavirusuk_users/",
-            "r/CoronavirusUK/comments/s4pk8w/",
-            "r/CoronavirusUK/comments/s4pk8w/unsolicited_dms_sent_to_rcoronavirusuk_users/hssml66/",
         ]
 
         listOfTestStrings.forEach( (entry) => {
 
-            const info = brigadeManager.stringContainsBrigadeLink(entry);
+            const info = brigadeManager.stringContainsBrigadeLink(entry)[0];
 
             describe( entry, () => {
                 it ("should find a match and reflect this in bContainsLink", (done) => {
