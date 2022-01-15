@@ -66,11 +66,13 @@ export default class gort {
 	}
 
 	private onDiscordMessage(message: Discord.Message) {
-		logger.trace(
+		/*logger.trace(
 			`Discord message from ${message.author.username} received.`
-		);
+		);*/
 		commandHandler.Instance.onMessage(message);
 	}
 
-	private onError(...data: any[]) {}
+	private onError(...data: any[]) {
+		DiscordProvider.Instance.sendMessage(data.toString());
+	}
 }

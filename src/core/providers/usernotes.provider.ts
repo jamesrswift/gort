@@ -15,12 +15,14 @@ export default class UsernotesProvider {
 	private constructor() {}
 
 	public getUsernotesPage(): Promise<Snoowrap.WikiPage> {
-		return new Promise<Snoowrap.WikiPage>( (resolve, reject) =>{
-			console.log( RedditProvider.Instance.getTargetSubreddit() )
-			RedditProvider.Instance.getTargetSubreddit().fetch().then( (subreddit: Subreddit) =>{
-				resolve(subreddit.getWikiPage('usernotes').fetch());
-			})
-		})
+		return new Promise<Snoowrap.WikiPage>((resolve, reject) => {
+			console.log(RedditProvider.Instance.getTargetSubreddit());
+			RedditProvider.Instance.getTargetSubreddit()
+				.fetch()
+				.then((subreddit: Subreddit) => {
+					resolve(subreddit.getWikiPage('usernotes').fetch());
+				});
+		});
 	}
 
 	public addUsernote(user: Snoowrap.RedditUser, note: string): void {

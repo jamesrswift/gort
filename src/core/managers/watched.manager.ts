@@ -22,7 +22,7 @@ export default class watchedManager {
 	}
 	private constructor() {}
 
-	async addWatchedUser(
+	public async addWatchedUser(
 		name: string,
 		actioner: string,
 		message: string
@@ -40,7 +40,7 @@ export default class watchedManager {
 		return watch;
 	}
 
-	async removeWatchedUser(name: string) {
+	public async removeWatchedUser(name: string) {
 		WatchedUser.findOneAndDelete(
 			{ name: name.toLowerCase() },
 			undefined,
@@ -51,11 +51,11 @@ export default class watchedManager {
 		);
 	}
 
-	async isUserWatched(user: string): Promise<boolean> {
+	public async isUserWatched(user: string): Promise<boolean> {
 		return WatchedUser.exists({ name: user.toLowerCase() });
 	}
 
-	getWatchedUserInfo(name: string): Promise<any> {
+	public async getWatchedUserInfo(name: string): Promise<any> {
 		return WatchedUser.findOne({ name: name.toLowerCase() }).exec();
 	}
 }
