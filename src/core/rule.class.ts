@@ -60,7 +60,7 @@ export class ruleHandler {
 		}
 	}
 
-	private iterateRules(args: executableArguments) {
+	public iterateRules(args: executableArguments) {
 		for (let [rulename, rule] of this._ruleArray) {
 			if (
 				rule.targetType == 'Both' ||
