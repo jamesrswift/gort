@@ -13,6 +13,6 @@ mongoose
 	.then(() => {
 		logger.debug(`MongoDB connected ${_mongoURI}`);
 	})
-	.catch(logger.error);
+	.catch(logger.error.bind(logger));
 
 export default mongoose;
