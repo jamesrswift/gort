@@ -94,14 +94,7 @@ export default class astro {
 	}
 
 	private containsLinkToSubreddit(text: string): string | undefined {
-		const match = text.match(
-			/(?:(?:https?:\/\/)?(?:(?:www|old|new|i|m|[a-z]{2})\.)?reddit\.com)?\/r\/CoronavirusUK\/(?:comments\/)?(?<target>[a-z0-9]{6})/gm
-		);
-		if (match != null && match.length > 0) {
-			console.log(match);
-			return match.pop();
-		}
-		return undefined;
+		return brigadeManager.stringContainsBrigadeLink(text).match
 	}
 
 	private containsKeyword(text: string): string | undefined {
@@ -117,6 +110,22 @@ export default class astro {
 
 	private onError(...data: any[]) {}
 
+	private async addBrigadeEntryToManager(item: astroNotifyInterface){
+
+		if ( item.linked == undefined) return;
+		const info = brigadeManager.stringContainsBrigadeLink(item.linked)
+		if ( !info.bContainsLink ) return;
+
+		item.target.subreddit.fetch().then( (subreddit) => {
+			// Add entry to brigadeManager
+			brigadeManager.Instance.addBrigadeEntry(
+				subreddit.display_name, // origin
+				item.target.author.name, // originator
+				info.sTargetID // target
+			);
+		})
+	}
+
 	private async output(item: astroNotifyInterface) {
 		if (
 			(item.keyword == undefined || null) &&
@@ -130,15 +139,7 @@ export default class astro {
 			`${item.type} from ${item.target.author.name} on ${item.target.subreddit_name_prefixed}`
 		);
 
-		item.target.subreddit.fetch().then( (subreddit) => {
-			// Add entry to brigadeManager
-			brigadeManager.Instance.addBrigadeEntry(
-				subreddit.display_name, // origin
-				item.target.author.name, // originator
-				item.linked? // TO DO: Get target thread id from linked string
-			);
-		})
-
+		this.addBrigadeEntryToManager(item)
 
 		// Notify discord
 		let embed = new Discord.MessageEmbed()

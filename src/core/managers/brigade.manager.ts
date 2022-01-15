@@ -34,6 +34,7 @@ export default class brigadeManager {
 			target: target.toLowerCase(),
 		});
 		entry.save();
+		logger.info(`Adding BrigadeEntry: Origin ${origin}, target ${target}`)
 		return entry;
 	}
 
@@ -44,4 +45,31 @@ export default class brigadeManager {
 	public async getBrigadeEntryInfo(target: string): Promise<any> {
 		return BrigadeEntry.findOne({ target: target.toLowerCase() }).exec();
 	}
+
+	public static stringContainsBrigadeLink(text: string) : IStringContainsBrigadeLinkResults{
+
+		let results : IStringContainsBrigadeLinkResults = {
+			bContainsLink : false,
+			sInput : text,
+			sTargetID: ''
+		}
+
+		const match = text.match(
+			/(?:(?:https?:\/\/)?(?:(?:www|old|new|i|m|[a-z]{2})\.)?reddit\.com)?\/r\/CoronavirusUK\/(?:comments\/)?(?<target>[a-z0-9]{6})/gm
+		);
+		if (match != null && match.length > 0) {
+			results.bContainsLink = true;
+			results.sTargetID = match.groups?.target ?? '';
+			results.match = match.pop() ?? '';
+		}
+
+		return results;
+	}
+}
+
+export interface IStringContainsBrigadeLinkResults{
+	bContainsLink: boolean;
+	sInput: string;
+	sTargetID: string;
+	match?: string;
 }

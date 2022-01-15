@@ -4,7 +4,7 @@ import { brigadeOrigin } from '../core/conditionals/brigaded';
 import { subredditHistory } from '../core/properties/user';
 import ruleBase, { targetType } from '../core/rule.class';
 
-export class subredditHistoryRule extends ruleBase {
+export class brigadeRule extends ruleBase {
 	name: string = 'UserSubredditHistory';
 	targetType: targetType = 'Both';
 
@@ -17,4 +17,4 @@ export class subredditHistoryRule extends ruleBase {
 	});
 }
 
-export default { rules: [new subredditHistoryRule()] };
+export default { rules: [new brigadeRule()] };
