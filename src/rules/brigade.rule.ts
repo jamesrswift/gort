@@ -5,7 +5,7 @@ import { subredditHistory } from '../core/properties/user';
 import ruleBase, { targetType } from '../core/rule.class';
 
 export class brigadeRule extends ruleBase {
-	name: string = 'UserSubredditHistory';
+	name: string = 'brigadeRule';
 	targetType: targetType = 'Both';
 
 	Condition = new arrayIncludes(new subredditHistory(), new brigadeOrigin());
