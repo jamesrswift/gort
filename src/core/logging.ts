@@ -41,7 +41,7 @@ export class LogManager extends EventEmitter {
 
 		this.onLogEntry((logEntry) => {
 			console.log(
-				`{${logEntry.level}} ${logEntry.location} [${logEntry.module}] ${logEntry.message}`
+				`{${logEntry.level}} [${logEntry.module}] ${logEntry.message}`
 			);
 		});
 
