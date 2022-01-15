@@ -1,10 +1,11 @@
-import Discord from 'discord.js';
+import Discord, { Intents } from 'discord.js';
 import { OrDefault, OrFail, textEllipsis } from '../lib/helper.lib';
 import dotenv from 'dotenv';
 import { EventEmitter } from 'stream';
 
 export declare interface DiscordProvider {
 	on(event: 'message', listener: (message: Discord.Message) => void): this;
+	on(event: 'ready', listener: () => void): this;
 }
 
 export class DiscordProvider extends EventEmitter {
@@ -19,9 +20,11 @@ export class DiscordProvider extends EventEmitter {
 	private constructor() {
 		super();
 		dotenv.config();
-		this._client = new Discord.Client({} as Discord.ClientOptions);
+		this._client = new Discord.Client({
+			intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+		} as Discord.ClientOptions);
 		this._client.on('ready', this.onConnection.bind(this));
-		this._client.on('message', this.onMessage.bind(this));
+		this._client.on('messageCreate', this.onMessage.bind(this));
 		void this._client.login(OrFail(process.env.DISCORD_TOKEN));
 	}
 
@@ -30,7 +33,10 @@ export class DiscordProvider extends EventEmitter {
 	//
 	// Event Handling
 	//
-	onConnection() {}
+	onConnection() {
+		this.emit('ready');
+	}
+
 	onMessage(message: Discord.Message) {
 		this.emit('message', message);
 	}
