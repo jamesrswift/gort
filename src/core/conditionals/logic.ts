@@ -52,6 +52,10 @@ export class and extends executable<boolean> {
 		}
 	}
 	private logic(results: boolean[]): boolean {
+		// @ts-ignore
+		if (results == true) {
+			return true;
+		}
 		return results.reduce((previous, current) => previous && current);
 	}
 }
