@@ -11,7 +11,7 @@ const WatchedUsersSchema = new mongoose.Schema(
 	{ strict: false }
 );
 
-export const WatchedUser = mongoose.model('watcheddusers', WatchedUsersSchema);
+export const WatchedUser = mongoose.model('watchedusers', WatchedUsersSchema);
 
 const logger = logging.getLogger('core.manager.watchedManager');
 
