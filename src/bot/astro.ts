@@ -90,7 +90,7 @@ export default class astro {
 
 	private containsLinkToSubreddit(text: string): string | undefined {
 		const match = text.match(
-			/(?:(?:https?:\/\/)?(?:(?:www|old|new|i|[a-z]{2})\.)?reddit\.com)?\/r\/CoronavirusUK\/(?:comments\/)?([a-z0-9]{6})/gm
+			/(?:(?:https?:\/\/)?(?:(?:www|old|new|i|m|[a-z]{2})\.)?reddit\.com)?\/r\/CoronavirusUK\/(?:comments\/)?([a-z0-9]{6})/gm
 		);
 		if (match != null && match.length > 0) {
 			return match.pop();
