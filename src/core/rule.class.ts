@@ -48,8 +48,10 @@ export class ruleHandler {
 
 	private loadRule(filename: string) {
 		const rules: ruleBase[] = (
-			require(`../rules/${filename}`) as { rules: ruleBase[] }
-		).rules;
+			require(`../rules/${filename}`) as {
+				default: { rules: ruleBase[] };
+			}
+		).default.rules;
 
 		for (const rule of rules) {
 			if (this._ruleArray.has(rule.name)) {
