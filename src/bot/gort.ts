@@ -7,6 +7,10 @@ import Discord from 'discord.js';
 import astro from './astro';
 import { commandHandler } from '../core/command.class';
 
+import { logging } from '../core/logging';
+
+const logger = logging.getLogger('bot.gort');
+
 export default class gort {
 	private _astroturfBot: astro;
 	private _ownSubredditStream: subredditStream;
@@ -20,13 +24,23 @@ export default class gort {
 		this._ownSubredditStream.on('comment', this.onComment.bind(this));
 		this._ownSubredditStream.on('submission', this.onSubmission.bind(this));
 		this._ownSubredditStream.on('error', this.onError.bind(this));
+
 		DiscordProvider.Instance.on(
 			'message',
 			this.onDiscordMessage.bind(this)
 		);
+
+		DiscordProvider.Instance.on('ready', this.onDiscordReady.bind(this));
+
+		logger.info('Gort class initialized');
+	}
+
+	private onDiscordReady() {
+		DiscordProvider.Instance.sendMessage('Gort online!');
 	}
 
 	private onComment(user: RedditUser, comment: Comment) {
+		logger.trace(`Comment by ${user.name} received.`);
 		// check if user is ignored?
 
 		// Iterate rules
@@ -39,6 +53,7 @@ export default class gort {
 	}
 
 	private onSubmission(user: RedditUser, submission: Submission) {
+		logger.trace(`Submission by ${user.name} received.`);
 		// check if user is ignored?
 
 		// Iterate rules
@@ -51,6 +66,9 @@ export default class gort {
 	}
 
 	private onDiscordMessage(message: Discord.Message) {
+		logger.trace(
+			`Discord message from ${message.author.username} received.`
+		);
 		commandHandler.Instance.onMessage(message);
 	}
 
