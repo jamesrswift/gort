@@ -1,8 +1,16 @@
 import Discord from 'discord.js';
 import { OrDefault, OrFail, textEllipsis } from '../lib/helper.lib';
 import dotenv from 'dotenv';
+import { EventEmitter } from 'stream';
 
-export default class DiscordProvider {
+export declare interface DiscordProvider {
+	on(
+		event: 'message',
+		listener: (message: Discord.Message) => void
+	): this;
+}
+
+export class DiscordProvider extends EventEmitter {
 	//
 	// Singleton Pattern
 	//
@@ -12,6 +20,7 @@ export default class DiscordProvider {
 	}
 
 	private constructor() {
+		super();
 		dotenv.config();
 		this._client = new Discord.Client({} as Discord.ClientOptions);
 		this._client.on('ready', this.onConnection.bind(this));
@@ -25,7 +34,9 @@ export default class DiscordProvider {
 	// Event Handling
 	//
 	onConnection() {}
-	onMessage(message: Discord.Message) {}
+	onMessage(message: Discord.Message) {
+		this.emit('message', message)
+	}
 
 	//
 	// Channel Management

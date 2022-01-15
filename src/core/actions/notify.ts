@@ -2,7 +2,7 @@ import action from '../action.class';
 import Snoowrap from 'snoowrap';
 import Discord from 'discord.js';
 import { OrDefault, textEllipsis } from '../lib/helper.lib';
-import DiscordProvider from '../providers/discord.provider';
+import {DiscordProvider} from '../providers/discord.provider';
 import { logging } from '../logging';
 import { executableArguments } from '../condition.class';
 
