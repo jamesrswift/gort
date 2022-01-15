@@ -46,21 +46,21 @@ export default class brigadeManager {
 		return BrigadeEntry.findOne({ target: target.toLowerCase() }).exec();
 	}
 
-	public static stringContainsBrigadeLink(text: string) : IStringContainsBrigadeLinkResults{
+	public static stringContainsBrigadeLink(text: string) : IStringContainsBrigadeLinkResults[]{
 
-		let results : IStringContainsBrigadeLinkResults = {
-			bContainsLink : false,
-			sInput : text,
-			sTargetID: ''
-		}
+		let results : IStringContainsBrigadeLinkResults[] = []
 
-		const match = text.match(
-			/(?:(?:https?:\/\/)?(?:(?:www|old|new|i|m|[a-z]{2})\.)?reddit\.com)?\/r\/CoronavirusUK\/(?:comments\/)?(?<target>[a-z0-9]{6})/gm
-		);
-		if (match != null && match.length > 0) {
-			results.bContainsLink = true;
-			results.sTargetID = match.groups?.target ?? '';
-			results.match = match.pop() ?? '';
+		const Regex =/(?:(?:https?:\/\/)?(?:(?:www|old|new|i|m|[a-z]{2})\.)?reddit\.com)?\/r\/CoronavirusUK\/(?:comments\/)?(?<target>[a-z0-9]{6})/gm;
+
+		const matches = text.matchAll(Regex);
+
+		for (const match of matches ){
+			results.push( {
+				bContainsLink: true,
+				sInput : text,
+				sTargetID: match[1],
+				match: match[0]
+			})
 		}
 
 		return results;

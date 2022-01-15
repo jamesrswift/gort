@@ -94,7 +94,7 @@ export default class astro {
 	}
 
 	private containsLinkToSubreddit(text: string): string | undefined {
-		return brigadeManager.stringContainsBrigadeLink(text).match
+		return brigadeManager.stringContainsBrigadeLink(text)[0]?.match
 	}
 
 	private containsKeyword(text: string): string | undefined {
@@ -114,15 +114,18 @@ export default class astro {
 
 		if ( item.linked == undefined) return;
 		const info = brigadeManager.stringContainsBrigadeLink(item.linked)
-		if ( !info.bContainsLink ) return;
+		if ( info.length == 0 ) return;
 
 		item.target.subreddit.fetch().then( (subreddit) => {
 			// Add entry to brigadeManager
-			brigadeManager.Instance.addBrigadeEntry(
-				subreddit.display_name, // origin
-				item.target.author.name, // originator
-				info.sTargetID // target
-			);
+			for ( const match of info ){
+
+				brigadeManager.Instance.addBrigadeEntry(
+					subreddit.display_name, // origin
+					item.target.author.name, // originator
+					match.sTargetID // target
+				);
+			}
 		})
 	}
 
