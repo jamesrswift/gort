@@ -2,7 +2,7 @@ import { Comment, RedditUser, Submission } from 'snoowrap';
 import { RedditProvider } from '../core/providers/reddit.provider';
 import { subredditStream } from '../core/providers/streamable.provider';
 import Discord from 'discord.js';
-import DiscordProvider from '../core/providers/discord.provider';
+import { DiscordProvider } from '../core/providers/discord.provider';
 
 interface astroNotifyInterface {
 	type: 'Comment' | 'Submission';

@@ -1,8 +1,11 @@
 import { Comment, RedditUser, Submission } from 'snoowrap';
+import { DiscordProvider } from '../core/providers/discord.provider';
 import { RedditProvider } from '../core/providers/reddit.provider';
 import { subredditStream } from '../core/providers/streamable.provider';
 import { ruleHandler } from '../core/rule.class';
+import Discord from 'discord.js';
 import astro from './astro';
+import { commandHandler } from '../core/command.class';
 
 export default class gort {
 	private _astroturfBot: astro;
@@ -17,6 +20,10 @@ export default class gort {
 		this._ownSubredditStream.on('comment', this.onComment.bind(this));
 		this._ownSubredditStream.on('submission', this.onSubmission.bind(this));
 		this._ownSubredditStream.on('error', this.onError.bind(this));
+		DiscordProvider.Instance.on(
+			'message',
+			this.onDiscordMessage.bind(this)
+		);
 	}
 
 	private onComment(user: RedditUser, comment: Comment) {
@@ -41,6 +48,10 @@ export default class gort {
 			user: user,
 			cookies: [],
 		});
+	}
+
+	private onDiscordMessage(message: Discord.Message) {
+		commandHandler.Instance.onMessage(message);
 	}
 
 	private onError(...data: any[]) {}

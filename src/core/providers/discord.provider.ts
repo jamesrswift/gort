@@ -4,10 +4,7 @@ import dotenv from 'dotenv';
 import { EventEmitter } from 'stream';
 
 export declare interface DiscordProvider {
-	on(
-		event: 'message',
-		listener: (message: Discord.Message) => void
-	): this;
+	on(event: 'message', listener: (message: Discord.Message) => void): this;
 }
 
 export class DiscordProvider extends EventEmitter {
@@ -35,7 +32,7 @@ export class DiscordProvider extends EventEmitter {
 	//
 	onConnection() {}
 	onMessage(message: Discord.Message) {
-		this.emit('message', message)
+		this.emit('message', message);
 	}
 
 	//
