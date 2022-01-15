@@ -4,6 +4,10 @@ import { subredditStream } from '../core/providers/streamable.provider';
 import Discord from 'discord.js';
 import { DiscordProvider } from '../core/providers/discord.provider';
 
+import { logging } from '../core/logging';
+
+const logger = logging.getLogger('bot.astro');
+
 interface astroNotifyInterface {
 	type: 'Comment' | 'Submission';
 	target: Comment | Submission;
@@ -12,7 +16,7 @@ interface astroNotifyInterface {
 }
 
 export default class astro {
-	private _channelID: string = '';
+	private _channelID: string = '931921060826349578'; // Brigades channel
 
 	private _listOfSubreddits: string[] = [
 		'NoNewNormal',
@@ -113,13 +117,15 @@ export default class astro {
 
 	private output(item: astroNotifyInterface) {
 		if (
-			item.keyword == undefined ||
-			null ||
-			item.linked == undefined ||
-			null
+			(item.keyword == undefined ||
+			null) &&
+			(item.linked == undefined ||
+			null)
 		) {
 			return; // Do nothing
 		}
+
+		logger.info(`${item.type} from ${item.target.author.name} on ${item.target.subreddit_name_prefixed}`)
 
 		let embed = new Discord.MessageEmbed()
 			.setColor('#0099ff')
@@ -140,9 +146,7 @@ export default class astro {
 					name: 'Subreddit',
 					value: item.target.subreddit_name_prefixed,
 				},
-
-				// @ts-ignore Because we know better
-				{ name: 'Thread Title', value: item.target.link_title }
+				//{ name: 'Thread Title', value: item.target. }
 			)
 			.setFooter({ text: 'Provided by CensorshipCo' });
 		DiscordProvider.Instance.sendMessage(
