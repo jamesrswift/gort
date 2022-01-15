@@ -62,7 +62,7 @@ export class commandHandler {
 
 	private loadCommand(filename: string) {
 		const commands: commandBase[] = (
-			require(`../rules/${filename}`) as {
+			require(`../commands/${filename}`) as {
 				default: { commands: commandBase[] };
 			}
 		).default.commands;
