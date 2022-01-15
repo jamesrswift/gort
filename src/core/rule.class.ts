@@ -47,14 +47,17 @@ export class ruleHandler {
 	}
 
 	private loadRule(filename: string) {
-		const rule: ruleBase = (
-			require(`../rules/${filename}`) as { default: ruleBase }
-		).default;
-		if (this._ruleArray.has(rule.name)) {
-			return logger.error(`Attempting to redefine rule ${rule.name}`);
+		const rules: ruleBase[] = (
+			require(`../rules/${filename}`) as { rules: ruleBase[] }
+		).rules;
+
+		for (const rule of rules) {
+			if (this._ruleArray.has(rule.name)) {
+				return logger.error(`Attempting to redefine rule ${rule.name}`);
+			}
+			logger.info(`Loading rule: ${rule.name}`);
+			this._ruleArray.set(rule.name, rule);
 		}
-		logger.info(`Loading rule: ${rule.name}`);
-		this._ruleArray.set(rule.name, rule);
 	}
 
 	private iterateRules(args: executableArguments) {

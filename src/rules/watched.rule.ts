@@ -18,7 +18,7 @@ class watchedAction extends notifyAction {
 	}
 }
 
-export default class watchedRule extends ruleBase {
+export class watchedRule extends ruleBase {
 	name: string = 'watchedRule';
 	targetType: targetType = 'Both';
 	Condition = new isWatched();
@@ -31,3 +31,5 @@ export default class watchedRule extends ruleBase {
 		//channelID?: string;
 	});
 }
+
+export default { rules: [new watchedRule()] };

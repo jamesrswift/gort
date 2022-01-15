@@ -7,7 +7,7 @@ import { and, or } from '../core/conditionals/logic';
 import { arrayIncludesAny } from '../core/conditionals/array';
 import ruleBase, { targetType } from '../core/rule.class';
 
-export default class testRule extends ruleBase {
+export class testRule extends ruleBase {
 	name: string = 'Test Rule';
 	targetType: targetType = 'Both';
 
@@ -24,3 +24,5 @@ export default class testRule extends ruleBase {
 
 	Action: action = new ban({});
 }
+
+export default { rules: [new testRule()] };

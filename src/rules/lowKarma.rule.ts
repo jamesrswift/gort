@@ -5,7 +5,7 @@ import { lessThanOrEquals } from '../core/conditionals/relational';
 import { comment_karma } from '../core/properties/user';
 import ruleBase, { targetType } from '../core/rule.class';
 
-export default class lowKarmaRule extends ruleBase {
+export class lowKarmaRule extends ruleBase {
 	name: string = 'LowKarmaRule';
 	targetType: targetType = 'Both';
 	Condition: conditional = new lessThanOrEquals(
@@ -17,3 +17,5 @@ export default class lowKarmaRule extends ruleBase {
 		color: '#a363d9',
 	});
 }
+
+export default { rules: [new lowKarmaRule()] };

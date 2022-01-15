@@ -4,7 +4,7 @@ import { arrayIncludesAny } from '../core/conditionals/array';
 import { subredditHistory } from '../core/properties/user';
 import ruleBase, { targetType } from '../core/rule.class';
 
-export default class subredditHistoryRule extends ruleBase {
+export class subredditHistoryRule extends ruleBase {
 	name: string = 'UserSubredditHistory';
 	targetType: targetType = 'Both';
 
@@ -43,3 +43,5 @@ export default class subredditHistoryRule extends ruleBase {
 		message: 'User contributed to "bad" subreddits',
 	});
 }
+
+export default { rules: [new subredditHistoryRule()] };
