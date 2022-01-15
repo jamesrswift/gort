@@ -1,6 +1,6 @@
 import action from '../action.class';
 import Snoowrap from 'snoowrap';
-import Discord from 'discord.js';
+import Discord, { ColorResolvable } from 'discord.js';
 import { OrDefault, textEllipsis } from '../lib/helper.lib';
 import { DiscordProvider } from '../providers/discord.provider';
 import { logging } from '../logging';
@@ -10,7 +10,7 @@ const logger = logging.getLogger('core.action.notify');
 
 interface notifyActionOptions {
 	message: string;
-	color?: string;
+	color?: ColorResolvable;
 	description?: string;
 	channelID?: string;
 }
@@ -65,11 +65,13 @@ export default class notifyAction extends action {
 					500
 				)
 			);
+			
 
 		await this.buildEmbed(args, embed);
 
 		embed.addField('Trigger Reason', this._sOpts.message ?? "UNDEFINED");
 		embed.setFooter({ text: 'Provided by CensorshipCo' });
+		embed.setColor( this._sOpts.color ?? '#0099ff' );
 
 		DiscordProvider.Instance.sendMessage(
 			{ embeds: [embed] },
