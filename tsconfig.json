@@ -107,11 +107,7 @@
 		"./tests/**/*",
 		"./dist/**/*",
 		"./node_modules/**/*",
-		"./.vscode/**/*"
+		"./.vscode/**/*",
+		"./docs/**/*"
 	],
-
-	"typedocOptions": {
-        "entryPoints": ["src/index.ts"],
-        "out": "docs"
-    }
 }
