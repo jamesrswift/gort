@@ -32,6 +32,10 @@ jobs:
         BUILDS_BRANCH_NAME="builds/${GITHUB_REF#refs/heads/}"
         echo "Pushing artifacts to branch $BUILDS_BRANCH_NAME"
 
+        echo "Setting git config username and email"
+        git config user.name "Build Bot"
+        git config user.email "bot@github-actions"
+
         # Create another clone of the repository in a temporary directory
         git clone "$(git remote get-url origin)" .temp
         cd .temp
