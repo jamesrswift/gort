@@ -18,7 +18,7 @@ class addUsernoteCommand extends commandBase {
 	): Promise<string | undefined | null> {
 		let cmdArguments = [...args];
 
-		const username = cmdArguments.shift()?.toLowerCase();
+		const username = cmdArguments.shift();
 		const message = cmdArguments.join(' ');
 
 		// Validate usage

@@ -37,16 +37,38 @@ export default class UsernotesProvider {
 		logger.warn(
 			'Usernotes are currently disabled due to error in underlying libraries'
 		);
-		return;
+		//return;
 
 		void this.getUsernotesPage().then((wiki: Snoowrap.WikiPage) => {
 			const usernotes = new toolbox.UsernotesData(wiki.content_md);
 			usernotes.addUsernote(user, note);
 
-			wiki.edit({
-				text: JSON.stringify(usernotes),
-				reason: 'toolbox modification by gort',
-			});
+			const subreddit = RedditProvider.Instance.getTargetSubreddit().fetch().then( (subreddit: Snoowrap.Subreddit) => {
+				// @ts-ignore
+				wiki.subreddit = subreddit;
+				// @ts-ignore
+				wiki.title = 'usernotes';
+
+				wiki.getRevisions().then(rev => {
+					try {
+						// @ts-ignore
+						wiki.previousRevision = (rev[0]).id
+						console.log( `previous revision = ${(rev[0]).id}`)
+						wiki.edit({
+							text: JSON.stringify(usernotes),
+							reason: 'toolbox modification by gort',
+
+							// @ts-ignore
+							previousRevision: (rev[0]).id
+						});
+					} catch ( error: any ) {
+						console.log(error)
+					}
+					
+				})
+				
+			})
+			
 		});
 	}
 
