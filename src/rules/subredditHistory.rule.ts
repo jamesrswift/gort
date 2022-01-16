@@ -1,10 +1,5 @@
 import { notify } from '../core/actions';
-import {
-	conditional,
-	executableArguments,
-	listable,
-} from '../core/condition.class';
-import { arrayIncludesAny } from '../core/conditionals/array';
+import { conditional, executableArguments } from '../core/condition.class';
 import { subredditHistory } from '../core/properties/user';
 import ruleBase, { targetType } from '../core/rule.class';
 
@@ -36,8 +31,7 @@ export class subredditHistoryRule extends ruleBase {
 		'covidrebellionuk',
 		'antiwork',
 
-
-		'testingground4bots'
+		'testingground4bots',
 	];
 
 	/*Condition = new arrayIncludesAny(
