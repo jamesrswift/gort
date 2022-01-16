@@ -7,7 +7,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![GNUv3 License][license-shield]][license-url]
-[![Generate development build][build-shield][build-url]
+[![Generate development build][build-shield]][build-url]
 
 </div>
 
