@@ -35,6 +35,9 @@ export class subredditHistoryRule extends ruleBase {
 		'churchofcovid',
 		'covidrebellionuk',
 		'antiwork',
+
+
+		'testingground4bots'
 	];
 
 	/*Condition = new arrayIncludesAny(
