@@ -7,6 +7,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![GNUv3 License][license-shield]][license-url]
+[![Generate development build][build-shield][build-url]
 
 </div>
 
@@ -190,3 +191,5 @@ Distributed under the GPL-3.0-only License. See [LICENSE.md](https://github.com/
 [issues-url]: https://github.com/jamesxx/gort/issues
 [license-shield]: https://img.shields.io/github/license/jamesxx/gort.svg?style=for-the-badge
 [license-url]: https://github.com/jamesxx/gort/blob/master/LICENSE.md
+[build-shield]: https://github.com/JamesxX/gort/actions/workflows/build-and-push.yml/badge.svg?style=for-the-badge
+[build-url]: https://github.com/JamesxX/gort/actions/workflows/build-and-push.yml
