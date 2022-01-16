@@ -70,7 +70,7 @@ class subredditHistoryRule extends rule_class_1.default {
                 });
             }
         })(this.badSubreddits);
-        this.Action = new (class extends actions_1.notify {
+        this.Action = new (class subredditHistoryNotification extends actions_1.notify {
             buildReasonField(args) {
                 var _a;
                 return __awaiter(this, void 0, void 0, function* () {
