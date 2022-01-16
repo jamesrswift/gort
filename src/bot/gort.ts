@@ -8,6 +8,7 @@ import astro from './astro';
 import { commandHandler } from '../core/command.class';
 
 import { logging } from '../core/logging';
+import ignoredManager from '../core/managers/ignored.manager';
 
 const logger = logging.getLogger('bot.gort');
 
@@ -39,9 +40,15 @@ export default class gort {
 		DiscordProvider.Instance.sendMessage('Gort online!');
 	}
 
-	private onComment(user: RedditUser, comment: Comment) {
+	private async onComment(user: RedditUser, comment: Comment) {
 		logger.trace(`Comment by ${user.name} received.`);
+
 		// check if user is ignored?
+		if (await ignoredManager.Instance.isUserIgnored(user.name)) {
+			logger.info(
+				`Ignoring comment by ${user.name} as they are on the ignored user list`
+			);
+		}
 
 		// Iterate rules
 		ruleHandler.Instance.iterateRules({
@@ -52,9 +59,15 @@ export default class gort {
 		});
 	}
 
-	private onSubmission(user: RedditUser, submission: Submission) {
+	private async onSubmission(user: RedditUser, submission: Submission) {
 		logger.trace(`Submission by ${user.name} received.`);
+
 		// check if user is ignored?
+		if (await ignoredManager.Instance.isUserIgnored(user.name)) {
+			logger.info(
+				`Ignoring submission by ${user.name} as they are on the ignored user list`
+			);
+		}
 
 		// Iterate rules
 		ruleHandler.Instance.iterateRules({
@@ -74,5 +87,6 @@ export default class gort {
 
 	private onError(...data: any[]) {
 		DiscordProvider.Instance.sendMessage(data.toString());
+		logger.error(data.toString());
 	}
 }

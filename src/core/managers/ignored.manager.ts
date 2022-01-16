@@ -21,10 +21,10 @@ export default class ignoredManager {
 	private constructor() {}
 
 	async addIgnoredUser(name: string, actioner: string): Promise<any> {
-		// TO DO: Check if user is already ignored?
 		// TO DO: Unwatch user if necessary
 
 		if (await this.isUserIgnored(name)) {
+			logger.warn(`${name} is already ignored. No action taken`);
 			return;
 		}
 
@@ -52,5 +52,9 @@ export default class ignoredManager {
 
 	async isUserIgnored(user: string): Promise<boolean> {
 		return IgnoredUser.exists({ name: user.toLowerCase() });
+	}
+
+	public async getIgnoredUserInfo(name: string): Promise<any> {
+		return IgnoredUser.findOne({ name: name.toLowerCase() }).exec();
 	}
 }
