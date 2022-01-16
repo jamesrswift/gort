@@ -4,7 +4,7 @@ import Snoowrap, { Subreddit } from 'snoowrap';
 import { OrFail } from '../lib/helper.lib';
 
 import { logging } from '../../core/logging';
-import { PrettyUsernote } from 'toolbox-api';
+import { expandPermalink, PrettyUsernote } from 'toolbox-api';
 
 const logger = logging.getLogger('core.provider.UsernotesProvider');
 
@@ -54,7 +54,21 @@ export default class UsernotesProvider {
 		return new Promise<PrettyUsernote[]>( (resolve, reject) => {
 			void this.getUsernotesPage().then((wiki: Snoowrap.WikiPage) => {
 				const usernotes = new toolbox.UsernotesData(wiki.content_md);
-				resolve( usernotes.notesForUser(user) ?? [] )
+
+				// Find username case_insensitive
+				Object.keys(usernotes.users).forEach( (key) => {
+					if ( key.toLowerCase() == user.toLowerCase()){
+						resolve( usernotes.users[key].ns.map<PrettyUsernote>( (note) => { 
+							return <PrettyUsernote>{
+								text: note.n,
+								timestamp: note.t ? new Date(note.t * 1000) : undefined,
+								link: note.l && expandPermalink(note.l),
+							}
+						}) )
+					}
+				})
+
+				resolve( [] )
 			});
 		})
 	}
