@@ -31,3 +31,4 @@ jobs:
         github_token: $\{{ secrets.GITHUB_TOKEN }}
         # Destination branch to push changes
         branch: builds/main
+        force: true
