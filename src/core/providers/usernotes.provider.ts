@@ -40,8 +40,8 @@ export default class UsernotesProvider {
 				page: wiki,
 				page_title: 'usernotes',
 				text: JSON.stringify(usernotes),
-				reason: 'toolbox modification by gort'
-			})			
+				reason: 'toolbox modification by gort',
+			});
 		});
 	}
 
@@ -61,7 +61,9 @@ export default class UsernotesProvider {
 										timestamp: note.t
 											? new Date(note.t * 1000)
 											: undefined,
-										link: note.l && toolbox.expandPermalink(note.l),
+										link:
+											note.l &&
+											toolbox.expandPermalink(note.l),
 									};
 								}
 							)
