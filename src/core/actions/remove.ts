@@ -5,6 +5,11 @@ import { executableArguments } from '../condition.class';
 
 const logger = logging.getLogger('core.action.remove');
 
+/**
+ * Remove Action
+ *
+ * @category Actions
+ */
 export default class removeAction extends action {
 	private _bSpam: boolean;
 

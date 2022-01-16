@@ -13,6 +13,11 @@ interface BanOptions {
 	banNote?: string;
 }
 
+/**
+ * Ban Action
+ *
+ * @category Actions
+ */
 export default class banAction extends action {
 	private _sOpts: BanOptions;
 

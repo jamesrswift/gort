@@ -15,6 +15,11 @@ interface notifyActionOptions {
 	channelID?: string;
 }
 
+/**
+ * Discord Notification Action
+ *
+ * @category Actions
+ */
 export default class notifyAction extends action {
 	protected _sOpts: notifyActionOptions;
 

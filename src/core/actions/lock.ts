@@ -5,6 +5,11 @@ import { executableArguments } from '../condition.class';
 
 const logger = logging.getLogger('core.action.lock');
 
+/**
+ * Lock Action
+ *
+ * @category Actions
+ */
 export default class lockAction extends action {
 	constructor() {
 		super();

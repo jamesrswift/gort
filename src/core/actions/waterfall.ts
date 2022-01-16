@@ -5,6 +5,11 @@ import { executableArguments } from '../condition.class';
 
 const logger = logging.getLogger('core.action.waterfall');
 
+/**
+ * Waterfall Action
+ *
+ * @category Actions
+ */
 export default class waterfallAction extends action {
 	private _waterfall: action[];
 

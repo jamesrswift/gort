@@ -12,6 +12,11 @@ interface replyActionOptions {
 	sticky: boolean;
 }
 
+/**
+ * Reply Action
+ *
+ * @category Actions
+ */
 export default class replyAction extends action {
 	private _sOpts: replyActionOptions;
 	private _replyText: (
