@@ -43,11 +43,20 @@ export default class gort {
 	private async onComment(user: RedditUser, comment: Comment) {
 		logger.trace(`Comment by ${user.name} received.`);
 
+		// Ignore moderators
+		if ( user.is_mod){
+			logger.info(
+				`Ignoring comment by ${user.name} as they are are a moderator`
+			);
+			return
+		}
+
 		// check if user is ignored?
 		if (await ignoredManager.Instance.isUserIgnored(user.name)) {
 			logger.info(
 				`Ignoring comment by ${user.name} as they are on the ignored user list`
 			);
+			return
 		}
 
 		// Iterate rules
@@ -62,11 +71,20 @@ export default class gort {
 	private async onSubmission(user: RedditUser, submission: Submission) {
 		logger.trace(`Submission by ${user.name} received.`);
 
+		// Ignore moderators
+		if ( user.is_mod){
+			logger.info(
+				`Ignoring comment by ${user.name} as they are are a moderator`
+			);
+			return
+		}
+
 		// check if user is ignored?
 		if (await ignoredManager.Instance.isUserIgnored(user.name)) {
 			logger.info(
 				`Ignoring submission by ${user.name} as they are on the ignored user list`
 			);
+			return
 		}
 
 		// Iterate rules
