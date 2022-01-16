@@ -50,26 +50,32 @@ export default class UsernotesProvider {
 		});
 	}
 
-	public getUsernotesByName(user: string) : Promise<PrettyUsernote[]>{
-		return new Promise<PrettyUsernote[]>( (resolve, reject) => {
+	public getUsernotesByName(user: string): Promise<PrettyUsernote[]> {
+		return new Promise<PrettyUsernote[]>((resolve, reject) => {
 			void this.getUsernotesPage().then((wiki: Snoowrap.WikiPage) => {
 				const usernotes = new toolbox.UsernotesData(wiki.content_md);
 
 				// Find username case_insensitive
-				Object.keys(usernotes.users).forEach( (key) => {
-					if ( key.toLowerCase() == user.toLowerCase()){
-						resolve( usernotes.users[key].ns.map<PrettyUsernote>( (note) => { 
-							return <PrettyUsernote>{
-								text: note.n,
-								timestamp: note.t ? new Date(note.t * 1000) : undefined,
-								link: note.l && expandPermalink(note.l),
-							}
-						}) )
+				Object.keys(usernotes.users).forEach((key) => {
+					if (key.toLowerCase() == user.toLowerCase()) {
+						resolve(
+							usernotes.users[key].ns.map<PrettyUsernote>(
+								(note) => {
+									return <PrettyUsernote>{
+										text: note.n,
+										timestamp: note.t
+											? new Date(note.t * 1000)
+											: undefined,
+										link: note.l && expandPermalink(note.l),
+									};
+								}
+							)
+						);
 					}
-				})
+				});
 
-				resolve( [] )
+				resolve([]);
 			});
-		})
+		});
 	}
 }

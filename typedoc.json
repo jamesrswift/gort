@@ -1,4 +1,4 @@
 {
-    "entryPoints": ["./src/bot/gort.ts"],
-    "out": "doc"
+	"entryPoints": ["./src/bot/gort.ts"],
+	"out": "doc"
 }

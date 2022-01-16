@@ -38,12 +38,12 @@ class addUsernoteCommand extends commandBase {
 	}
 }
 
-class getUsernotes extends commandBase{
-    name = 'getUsernote';
+class getUsernotes extends commandBase {
+	name = 'getUsernote';
 	description = 'finds usernotes against a username';
 	usage = 'getUsernote <username>';
 
-    override async execute(
+	override async execute(
 		args: string[],
 		cmd: string,
 		discordMessage: Discord.Message
@@ -60,20 +60,21 @@ class getUsernotes extends commandBase{
 			return `Malformed command, no action taken! Correct usage: ${this.usage}`;
 		}
 
-        const usernotes = (await UsernotesProvider.Instance.getUsernotesByName(username))
+		const usernotes = await UsernotesProvider.Instance.getUsernotesByName(
+			username
+		);
 
-        if ( usernotes.length == 0 ){
-            return "Not usernotes found"
-        }
+		if (usernotes.length == 0) {
+			return 'Not usernotes found';
+		}
 
-        let output : string = "";
-        for ( const usernote of usernotes ){
-            output += `"${usernote.text}"\r\n`
-        }
+		let output: string = '';
+		for (const usernote of usernotes) {
+			output += `"${usernote.text}"\r\n`;
+		}
 
-        return output
-    }
-
+		return output;
+	}
 }
 
 export default {
