@@ -1,8 +1,6 @@
 import dotenv from 'dotenv';
 import Snoowrap from 'snoowrap';
-import SnooStream from '../lib/snoostream.lib';
 import { OrFail } from '../lib/helper.lib';
-import Pollify from '../lib/pollify.lib';
 import EventEmitter from 'events';
 import { subredditStream } from './streamable.provider';
 
@@ -52,4 +50,40 @@ export class RedditProvider extends EventEmitter {
 	): subredditStream {
 		return new subredditStream(this, subreddit);
 	}
+
+	//
+	// Utility due to issues with underlying snoowrap library
+	//	see: https://github.com/not-an-aardvark/snoowrap/issues/351
+	// 	see: https://github.com/not-an-aardvark/snoowrap/issues/352
+	public async editWikiPage( args: editWikiPageInterface): Promise<void>{
+
+		// Update wiki object, typing disabled due to issues
+			// @ts-ignore
+			args.page.subreddit = args.subreddit;
+			// @ts-ignore
+			args.page.title = args.page_title;
+
+		// Get most recent revision to remove EDIT_CONFLICT error
+		const revisions = await args.page.getRevisions();
+
+		// Update wiki object, typing disabled due to issues
+			// @ts-ignore
+			args.page.previousRevision 
+				= (revisions[0]).id
+
+		args.page.edit({
+			text: args.text,
+			reason: args.reason,
+			// @ts-ignore https://github.com/not-an-aardvark/snoowrap/issues/352
+			previousRevision: args.page.previousRevision
+		})
+	}
+}
+
+export interface editWikiPageInterface{
+	subreddit: Snoowrap.Subreddit,
+	page: Snoowrap.WikiPage,
+	page_title: string,
+	text: string,
+	reason?: string
 }
