@@ -9,14 +9,14 @@ import { executableArguments } from '../condition.class';
 const logger = logging.getLogger('core.action.notify');
 
 interface notifyActionOptions {
-	message: string;
+	message?: string;
 	color?: ColorResolvable;
 	description?: string;
 	channelID?: string;
 }
 
 export default class notifyAction extends action {
-	private _sOpts: notifyActionOptions;
+	protected _sOpts: notifyActionOptions;
 
 	constructor(options: notifyActionOptions) {
 		super();
@@ -41,6 +41,13 @@ export default class notifyAction extends action {
 				args.user.comment_karma.toString(),
 				true
 			);
+	}
+
+	public async buildReasonField(
+		args: executableArguments,
+		embed: Discord.MessageEmbed
+	) {
+		return this._sOpts.message ?? 'UNDEFINED';
 	}
 
 	public override async execute(args: executableArguments) {
@@ -68,7 +75,7 @@ export default class notifyAction extends action {
 
 		await this.buildEmbed(args, embed);
 
-		embed.addField('Trigger Reason', this._sOpts.message ?? 'UNDEFINED');
+		embed.addField('Trigger Reason', await this.buildReasonField());
 		embed.setFooter({ text: 'Provided by CensorshipCo' });
 		embed.setColor(this._sOpts.color ?? '#0099ff');
 
