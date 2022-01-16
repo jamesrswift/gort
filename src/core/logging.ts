@@ -1,6 +1,6 @@
 // Code credit to Adrian Hall, https://adrianhall.github.io/cloud/2019/06/30/building-an-efficient-logger-in-typescript/
-
-import { EventEmitter } from 'stream';
+import chalk from 'chalk';
+import EventEmitter from 'events';
 
 /* istanbul ignore next */
 export class LogManager extends EventEmitter {
@@ -41,7 +41,7 @@ export class LogManager extends EventEmitter {
 
 		this.onLogEntry((logEntry) => {
 			console.log(
-				`{${logEntry.level}} [${logEntry.module}] ${logEntry.message}`
+				`{${chalk.greenBright(logEntry.level)}} [${chalk.blueBright(logEntry.module)}] ${logEntry.message}`
 			);
 		});
 
