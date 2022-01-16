@@ -1,5 +1,9 @@
 import { notify } from '../core/actions';
-import { listable } from '../core/condition.class';
+import {
+	conditional,
+	executableArguments,
+	listable,
+} from '../core/condition.class';
 import { arrayIncludesAny } from '../core/conditionals/array';
 import { subredditHistory } from '../core/properties/user';
 import ruleBase, { targetType } from '../core/rule.class';
@@ -8,7 +12,7 @@ export class subredditHistoryRule extends ruleBase {
 	name: string = 'UserSubredditHistory';
 	targetType: targetType = 'Both';
 
-	badSubreddits: listable = new listable([
+	badSubreddits: string[] = [
 		'nonewnormal',
 		'lockdownskepticism',
 		'lockdowncriticalleft',
@@ -31,16 +35,48 @@ export class subredditHistoryRule extends ruleBase {
 		'churchofcovid',
 		'covidrebellionuk',
 		'antiwork',
-	]);
+	];
 
-	Condition = new arrayIncludesAny(
+	/*Condition = new arrayIncludesAny(
 		new subredditHistory(),
 		this.badSubreddits
-	);
+	);*/
 
-	Action = new notify({
+	Condition: conditional = new (class extends conditional {
+		badSubreddits: string[] = [];
+		public constructor(badSubreddits: string[]) {
+			super();
+			this.badSubreddits = badSubreddits;
+		}
+		public override async execute(
+			args: executableArguments
+		): Promise<boolean> {
+			// Get subreddit history
+			const history: string[] = await new subredditHistory().execute(
+				args
+			);
+
+			// Condition
+			const arrayIntersection = this.badSubreddits.filter((value) =>
+				history.includes(value)
+			);
+			const condition: boolean = arrayIntersection.length > 0;
+
+			// Set cookie
+			args.cookies['BadSubreddits'] = arrayIntersection ?? [];
+
+			return condition;
+		}
+	})(this.badSubreddits);
+
+	Action = new (class extends notify {
+		public override async buildReasonField(args: executableArguments) {
+			return `User contributed to the following subreddits: ${args.cookies[
+				'BadSubreddits'
+			]?.join(', ')}`;
+		}
+	})({
 		color: '#db3838',
-		message: 'User contributed to "bad" subreddits',
 	});
 }
 
