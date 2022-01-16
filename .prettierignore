@@ -1,6 +1,0 @@
-# Ignore artifacts:
-.nyc_output
-.vscode
-coverage
-node_modules
-doc
