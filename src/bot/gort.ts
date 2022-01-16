@@ -44,11 +44,11 @@ export default class gort {
 		logger.trace(`Comment by ${user.name} received.`);
 
 		// Ignore moderators
-		if ( user.is_mod){
+		if (user.is_mod) {
 			logger.info(
 				`Ignoring comment by ${user.name} as they are are a moderator`
 			);
-			return
+			return;
 		}
 
 		// check if user is ignored?
@@ -56,7 +56,7 @@ export default class gort {
 			logger.info(
 				`Ignoring comment by ${user.name} as they are on the ignored user list`
 			);
-			return
+			return;
 		}
 
 		// Iterate rules
@@ -72,11 +72,11 @@ export default class gort {
 		logger.trace(`Submission by ${user.name} received.`);
 
 		// Ignore moderators
-		if ( user.is_mod){
+		if (user.is_mod) {
 			logger.info(
 				`Ignoring comment by ${user.name} as they are are a moderator`
 			);
-			return
+			return;
 		}
 
 		// check if user is ignored?
@@ -84,7 +84,7 @@ export default class gort {
 			logger.info(
 				`Ignoring submission by ${user.name} as they are on the ignored user list`
 			);
-			return
+			return;
 		}
 
 		// Iterate rules
