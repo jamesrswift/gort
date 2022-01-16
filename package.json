@@ -38,6 +38,6 @@
 		"dotenv": "^10.0.0",
 		"mongoose": "^6.1.6",
 		"snoowrap": "git+https://github.com/iMrDJAi/snoowrap.git",
-		"toolbox-api": "git+https://github.com/Geo1088/toolbox-api.git#builds/master"
+		"toolbox-api": "github:eritbh/toolbox-api#builds/main"
 	}
 }
