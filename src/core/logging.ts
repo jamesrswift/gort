@@ -40,23 +40,35 @@ export class LogManager extends EventEmitter {
 		if (this._bConsoleLoggerRegistered) return this;
 
 		this.onLogEntry((logEntry) => {
-			switch( logEntry.level){
-				case( 'info'):
-				case( 'trace'):
-				case( 'debug'):
+			switch (logEntry.level) {
+				case 'info':
+				case 'trace':
+				case 'debug':
 					console.log(
-						`{${chalk.greenBright(logEntry.level)}} [${chalk.blueBright(logEntry.module)}] ${logEntry.message}`
+						`{${chalk.greenBright(
+							logEntry.level
+						)}} [${chalk.blueBright(logEntry.module)}] ${
+							logEntry.message
+						}`
 					);
 					break;
-				case('warn'):
+				case 'warn':
 					console.log(
-						`{${chalk.yellowBright(logEntry.level)}} [${chalk.blueBright(logEntry.module)}] ${logEntry.message}`
+						`{${chalk.yellowBright(
+							logEntry.level
+						)}} [${chalk.blueBright(logEntry.module)}] ${
+							logEntry.message
+						}`
 					);
 					break;
-				case('error'):
+				case 'error':
 				default:
 					console.log(
-						`{${chalk.redBright(logEntry.level)}} [${chalk.blueBright(logEntry.module)}] ${logEntry.message}`
+						`{${chalk.redBright(
+							logEntry.level
+						)}} [${chalk.blueBright(logEntry.module)}] ${
+							logEntry.message
+						}`
 					);
 					break;
 			}

@@ -65,13 +65,12 @@ export default class notifyAction extends action {
 					500
 				)
 			);
-			
 
 		await this.buildEmbed(args, embed);
 
-		embed.addField('Trigger Reason', this._sOpts.message ?? "UNDEFINED");
+		embed.addField('Trigger Reason', this._sOpts.message ?? 'UNDEFINED');
 		embed.setFooter({ text: 'Provided by CensorshipCo' });
-		embed.setColor( this._sOpts.color ?? '#0099ff' );
+		embed.setColor(this._sOpts.color ?? '#0099ff');
 
 		DiscordProvider.Instance.sendMessage(
 			{ embeds: [embed] },

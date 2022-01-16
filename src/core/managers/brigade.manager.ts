@@ -34,7 +34,7 @@ export default class brigadeManager {
 			target: target.toLowerCase(),
 		});
 		entry.save();
-		logger.info(`Adding BrigadeEntry: Origin ${origin}, target ${target}`)
+		logger.info(`Adding BrigadeEntry: Origin ${origin}, target ${target}`);
 		return entry;
 	}
 
@@ -46,28 +46,30 @@ export default class brigadeManager {
 		return BrigadeEntry.findOne({ target: target.toLowerCase() }).exec();
 	}
 
-	public static stringContainsBrigadeLink(text: string) : IStringContainsBrigadeLinkResults[]{
+	public static stringContainsBrigadeLink(
+		text: string
+	): IStringContainsBrigadeLinkResults[] {
+		let results: IStringContainsBrigadeLinkResults[] = [];
 
-		let results : IStringContainsBrigadeLinkResults[] = []
-
-		const Regex =/(?:(?:https?:\/\/)?(?:(?:www|old|new|i|m|[a-z]{2})\.)?reddit\.com)?\/r\/CoronavirusUK\/(?:comments\/)?(?<target>[a-z0-9]{6})/gm;
+		const Regex =
+			/(?:(?:https?:\/\/)?(?:(?:www|old|new|i|m|[a-z]{2})\.)?reddit\.com)?\/r\/CoronavirusUK\/(?:comments\/)?(?<target>[a-z0-9]{6})/gm;
 
 		const matches = text.matchAll(Regex);
 
-		for (const match of matches ){
-			results.push( {
+		for (const match of matches) {
+			results.push({
 				bContainsLink: true,
-				sInput : text,
+				sInput: text,
 				sTargetID: match[1],
-				match: match[0]
-			})
+				match: match[0],
+			});
 		}
 
 		return results;
 	}
 }
 
-export interface IStringContainsBrigadeLinkResults{
+export interface IStringContainsBrigadeLinkResults {
 	bContainsLink: boolean;
 	sInput: string;
 	sTargetID: string;

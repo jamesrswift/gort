@@ -94,7 +94,7 @@ export default class astro {
 	}
 
 	private containsLinkToSubreddit(text: string): string | undefined {
-		return brigadeManager.stringContainsBrigadeLink(text)[0]?.match
+		return brigadeManager.stringContainsBrigadeLink(text)[0]?.match;
 	}
 
 	private containsKeyword(text: string): string | undefined {
@@ -110,23 +110,21 @@ export default class astro {
 
 	private onError(...data: any[]) {}
 
-	private async addBrigadeEntryToManager(item: astroNotifyInterface){
+	private async addBrigadeEntryToManager(item: astroNotifyInterface) {
+		if (item.linked == undefined) return;
+		const info = brigadeManager.stringContainsBrigadeLink(item.linked);
+		if (info.length == 0) return;
 
-		if ( item.linked == undefined) return;
-		const info = brigadeManager.stringContainsBrigadeLink(item.linked)
-		if ( info.length == 0 ) return;
-
-		item.target.subreddit.fetch().then( (subreddit) => {
+		item.target.subreddit.fetch().then((subreddit) => {
 			// Add entry to brigadeManager
-			for ( const match of info ){
-
+			for (const match of info) {
 				brigadeManager.Instance.addBrigadeEntry(
 					subreddit.display_name, // origin
 					item.target.author.name, // originator
 					match.sTargetID // target
 				);
 			}
-		})
+		});
 	}
 
 	private async output(item: astroNotifyInterface) {
@@ -142,7 +140,7 @@ export default class astro {
 			`${item.type} from ${item.target.author.name} on ${item.target.subreddit_name_prefixed}`
 		);
 
-		this.addBrigadeEntryToManager(item)
+		this.addBrigadeEntryToManager(item);
 
 		// Notify discord
 		let embed = new Discord.MessageEmbed()
