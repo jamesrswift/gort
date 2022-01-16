@@ -5,7 +5,7 @@ export interface executableArguments {
 	user: Snoowrap.RedditUser;
 	target: Snoowrap.Comment | Snoowrap.Submission;
 	targetType: Exclude<targetType, 'Both'>;
-	cookies: any[]; // This can be used to pass pertinent information between both the condition and the action
+	cookies: { [key: string]: any }; // This can be used to pass pertinent information between both the condition and the action
 }
 
 export class executable<Type> {
