@@ -37,6 +37,7 @@ jobs:
         git config user.email "bot@github-actions"
 
         # Create another clone of the repository in a temporary directory
+        
         git clone "$(git remote get-url origin)" .temp
         cd .temp
 
@@ -55,7 +56,7 @@ jobs:
         # https://docs.npmjs.com/files/package.json#files
         cp -r ../dist .
         cp ../package.json .
-        cp ../LICENSE .
+        cp ../LICENSE.md .
         cp ../README.md .
 
         # If we have changes...
