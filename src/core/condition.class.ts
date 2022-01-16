@@ -9,7 +9,7 @@ export interface executableArguments {
 }
 
 export class executable<Type> {
-	private _value?: Type;
+	public _value?: Type;
 	public constructor(value?: Type) {
 		this._value = value;
 	}

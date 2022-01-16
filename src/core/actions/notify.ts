@@ -21,7 +21,7 @@ interface notifyActionOptions {
  * @category Actions
  */
 export default class notifyAction extends action {
-	protected _sOpts: notifyActionOptions;
+	public _sOpts: notifyActionOptions;
 
 	constructor(options: notifyActionOptions) {
 		super();

@@ -1,3 +1,4 @@
+import action from '../core/action.class';
 import { notify } from '../core/actions';
 import { conditional, executableArguments } from '../core/condition.class';
 import { subredditHistory } from '../core/properties/user';
@@ -66,7 +67,7 @@ export class subredditHistoryRule extends ruleBase {
 		}
 	})(this.badSubreddits);
 
-	Action = new (class extends notify {
+	Action : action = new (class subredditHistoryNotification extends notify {
 		public override async buildReasonField(args: executableArguments) {
 			return `User contributed to the following subreddits: ${args.cookies[
 				'BadSubreddits'
