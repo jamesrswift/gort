@@ -4,6 +4,7 @@ import Snoowrap, { Subreddit } from 'snoowrap';
 import { OrFail } from '../lib/helper.lib';
 
 import { logging } from '../../core/logging';
+import { PrettyUsernote } from 'toolbox-api';
 
 const logger = logging.getLogger('core.provider.UsernotesProvider');
 
@@ -20,7 +21,6 @@ export default class UsernotesProvider {
 
 	public getUsernotesPage(): Promise<Snoowrap.WikiPage> {
 		return new Promise<Snoowrap.WikiPage>((resolve, reject) => {
-			console.log(RedditProvider.Instance.getTargetSubreddit());
 			RedditProvider.Instance.getTargetSubreddit()
 				.fetch()
 				.then((subreddit: Subreddit) => {
@@ -48,5 +48,14 @@ export default class UsernotesProvider {
 				reason: 'toolbox modification by gort',
 			});
 		});
+	}
+
+	public getUsernotesByName(user: string) : Promise<PrettyUsernote[]>{
+		return new Promise<PrettyUsernote[]>( (resolve, reject) => {
+			void this.getUsernotesPage().then((wiki: Snoowrap.WikiPage) => {
+				const usernotes = new toolbox.UsernotesData(wiki.content_md);
+				resolve( usernotes.notesForUser(user) ?? [] )
+			});
+		})
 	}
 }
