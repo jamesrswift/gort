@@ -70,10 +70,10 @@ export class commandHandler {
 		commands.forEach((command) => {
 			if (this._commandArray.has(command.name)) {
 				return logger.error(
-					`Attempting to redefine rule ${command.name}`
+					`Attempting to redefine command ${command.name}`
 				);
 			}
-			logger.info(`Loading rule: ${command.name}`);
+			logger.info(`Loading command: ${command.name}`);
 			this._commandArray.set(command.name.toLowerCase(), command);
 		});
 	}
