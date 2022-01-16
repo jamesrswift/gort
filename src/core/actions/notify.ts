@@ -1,10 +1,10 @@
-import action from '../action.class';
-import Snoowrap from 'snoowrap';
 import Discord, { ColorResolvable } from 'discord.js';
-import { OrDefault, textEllipsis } from '../lib/helper.lib';
-import { DiscordProvider } from '../providers/discord.provider';
-import { logging } from '../logging';
+import Snoowrap from 'snoowrap';
+import action from '../action.class';
 import { executableArguments } from '../condition.class';
+import { OrDefault, textEllipsis } from '../lib/helper.lib';
+import { logging } from '../logging';
+import { DiscordProvider } from '../providers/discord.provider';
 
 const logger = logging.getLogger('core.action.notify');
 

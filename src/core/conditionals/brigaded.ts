@@ -1,4 +1,4 @@
-import { Comment, Submission } from 'snoowrap';
+import { Comment } from 'snoowrap';
 import { executable, executableArguments } from '../condition.class';
 import brigadeManager from '../managers/brigade.manager';
 

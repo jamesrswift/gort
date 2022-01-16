@@ -1,11 +1,4 @@
-import {
-	conditional,
-	executable,
-	executableArguments,
-	listable,
-} from '../condition.class';
-import Snoowrap from 'snoowrap';
-import { comment_karma } from '../properties/user';
+import { executable, executableArguments } from '../condition.class';
 
 export class arrayIncludes<Type> extends executable<boolean> {
 	private _lhs: executable<Type[]>;

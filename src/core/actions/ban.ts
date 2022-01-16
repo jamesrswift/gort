@@ -1,8 +1,7 @@
 import action from '../action.class';
-import Snoowrap from 'snoowrap';
-import { RedditProvider } from '../providers/reddit.provider';
-import { logging } from '../logging';
 import { executableArguments } from '../condition.class';
+import { logging } from '../logging';
+import { RedditProvider } from '../providers/reddit.provider';
 
 const logger = logging.getLogger('core.action.ban');
 

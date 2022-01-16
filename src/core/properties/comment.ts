@@ -1,12 +1,5 @@
 import Snoowrap from 'snoowrap';
-import {
-	executable,
-	conditional,
-	countable,
-	legible,
-	listable,
-	executableArguments,
-} from '../condition.class';
+import { executable, executableArguments } from '../condition.class';
 
 function redditCommentProperties<K extends keyof Snoowrap.Comment>(
 	propertyName: K

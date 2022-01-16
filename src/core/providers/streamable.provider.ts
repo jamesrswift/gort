@@ -1,8 +1,8 @@
-import { RedditProvider } from './reddit.provider';
-import Snoowrap, { Subreddit } from 'snoowrap';
-import SnooStream from '../lib/snoostream.lib';
-import Pollify from '../lib/pollify.lib';
+import Snoowrap from 'snoowrap';
 import { EventEmitter } from 'stream';
+import Pollify from '../lib/pollify.lib';
+import SnooStream from '../lib/snoostream.lib';
+import { RedditProvider } from './reddit.provider';
 
 export declare interface subredditStream {
 	on(

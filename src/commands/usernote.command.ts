@@ -1,6 +1,5 @@
-import commandBase from '../core/command.class';
 import Discord from 'discord.js';
-
+import commandBase from '../core/command.class';
 import { logging } from '../core/logging';
 import UsernotesProvider from '../core/providers/usernotes.provider';
 

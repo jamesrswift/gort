@@ -1,12 +1,5 @@
 import Snoowrap from 'snoowrap';
-import {
-	executable,
-	conditional,
-	countable,
-	legible,
-	listable,
-	executableArguments,
-} from '../condition.class';
+import { executable, executableArguments, listable } from '../condition.class';
 
 function redditUserProperty<K extends keyof Snoowrap.RedditUser>(
 	propertyName: K

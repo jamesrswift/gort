@@ -1,10 +1,9 @@
-import Snoowrap from 'snoowrap';
 import action from '../../core/action.class';
 import { ban } from '../../core/actions';
-import { listable, countable } from '../../core/condition.class';
-import { greaterThan } from '../../core/conditionals/relational';
-import { and, or } from '../../core/conditionals/logic';
+import { countable, listable } from '../../core/condition.class';
 import { arrayIncludesAny } from '../../core/conditionals/array';
+import { and, or } from '../../core/conditionals/logic';
+import { greaterThan } from '../../core/conditionals/relational';
 import ruleBase, { targetType } from '../../core/rule.class';
 
 export class testRule extends ruleBase {

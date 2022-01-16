@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
+import EventEmitter from 'events';
 import Snoowrap from 'snoowrap';
 import { OrFail } from '../lib/helper.lib';
-import EventEmitter from 'events';
 import { subredditStream } from './streamable.provider';
 
 export class RedditProvider extends EventEmitter {

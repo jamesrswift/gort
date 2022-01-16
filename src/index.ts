@@ -1,4 +1,5 @@
-import { logging, LogEntry } from './core/logging';
+import gort from './bot/gort';
+import { logging } from './core/logging';
 
 logging
 	.configure({
@@ -8,5 +9,4 @@ logging
 	})
 	.registerConsoleLogger();
 
-import gort from './bot/gort';
 const bot = new gort();

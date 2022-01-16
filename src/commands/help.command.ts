@@ -1,5 +1,5 @@
-import commandBase, { commandHandler } from '../core/command.class';
 import Discord from 'discord.js';
+import commandBase, { commandHandler } from '../core/command.class';
 
 class helpCommand extends commandBase {
 	name = 'help';

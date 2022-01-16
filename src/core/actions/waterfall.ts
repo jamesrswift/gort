@@ -1,7 +1,6 @@
 import action from '../action.class';
-import Snoowrap from 'snoowrap';
-import { logging } from '../logging';
 import { executableArguments } from '../condition.class';
+import { logging } from '../logging';
 
 const logger = logging.getLogger('core.action.waterfall');
 

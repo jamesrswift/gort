@@ -1,14 +1,13 @@
+import Discord from 'discord.js';
 import { Comment, RedditUser, Submission } from 'snoowrap';
+import { commandHandler } from '../core/command.class';
+import { logging } from '../core/logging';
+import ignoredManager from '../core/managers/ignored.manager';
 import { DiscordProvider } from '../core/providers/discord.provider';
 import { RedditProvider } from '../core/providers/reddit.provider';
 import { subredditStream } from '../core/providers/streamable.provider';
 import { ruleHandler } from '../core/rule.class';
-import Discord from 'discord.js';
 import astro from './astro';
-import { commandHandler } from '../core/command.class';
-
-import { logging } from '../core/logging';
-import ignoredManager from '../core/managers/ignored.manager';
 
 const logger = logging.getLogger('bot.gort');
 

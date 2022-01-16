@@ -1,9 +1,5 @@
 import Snoowrap from 'snoowrap';
 
-function activator<T>(type: { new (): T }): T {
-	return new type();
-}
-
 export class executable<Type> {
 	private _value?: Type;
 	public constructor(value?: Type) {

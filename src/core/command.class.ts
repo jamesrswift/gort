@@ -1,7 +1,7 @@
 import Discord from 'discord.js';
+import dotenv from 'dotenv';
 import fs from 'fs';
 import { OrDefault } from './lib/helper.lib';
-import dotenv from 'dotenv';
 import { logging } from './logging';
 
 const logger = logging.getLogger('core.command');

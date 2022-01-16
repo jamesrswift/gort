@@ -1,6 +1,5 @@
 import { logging } from '../logging';
 import mongoose from '../providers/database.provider';
-import ignoredManager from './ignored.manager';
 
 const WatchedUsersSchema = new mongoose.Schema(
 	{

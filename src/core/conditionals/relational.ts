@@ -1,12 +1,4 @@
-import {
-	conditional,
-	countable,
-	executable,
-	executableArguments,
-	legible,
-	listable,
-} from '../condition.class';
-import Snoowrap from 'snoowrap';
+import { executable, executableArguments } from '../condition.class';
 
 //----------------------------------------------------------------------------------
 //  Relational arithmetic operations

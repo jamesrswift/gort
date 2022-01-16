@@ -1,11 +1,10 @@
-import { Comment, RedditUser, Submission } from 'snoowrap';
-import { RedditProvider } from '../core/providers/reddit.provider';
-import { subredditStream } from '../core/providers/streamable.provider';
 import Discord from 'discord.js';
-import { DiscordProvider } from '../core/providers/discord.provider';
-
+import { Comment, RedditUser, Submission } from 'snoowrap';
 import { logging } from '../core/logging';
 import brigadeManager from '../core/managers/brigade.manager';
+import { DiscordProvider } from '../core/providers/discord.provider';
+import { RedditProvider } from '../core/providers/reddit.provider';
+import { subredditStream } from '../core/providers/streamable.provider';
 
 const logger = logging.getLogger('bot.astro');
 

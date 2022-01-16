@@ -1,6 +1,6 @@
+import Discord from 'discord.js';
 import commandBase from '../core/command.class';
 import { logging } from '../core/logging';
-import Discord from 'discord.js';
 import ignoredManager from '../core/managers/ignored.manager';
 import watchedManager from '../core/managers/watched.manager';
 

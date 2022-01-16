@@ -1,9 +1,4 @@
-import {
-	conditional,
-	executable,
-	executableArguments,
-} from '../condition.class';
-import Snoowrap from 'snoowrap';
+import { executable, executableArguments } from '../condition.class';
 import { logging } from '../logging';
 
 const logger = logging.getLogger('core.conditionals.logic');

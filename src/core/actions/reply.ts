@@ -1,8 +1,8 @@
-import action from '../action.class';
 import Snoowrap from 'snoowrap';
+import action from '../action.class';
+import { executableArguments } from '../condition.class';
 import { OrDefault } from '../lib/helper.lib';
 import { logging } from '../logging';
-import { executableArguments } from '../condition.class';
 
 const logger = logging.getLogger('core.action.reply');
 

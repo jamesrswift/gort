@@ -1,7 +1,7 @@
 import Discord, { Intents } from 'discord.js';
-import { OrDefault, OrFail, textEllipsis } from '../lib/helper.lib';
 import dotenv from 'dotenv';
 import { EventEmitter } from 'stream';
+import { OrDefault, OrFail } from '../lib/helper.lib';
 
 export declare interface DiscordProvider {
 	on(event: 'message', listener: (message: Discord.Message) => void): this;

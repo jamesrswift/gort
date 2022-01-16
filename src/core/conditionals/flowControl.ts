@@ -1,3 +1,3 @@
-import { conditional, executableArguments } from '../condition.class';
+import { conditional } from '../condition.class';
 
 export class forEach extends conditional {}

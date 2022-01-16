@@ -1,7 +1,6 @@
-import Snoowrap from 'snoowrap';
+import fs from 'fs';
 import action from './action.class';
 import { conditional, executableArguments } from './condition.class';
-import fs from 'fs';
 import { logging } from './logging';
 const logger = logging.getLogger('core.rule');
 
@@ -9,17 +8,13 @@ export type targetType = 'Submission' | 'Comment' | 'Both';
 
 export default abstract class ruleBase {
 	abstract name: string;
-
 	abstract targetType: targetType;
+	abstract Condition: conditional;
+	abstract Action: action;
 
 	pre(args: executableArguments): boolean {
 		return true;
 	}
-
-	abstract Condition: conditional;
-
-	abstract Action: action;
-
 	post(args: executableArguments): void {}
 }
 

@@ -1,15 +1,15 @@
-import { assert, expect } from 'chai';
+import { expect } from 'chai';
 import {
-	executableArguments,
 	executable,
+	executableArguments,
 } from '../../src/core/condition.class';
 import {
 	arrayConcat,
 	arrayIncludes,
 	arrayIncludesAny,
+	arrayIndexOf,
 	arrayPop,
 	arrayPush,
-	arrayIndexOf,
 } from '../../src/core/conditionals/array';
 import { and, not, notArray, or } from '../../src/core/conditionals/logic';
 import { RedditProvider } from '../../src/core/providers/reddit.provider';
