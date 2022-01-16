@@ -3,6 +3,9 @@ import ignoredManager from '../core/managers/ignored.manager';
 import watchedManager from '../core/managers/watched.manager';
 import Discord from 'discord.js';
 import UsernotesProvider from '../core/providers/usernotes.provider';
+import { logging } from '../core/logging';
+
+const logger = logging.getLogger('core.commands.watched');
 
 class watchCommand extends commandBase {
 	name = 'watch';
@@ -21,6 +24,9 @@ class watchCommand extends commandBase {
 
 		// Validate usage
 		if (username == undefined) {
+			logger.warn(
+				`Malformed command, no action taken! Correct usage: ${this.usage}`
+			);
 			return `Malformed command, no action taken! Correct usage: ${this.usage}`;
 		}
 
@@ -28,6 +34,9 @@ class watchCommand extends commandBase {
 		if (await watchedManager.Instance.isUserWatched(username)) {
 			const info = await watchedManager.Instance.getWatchedUserInfo(
 				username
+			);
+			logger.warn(
+				`${username} is already watched. Actioned by ${info.actioner}. Message: ${info.message}`
 			);
 			return `${username} is already watched. Actioned by ${info.actioner}. Message: ${info.message}`;
 		}
@@ -52,6 +61,10 @@ class watchCommand extends commandBase {
 		);*/
 
 		// Notify
+		logger.info(
+			`Adding ${username} to the watched list.` +
+				(bIgnored ? 'User was unignored in the process.' : '')
+		);
 		return (
 			`Adding ${username} to the watched list.` +
 			(bIgnored ? 'User was unignored in the process.' : '')
@@ -76,14 +89,21 @@ class unwatchCommand extends commandBase {
 
 		// Validate usage
 		if (username == undefined) {
+			logger.warn(
+				`Malformed command, no action taken! Correct usage: ${this.usage}`
+			);
 			return `Malformed command, no action taken! Correct usage: ${this.usage}`;
 		}
 
 		if (!(await watchedManager.Instance.isUserWatched(username))) {
+			logger.warn(
+				`User ${username} is not presently being watched. No action taken.`
+			);
 			return `User ${username} is not presently being watched. No action taken.`;
 		}
 
 		await watchedManager.Instance.removeWatchedUser(username);
+		logger.info(`User ${username} has been removed from the watchlist.`);
 		return `User ${username} has been removed from the watchlist.`;
 	}
 }
