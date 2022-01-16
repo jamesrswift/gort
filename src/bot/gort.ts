@@ -44,12 +44,12 @@ export default class gort {
 		logger.trace(`Comment by ${user.name} received.`);
 
 		// Ignore moderators
-		if (user.is_mod) {
+		/*if (user.is_mod) {
 			logger.info(
 				`Ignoring comment by ${user.name} as they are are a moderator`
 			);
 			return;
-		}
+		}*/
 
 		// check if user is ignored?
 		if (await ignoredManager.Instance.isUserIgnored(user.name)) {
@@ -72,12 +72,12 @@ export default class gort {
 		logger.trace(`Submission by ${user.name} received.`);
 
 		// Ignore moderators
-		if (user.is_mod) {
+		/*if (user.is_mod) {
 			logger.info(
 				`Ignoring comment by ${user.name} as they are are a moderator`
 			);
 			return;
-		}
+		}*/
 
 		// check if user is ignored?
 		if (await ignoredManager.Instance.isUserIgnored(user.name)) {
