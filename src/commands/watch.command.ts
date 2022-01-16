@@ -55,10 +55,10 @@ class watchCommand extends commandBase {
 		);
 
 		// Add usernote
-		/*UsernotesProvider.Instance.addUsernoteByName(
+		UsernotesProvider.Instance.addUsernoteByName(
 			username,
 			`[GORT] User was added to watchlist by ${discordMessage.author.username}. Message: ${message}`
-		);*/
+		);
 
 		// Notify
 		logger.info(

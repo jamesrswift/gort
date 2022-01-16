@@ -3,6 +3,10 @@ import { RedditProvider } from './reddit.provider';
 import Snoowrap, { Subreddit } from 'snoowrap';
 import { OrFail } from '../lib/helper.lib';
 
+import { logging } from '../../core/logging';
+
+const logger = logging.getLogger('core.provider.UsernotesProvider');
+
 export default class UsernotesProvider {
 	//
 	// Singleton Pattern
@@ -30,6 +34,11 @@ export default class UsernotesProvider {
 	}
 
 	public addUsernoteByName(user: string, note: string): void {
+		logger.warn(
+			'Usernotes are currently disabled due to error in underlying libraries'
+		);
+		return;
+
 		void this.getUsernotesPage().then((wiki: Snoowrap.WikiPage) => {
 			const usernotes = new toolbox.UsernotesData(wiki.content_md);
 			usernotes.addUsernote(user, note);
