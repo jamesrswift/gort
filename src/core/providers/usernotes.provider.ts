@@ -1,10 +1,7 @@
 import * as toolbox from 'toolbox-api';
 import { RedditProvider } from './reddit.provider';
 import Snoowrap, { Subreddit } from 'snoowrap';
-import { OrFail } from '../lib/helper.lib';
-
 import { logging } from '../../core/logging';
-import { expandPermalink, PrettyUsernote } from 'toolbox-api';
 
 const logger = logging.getLogger('core.provider.UsernotesProvider');
 
@@ -72,8 +69,8 @@ export default class UsernotesProvider {
 		});
 	}
 
-	public getUsernotesByName(user: string): Promise<PrettyUsernote[]> {
-		return new Promise<PrettyUsernote[]>((resolve, reject) => {
+	public getUsernotesByName(user: string): Promise<toolbox.PrettyUsernote[]> {
+		return new Promise<toolbox.PrettyUsernote[]>((resolve, reject) => {
 			void this.getUsernotesPage().then((wiki: Snoowrap.WikiPage) => {
 				const usernotes = new toolbox.UsernotesData(wiki.content_md);
 
@@ -81,14 +78,14 @@ export default class UsernotesProvider {
 				Object.keys(usernotes.users).forEach((key) => {
 					if (key.toLowerCase() == user.toLowerCase()) {
 						resolve(
-							usernotes.users[key].ns.map<PrettyUsernote>(
+							usernotes.users[key].ns.map<toolbox.PrettyUsernote>(
 								(note) => {
-									return <PrettyUsernote>{
+									return <toolbox.PrettyUsernote>{
 										text: note.n,
 										timestamp: note.t
 											? new Date(note.t * 1000)
 											: undefined,
-										link: note.l && expandPermalink(note.l),
+										link: note.l && toolbox.expandPermalink(note.l),
 									};
 								}
 							)
