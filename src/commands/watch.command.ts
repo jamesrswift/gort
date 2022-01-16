@@ -75,7 +75,7 @@ class watchCommand extends commandBase {
 class unwatchCommand extends commandBase {
 	name = 'unwatch';
 	description = 'remove a user to the watchlist';
-	usage = 'watch <name>';
+	usage = 'unwatch <name>';
 
 	override async execute(
 		args: string[],
