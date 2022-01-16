@@ -75,7 +75,10 @@ export default class notifyAction extends action {
 
 		await this.buildEmbed(args, embed);
 
-		embed.addField('Trigger Reason', await this.buildReasonField());
+		embed.addField(
+			'Trigger Reason',
+			(await this.buildReasonField(args, embed)) ?? 'UNDEFINED'
+		);
 		embed.setFooter({ text: 'Provided by CensorshipCo' });
 		embed.setColor(this._sOpts.color ?? '#0099ff');
 
