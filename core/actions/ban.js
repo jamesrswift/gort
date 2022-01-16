@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const action_class_1 = __importDefault(require("../action.class"));
-const reddit_provider_1 = require("../providers/reddit.provider");
 const logging_1 = require("../logging");
+const reddit_provider_1 = require("../providers/reddit.provider");
 const logger = logging_1.logging.getLogger('core.action.ban');
 /**
  * Ban Action

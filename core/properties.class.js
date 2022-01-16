@@ -1,9 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.legible = exports.listable = exports.countable = exports.conditional = exports.executable = void 0;
-function activator(type) {
-    return new type();
-}
 class executable {
     constructor(value) {
         this._value = value;

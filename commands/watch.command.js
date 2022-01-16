@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const command_class_1 = __importDefault(require("../core/command.class"));
+const logging_1 = require("../core/logging");
 const ignored_manager_1 = __importDefault(require("../core/managers/ignored.manager"));
 const watched_manager_1 = __importDefault(require("../core/managers/watched.manager"));
 const usernotes_provider_1 = __importDefault(require("../core/providers/usernotes.provider"));
-const logging_1 = require("../core/logging");
 const logger = logging_1.logging.getLogger('core.commands.watched');
 class watchCommand extends command_class_1.default {
     constructor() {

@@ -33,9 +33,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DiscordProvider = void 0;
 const discord_js_1 = __importStar(require("discord.js"));
-const helper_lib_1 = require("../lib/helper.lib");
 const dotenv_1 = __importDefault(require("dotenv"));
 const stream_1 = require("stream");
+const helper_lib_1 = require("../lib/helper.lib");
 class DiscordProvider extends stream_1.EventEmitter {
     constructor() {
         super();

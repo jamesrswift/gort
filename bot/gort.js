@@ -12,14 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const command_class_1 = require("../core/command.class");
+const logging_1 = require("../core/logging");
+const ignored_manager_1 = __importDefault(require("../core/managers/ignored.manager"));
 const discord_provider_1 = require("../core/providers/discord.provider");
 const reddit_provider_1 = require("../core/providers/reddit.provider");
 const streamable_provider_1 = require("../core/providers/streamable.provider");
 const rule_class_1 = require("../core/rule.class");
 const astro_1 = __importDefault(require("./astro"));
-const command_class_1 = require("../core/command.class");
-const logging_1 = require("../core/logging");
-const ignored_manager_1 = __importDefault(require("../core/managers/ignored.manager"));
 const logger = logging_1.logging.getLogger('bot.gort');
 class gort {
     constructor() {

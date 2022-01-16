@@ -12,11 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const action_class_1 = __importDefault(require("../action.class"));
 const discord_js_1 = __importDefault(require("discord.js"));
+const action_class_1 = __importDefault(require("../action.class"));
 const helper_lib_1 = require("../lib/helper.lib");
-const discord_provider_1 = require("../providers/discord.provider");
 const logging_1 = require("../logging");
+const discord_provider_1 = require("../providers/discord.provider");
 const logger = logging_1.logging.getLogger('core.action.notify');
 /**
  * Discord Notification Action

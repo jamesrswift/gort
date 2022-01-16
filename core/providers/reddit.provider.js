@@ -14,9 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RedditProvider = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
+const events_1 = __importDefault(require("events"));
 const snoowrap_1 = __importDefault(require("snoowrap"));
 const helper_lib_1 = require("../lib/helper.lib");
-const events_1 = __importDefault(require("events"));
 const streamable_provider_1 = require("./streamable.provider");
 class RedditProvider extends events_1.default {
     //

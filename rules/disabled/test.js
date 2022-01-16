@@ -6,9 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.testRule = void 0;
 const actions_1 = require("../../core/actions");
 const condition_class_1 = require("../../core/condition.class");
-const relational_1 = require("../../core/conditionals/relational");
-const logic_1 = require("../../core/conditionals/logic");
 const array_1 = require("../../core/conditionals/array");
+const logic_1 = require("../../core/conditionals/logic");
+const relational_1 = require("../../core/conditionals/relational");
 const rule_class_1 = __importDefault(require("../../core/rule.class"));
 class testRule extends rule_class_1.default {
     constructor() {

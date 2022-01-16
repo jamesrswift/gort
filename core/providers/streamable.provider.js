@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.subredditStream = void 0;
-const snoostream_lib_1 = __importDefault(require("../lib/snoostream.lib"));
 const stream_1 = require("stream");
+const snoostream_lib_1 = __importDefault(require("../lib/snoostream.lib"));
 /* istanbul ignore next */
 class subredditStream extends stream_1.EventEmitter {
     constructor(redditProvider, subreddit) {

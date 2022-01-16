@@ -12,12 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const reddit_provider_1 = require("../core/providers/reddit.provider");
-const streamable_provider_1 = require("../core/providers/streamable.provider");
 const discord_js_1 = __importDefault(require("discord.js"));
-const discord_provider_1 = require("../core/providers/discord.provider");
 const logging_1 = require("../core/logging");
 const brigade_manager_1 = __importDefault(require("../core/managers/brigade.manager"));
+const discord_provider_1 = require("../core/providers/discord.provider");
+const reddit_provider_1 = require("../core/providers/reddit.provider");
+const streamable_provider_1 = require("../core/providers/streamable.provider");
 const logger = logging_1.logging.getLogger('bot.astro');
 class astro {
     constructor() {

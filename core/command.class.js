@@ -13,9 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.commandHandler = void 0;
+const dotenv_1 = __importDefault(require("dotenv"));
 const fs_1 = __importDefault(require("fs"));
 const helper_lib_1 = require("./lib/helper.lib");
-const dotenv_1 = __importDefault(require("dotenv"));
 const logging_1 = require("./logging");
 const logger = logging_1.logging.getLogger('core.command');
 class commandBase {
