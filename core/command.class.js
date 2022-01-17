@@ -80,7 +80,7 @@ class commandHandler {
         const command = this._commandArray.get(commandName);
         if (command == undefined)
             return;
-        this.handleInvokeCommand(message, command, args, cmd);
+        this.handleInvokeCommand(message, command, [...args], cmd);
     }
     handleInvokeCommand(message, command, args, cmd) {
         return __awaiter(this, void 0, void 0, function* () {

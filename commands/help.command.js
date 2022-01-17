@@ -36,7 +36,7 @@ class helpCommand extends command_class_1.default {
         this.description = 'show a list of available commands';
         this.usage = 'help';
     }
-    execute(args, cmd, discordMessage) {
+    execute() {
         return __awaiter(this, void 0, void 0, function* () {
             let output = 'List of commands: \r\n';
             const commands = command_class_1.commandHandler.Instance.getCommands();
