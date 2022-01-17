@@ -67,7 +67,7 @@ export class subredditHistoryRule extends ruleBase {
 		}
 	})(this.badSubreddits);
 
-	Action : action = new (class subredditHistoryNotification extends notify {
+	Action: action = new (class subredditHistoryNotification extends notify {
 		public override async buildReasonField(args: executableArguments) {
 			return `User contributed to the following subreddits: ${args.cookies[
 				'BadSubreddits'
