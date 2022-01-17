@@ -104,7 +104,7 @@ export class commandHandler {
 		const command = this._commandArray.get(commandName);
 		if (command == undefined) return;
 
-		this.handleInvokeCommand(message, command, args, cmd);
+		this.handleInvokeCommand(message, command, [...args], cmd);
 	}
 
 	private async handleInvokeCommand(
