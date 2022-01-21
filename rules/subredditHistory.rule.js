@@ -45,6 +45,7 @@ class subredditHistoryRule extends rule_class_1.default {
             'churchofcovid',
             'covidrebellionuk',
             'antiwork',
+            'joerogan',
             'testingground4bots',
         ];
         /*Condition = new arrayIncludesAny(

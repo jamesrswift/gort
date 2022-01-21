@@ -38,6 +38,8 @@ class astro {
             'LockdownSceptics',
             'antiwork',
             'samharris',
+            'joerogan',
+            'churchofcovid'
         ];
         this._listOfKeywords = [
             'coughuk',
