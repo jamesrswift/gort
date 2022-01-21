@@ -33,7 +33,7 @@ class addUsernoteCommand extends command_class_1.default {
                 logger.warn(`Malformed command, no action taken! Correct usage: ${this.usage}`);
                 return `Malformed command, no action taken! Correct usage: ${this.usage}`;
             }
-            usernotes_provider_1.default.Instance.addUsernoteByName(username, `[GORT] Message from ${discordMessage.author.username}: ${message}`);
+            usernotes_provider_1.default.Instance.addUsernoteByName(username, `[G] ${message} (Sent by ${discordMessage.author.username})`);
             return `Added usernote '${message}' to ${username}`;
         });
     }
