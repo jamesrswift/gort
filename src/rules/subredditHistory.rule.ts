@@ -31,7 +31,7 @@ export class subredditHistoryRule extends ruleBase {
 		'churchofcovid',
 		'covidrebellionuk',
 		'antiwork',
-
+		'joerogan',
 		'testingground4bots',
 	];
 
