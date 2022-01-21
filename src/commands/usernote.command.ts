@@ -30,7 +30,7 @@ class addUsernoteCommand extends commandBase {
 
 		UsernotesProvider.Instance.addUsernoteByName(
 			username,
-			`[GORT] Message from ${discordMessage.author.username}: ${message}`
+			`[G] ${message} (Sent by ${discordMessage.author.username})`
 		);
 
 		return `Added usernote '${message}' to ${username}`;
