@@ -90,7 +90,7 @@ class gort {
         command_class_1.commandHandler.Instance.onMessage(message);
     }
     onError(...data) {
-        discord_provider_1.DiscordProvider.Instance.sendMessage(data.toString());
+        discord_provider_1.DiscordProvider.Instance.sendMessage(data.toString(), "931921081667837984");
         logger.error(data.toString());
     }
 }
