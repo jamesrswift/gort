@@ -14,6 +14,7 @@ export class toxicityRule extends ruleBase {
 		message:
 			'Comment/Submission triggered Perspective NLP for either SPAM or TOXICITY',
 		color: '#b2c225',
+		channelID: '934518268079788042',
 	});
 }
 

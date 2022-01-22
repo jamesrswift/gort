@@ -75,6 +75,7 @@ export class subredditHistoryRule extends ruleBase {
 		}
 	})({
 		color: '#db3838',
+		channelID: '934518094804705370',
 	});
 }
 

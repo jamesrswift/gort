@@ -28,7 +28,7 @@ export class watchedRule extends ruleBase {
 		//color?: string;
 		description:
 			`A watched user has commented on r/${process.env.REDDIT_SUBREDDIT} and has triggered this warning!`,
-		//channelID?: string;
+		channelID: '934518400221319248',
 	});
 }
 

@@ -15,6 +15,7 @@ export class lowKarmaRule extends ruleBase {
 	Action: action = new notify({
 		message: 'User has low comment karma',
 		color: '#a363d9',
+		channelID: '934517919013011486',
 	});
 }
 
