@@ -37,7 +37,7 @@ export class subredditStream extends EventEmitter {
 
 	private createListeners(): void {
 		this._commentStream = this._streamer.commentStream(this._subreddit, {
-			rate: 10000,
+			rate: 15000,
 		});
 		this._commentStream?.on('post', this.onComment.bind(this));
 		this._commentStream?.on('error', this.onError.bind(this));
@@ -45,7 +45,7 @@ export class subredditStream extends EventEmitter {
 		this._submissionStream = this._streamer.submissionStream(
 			this._subreddit,
 			{
-				rate: 10000,
+				rate: 15000,
 			}
 		);
 		this._submissionStream?.on('post', this.onSubmission.bind(this));
