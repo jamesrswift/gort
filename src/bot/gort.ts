@@ -43,14 +43,6 @@ export default class gort {
 	private async onComment(user: RedditUser, comment: Comment) {
 		logger.trace(`Comment by ${user.name} received.`);
 
-		// Ignore moderators
-		/*if (user.is_mod) {
-			logger.info(
-				`Ignoring comment by ${user.name} as they are are a moderator`
-			);
-			return;
-		}*/
-
 		// check if user is ignored?
 		if (await ignoredManager.Instance.isUserIgnored(user.name)) {
 			logger.info(
@@ -71,14 +63,6 @@ export default class gort {
 	private async onSubmission(user: RedditUser, submission: Submission) {
 		logger.trace(`Submission by ${user.name} received.`);
 
-		// Ignore moderators
-		/*if (user.is_mod) {
-			logger.info(
-				`Ignoring comment by ${user.name} as they are are a moderator`
-			);
-			return;
-		}*/
-
 		// check if user is ignored?
 		if (await ignoredManager.Instance.isUserIgnored(user.name)) {
 			logger.info(
@@ -97,14 +81,14 @@ export default class gort {
 	}
 
 	private onDiscordMessage(message: Discord.Message) {
-		/*logger.trace(
-			`Discord message from ${message.author.username} received.`
-		);*/
 		commandHandler.Instance.onMessage(message);
 	}
 
 	private onError(...data: any[]) {
-		DiscordProvider.Instance.sendMessage(data.toString(), "931921081667837984");
 		logger.error(data.toString());
+		if ( data.toString().includes("ratelimit was exceeded") ){
+			return DiscordProvider.Instance.sendMessage("Ratelimit exceeded", "931921081667837984");
+		}
+		DiscordProvider.Instance.sendMessage(data.toString(), "931921081667837984");
 	}
 }
