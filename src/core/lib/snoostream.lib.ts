@@ -9,14 +9,14 @@ function isSnoowrap(obj: any): boolean {
 	);
 }
 
-type tPollFn = (...args: any[]) => Promise<any>;
+export type tPollFn = (...args: any[]) => Promise<any>;
 
-interface IPostStreamOptions {
+export interface IPostStreamOptions {
 	rate?: number;
 	regex?: RegExp;
 }
 
-interface IPostStreamCacheObject {
+export interface IPostStreamCacheObject {
 	cache: any[];
 }
 
