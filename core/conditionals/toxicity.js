@@ -66,12 +66,12 @@ class toxitityTrigger extends condition_class_1.executable {
         return __awaiter(this, void 0, void 0, function* () {
             return new Promise((resolve, reject) => {
                 const html = args.targetType == 'Comment'
-                    ? args.target.body_html
-                    : args.target.selftext_html;
+                    ? args.target.body
+                    : args.target.selftext;
                 if (html == null)
                     return resolve(false);
                 this._client
-                    .getScores(html, this._options)
+                    .getScores(html.substring(0, 2900), this._options)
                     .then((value) => {
                     resolve(this.scoresDecision(value));
                 });
