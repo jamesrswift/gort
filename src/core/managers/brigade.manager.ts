@@ -51,9 +51,8 @@ export default class brigadeManager {
 	): IStringContainsBrigadeLinkResults[] {
 		let results: IStringContainsBrigadeLinkResults[] = [];
 
-		const Regex =
-			/(?:(?:https?:\/\/)?(?:(?:www|old|new|i|m|[a-z]{2})\.)?reddit\.com)?\/r\/CoronavirusUK\/(?:comments\/)?(?<target>[a-z0-9]{6})/gm;
-
+		const Regex = new RegExp(
+			`(?:(?:https?:\/\/)?(?:(?:www|old|new|i|m|[a-z]{2})\.)?reddit\.com)?\/r\/${process.env.REDDIT_SUBREDDIT}\/(?:comments\/)?(?<target>[a-z0-9]{6})`, "gm")
 		const matches = text.matchAll(Regex);
 
 		for (const match of matches) {

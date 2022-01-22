@@ -1,6 +1,7 @@
 import Discord from 'discord.js';
 import { Comment, RedditUser, Submission } from 'snoowrap';
 import { commandHandler } from '../core/command.class';
+import { OrFail } from '../core/lib/helper.lib';
 import { logging } from '../core/logging';
 import ignoredManager from '../core/managers/ignored.manager';
 import { DiscordProvider } from '../core/providers/discord.provider';
@@ -19,7 +20,7 @@ export default class gort {
 		this._astroturfBot = new astro();
 		this._ownSubredditStream = new subredditStream(
 			RedditProvider.Instance,
-			'coronavirusuk'
+			OrFail(process.env.REDDIT_SUBREDDIT)
 		);
 		this._ownSubredditStream.on('comment', this.onComment.bind(this));
 		this._ownSubredditStream.on('submission', this.onSubmission.bind(this));

@@ -62,7 +62,7 @@ export default class notifyAction extends action {
 			.setDescription(
 				OrDefault(
 					this._sOpts.description,
-					'A user has commented on r/CoronavirusUK and has triggered this warning!'
+					`A user has commented on r/${process.env.REDDIT_SUBREDDIT} and has triggered this warning!`
 				)
 			)
 			.setTimestamp()

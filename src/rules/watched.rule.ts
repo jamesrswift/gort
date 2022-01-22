@@ -27,7 +27,7 @@ export class watchedRule extends ruleBase {
 		message: 'User is on watch list',
 		//color?: string;
 		description:
-			'A watched user has commented on r/CoronavirusUK and has triggered this warning!',
+			`A watched user has commented on r/${process.env.REDDIT_SUBREDDIT} and has triggered this warning!`,
 		//channelID?: string;
 	});
 }
