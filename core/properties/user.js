@@ -72,6 +72,9 @@ class subredditHistory extends condition_class_1.listable {
         super();
     }
     execute(args) {
+        if (args.cookies["subredditHistory"] != undefined) {
+            return Promise.resolve(args.cookies["subredditHistory"]);
+        }
         return new Promise((resolve, reject) => {
             args.user
                 .getComments()
@@ -82,6 +85,7 @@ class subredditHistory extends condition_class_1.listable {
                         subreddits.push(comment.subreddit.display_name.toLowerCase());
                     }
                 });
+                args.cookies["subredditHistory"] = subreddits;
                 resolve(subreddits);
             })
                 .catch((error) => {

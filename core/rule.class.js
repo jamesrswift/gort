@@ -43,23 +43,24 @@ class ruleHandler {
         }
     }
     iterateRules(args) {
-        for (let [rulename, rule] of this._ruleArray) {
-            if (rule.targetType == 'Both' ||
-                args.targetType == rule.targetType) {
-                if (rule.pre(args)) {
-                    rule.Condition.execute(args)
-                        .then((value) => {
-                        if (value) {
-                            logger.info(`Executing rule ${rulename} on ${args.target.permalink}, submitted by ${args.user.name}.`);
-                            return rule.Action.execute(args);
-                        }
-                    })
-                        .finally(() => {
-                        rule.post(args);
-                    });
+        args.user.fetch().then((user) => {
+            args.user = user;
+            for (let [rulename, rule] of this._ruleArray) {
+                if (rule.targetType == 'Both' || args.targetType == rule.targetType) {
+                    if (rule.pre(args)) {
+                        rule.Condition.execute(args).then((value) => {
+                            if (value) {
+                                logger.info(`Executing rule ${rulename} on ${args.target.permalink}, submitted by ${args.user.name}.`);
+                                return rule.Action.execute(args);
+                            }
+                        })
+                            .finally(() => {
+                            rule.post(args);
+                        });
+                    }
                 }
             }
-        }
+        });
     }
 }
 exports.ruleHandler = ruleHandler;
