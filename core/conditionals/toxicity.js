@@ -26,6 +26,42 @@ class toxitityTrigger extends condition_class_1.executable {
             (this._client = new perspectiveapi_js_client_1.Client(this._APIKey));
         this._options = options;
     }
+    scoresDecision(value) {
+        if (value['TOXICITY'] > 0.95)
+            return true;
+        if (value['SEVERE_TOXICITY'] > 0.95)
+            return true;
+        if (value['IDENTITY_ATTACK'] > 0.95)
+            return true;
+        if (value['INSULT'] > 0.95)
+            return true;
+        if (value['PROFANITY'] > 0.95)
+            return true;
+        if (value['THREAT'] > 0.95)
+            return true;
+        // Experimental values:
+        if (value['SEXUALLY_EXPLICIT'] > 0.95)
+            return true;
+        if (value['FLIRTATION'] > 0.95)
+            return true;
+        // New York Times attributes
+        if (value['ATTACK_ON_AUTHOR'] > 0.95)
+            return true;
+        if (value['ATTACK_ON_COMMENTER'] > 0.95)
+            return true;
+        if (value['INCOHERENT'] > 0.95)
+            return true;
+        if (value['INFLAMMATORY'] > 0.95)
+            return true;
+        if (value['LIKELY_TO_REJECT'] > 0.95)
+            return true;
+        if (value['OBSCENE'] > 0.95)
+            return true;
+        if (value['SPAM'] > 0.95)
+            return true;
+        //if ( value['UNSUBSTANTIAL'] > 0.95 ) return true
+        return false;
+    }
     execute(args) {
         return __awaiter(this, void 0, void 0, function* () {
             return new Promise((resolve, reject) => {
@@ -37,7 +73,7 @@ class toxitityTrigger extends condition_class_1.executable {
                 this._client
                     .getScores(html, this._options)
                     .then((value) => {
-                    return value['SPAM'] > 0.95 || value['TOXICITY'] > 0.95;
+                    resolve(this.scoresDecision(value));
                 });
             });
         });
