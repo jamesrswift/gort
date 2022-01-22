@@ -39,7 +39,7 @@ class astro {
             'antiwork',
             'samharris',
             'joerogan',
-            'churchofcovid'
+            'churchofcovid',
         ];
         this._listOfKeywords = [
             'coughuk',
