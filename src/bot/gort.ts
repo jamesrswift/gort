@@ -103,7 +103,7 @@ export default class gort {
 	}
 
 	private onError(...data: any[]) {
-		DiscordProvider.Instance.sendMessage(data.toString());
+		DiscordProvider.Instance.sendMessage(data.toString(), "931921081667837984");
 		logger.error(data.toString());
 	}
 }
