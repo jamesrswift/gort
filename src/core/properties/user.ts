@@ -56,6 +56,10 @@ export class subredditHistory extends listable {
 	}
 
 	public override execute(args: executableArguments): Promise<string[]> {
+		if ( args.cookies["subredditHistory"] != undefined ){
+			return Promise.resolve<string[]>(args.cookies["subredditHistory"])
+		}
+
 		return new Promise<string[]>((resolve, reject) => {
 			args.user
 				.getComments()
@@ -72,6 +76,9 @@ export class subredditHistory extends listable {
 							);
 						}
 					});
+
+					args.cookies["subredditHistory"] = subreddits;
+					
 					resolve(subreddits);
 				})
 				.catch((error) => {
