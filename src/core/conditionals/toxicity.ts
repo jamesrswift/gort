@@ -50,12 +50,12 @@ export class toxitityTrigger extends executable<boolean> {
 		return new Promise<boolean>((resolve, reject) => {
 			const html =
 				args.targetType == 'Comment'
-					? (<Snoowrap.Comment>args.target).body_html
-					: (<Snoowrap.Submission>args.target).selftext_html;
+					? (<Snoowrap.Comment>args.target).body
+					: (<Snoowrap.Submission>args.target).selftext;
 			if (html == null) return resolve(false);
 
 			this._client
-				.getScores(html, this._options)
+				.getScores(html.substring(0,2900), this._options)
 				.then((value: IAttributeScores) => {
 					resolve(this.scoresDecision(value))
 				});
