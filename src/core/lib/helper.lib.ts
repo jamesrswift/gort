@@ -1,5 +1,5 @@
 export function OrDefault<T>(Arg: T | null | undefined, Default: T): T {
-	return Arg ?? Default;
+	return ( Arg != null && Arg != undefined) ? Arg : Default;
 }
 
 export function OrFail<T>(Arg: T | null | undefined): T {
