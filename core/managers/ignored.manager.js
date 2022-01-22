@@ -53,7 +53,12 @@ class ignoredManager {
     }
     isUserIgnored(user) {
         return __awaiter(this, void 0, void 0, function* () {
-            return exports.IgnoredUser.exists({ name: user.toLowerCase() });
+            try {
+                return exports.IgnoredUser.exists({ name: user.toLowerCase() });
+            }
+            catch (err) {
+                return Promise.resolve(false);
+            }
         });
     }
     getIgnoredUserInfo(name) {
