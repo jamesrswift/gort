@@ -37,7 +37,7 @@ class watchedRule extends rule_class_1.default {
             message: 'User is on watch list',
             //color?: string;
             description: `A watched user has commented on r/${process.env.REDDIT_SUBREDDIT} and has triggered this warning!`,
-            //channelID?: string;
+            channelID: '934518400221319248',
         });
     }
 }

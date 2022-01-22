@@ -80,6 +80,7 @@ class subredditHistoryRule extends rule_class_1.default {
             }
         })({
             color: '#db3838',
+            channelID: '934518094804705370',
         });
     }
 }

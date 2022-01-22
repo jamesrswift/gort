@@ -18,6 +18,7 @@ class lowKarmaRule extends rule_class_1.default {
         this.Action = new actions_1.notify({
             message: 'User has low comment karma',
             color: '#a363d9',
+            channelID: '934517919013011486',
         });
     }
 }

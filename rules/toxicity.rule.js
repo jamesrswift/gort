@@ -16,6 +16,7 @@ class toxicityRule extends rule_class_1.default {
         this.Action = new actions_1.notify({
             message: 'Comment/Submission triggered Perspective NLP for either SPAM or TOXICITY',
             color: '#b2c225',
+            channelID: '934518268079788042',
         });
     }
 }
