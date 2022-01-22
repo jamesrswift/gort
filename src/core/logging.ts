@@ -120,7 +120,7 @@ export class Logger {
 
 	public log(logLevel: string, message: string): void {
 		const level = this.levelToInt(logLevel);
-		if (level < this._minLevel) return;
+		// if (level < this._minLevel) return;
 
 		const logEntry: LogEntry = {
 			level: logLevel,

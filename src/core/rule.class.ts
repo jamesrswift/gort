@@ -67,6 +67,7 @@ export class ruleHandler {
 					rule.Condition.execute(args)
 						.then((value) => {
 							if (value) {
+
 								logger.info(
 									`Executing rule ${rulename} on ${args.target.permalink}, submitted by ${args.user.name}.`
 								);

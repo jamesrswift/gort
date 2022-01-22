@@ -1,10 +1,12 @@
-import Snoowrap, { Comment } from 'snoowrap';
-import { executable, executableArguments } from '../condition.class';
 import {
 	Client,
 	IAttributeScores,
 	IClientOptions,
 } from '@conversationai/perspectiveapi-js-client';
+import dotenv from 'dotenv';
+import Snoowrap from 'snoowrap';
+import { executable, executableArguments } from '../condition.class';
+import { OrFail } from '../lib/helper.lib';
 
 export class toxitityTrigger extends executable<boolean> {
 	private _APIKey: string = '';
@@ -12,7 +14,10 @@ export class toxitityTrigger extends executable<boolean> {
 	private _options: IClientOptions;
 	public constructor(options: IClientOptions) {
 		super();
-		this._client = new Client(this._APIKey);
+
+		dotenv.config();
+		(this._APIKey = OrFail(process.env.PERSPECTIVE_API)),
+			(this._client = new Client(this._APIKey));
 		this._options = options;
 	}
 
