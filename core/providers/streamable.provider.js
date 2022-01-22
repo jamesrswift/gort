@@ -18,12 +18,12 @@ class subredditStream extends stream_1.EventEmitter {
     createListeners() {
         var _a, _b, _c, _d;
         this._commentStream = this._streamer.commentStream(this._subreddit, {
-            rate: 10000,
+            rate: 15000,
         });
         (_a = this._commentStream) === null || _a === void 0 ? void 0 : _a.on('post', this.onComment.bind(this));
         (_b = this._commentStream) === null || _b === void 0 ? void 0 : _b.on('error', this.onError.bind(this));
         this._submissionStream = this._streamer.submissionStream(this._subreddit, {
-            rate: 10000,
+            rate: 15000,
         });
         (_c = this._submissionStream) === null || _c === void 0 ? void 0 : _c.on('post', this.onSubmission.bind(this));
         (_d = this._submissionStream) === null || _d === void 0 ? void 0 : _d.on('error', this.onError.bind(this));
