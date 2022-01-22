@@ -3,28 +3,39 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.subredditStream = void 0;
+exports.subredditStream = exports.pooledSubredditStream = void 0;
 const stream_1 = require("stream");
 const snoostream_lib_1 = __importDefault(require("../lib/snoostream.lib"));
-/* istanbul ignore next */
-class subredditStream extends stream_1.EventEmitter {
-    constructor(redditProvider, subreddit) {
+const reddit_provider_1 = require("./reddit.provider");
+class pooledSubredditStream extends stream_1.EventEmitter {
+    constructor() {
         super();
-        this._redditProvider = redditProvider;
+        this._redditProvider = reddit_provider_1.RedditProvider.Instance;
+        this._subredditList = [];
+        this.streamOptions = {
+            rate: 15000
+        };
         this._streamer = new snoostream_lib_1.default(this._redditProvider.getRedditClient());
-        this._subreddit = subreddit;
-        this.createListeners();
     }
-    createListeners() {
+    static get Instance() {
+        return this._instance || (this._instance = new pooledSubredditStream());
+    }
+    addSubreddit(subreddit) {
+        if (!this._subredditList.includes(subreddit)) {
+            this._subredditList.push(subreddit);
+        }
+    }
+    addSubreddits(subreddits) {
+        subreddits.forEach(this.addSubreddit.bind(this));
+    }
+    get subreddits() { return this._subredditList.join("+"); }
+    ;
+    invalidatePolls() {
         var _a, _b, _c, _d;
-        this._commentStream = this._streamer.commentStream(this._subreddit, {
-            rate: 15000,
-        });
+        this._commentStream = this._streamer.commentStream(this.subreddits, this.streamOptions);
         (_a = this._commentStream) === null || _a === void 0 ? void 0 : _a.on('post', this.onComment.bind(this));
         (_b = this._commentStream) === null || _b === void 0 ? void 0 : _b.on('error', this.onError.bind(this));
-        this._submissionStream = this._streamer.submissionStream(this._subreddit, {
-            rate: 15000,
-        });
+        this._submissionStream = this._streamer.submissionStream(this.subreddits, this.streamOptions);
         (_c = this._submissionStream) === null || _c === void 0 ? void 0 : _c.on('post', this.onSubmission.bind(this));
         (_d = this._submissionStream) === null || _d === void 0 ? void 0 : _d.on('error', this.onError.bind(this));
     }
@@ -32,14 +43,43 @@ class subredditStream extends stream_1.EventEmitter {
     //  Event Handling
     //
     onComment(comment) {
-        void comment.author.fetch().then(((user) => {
-            this.emit('comment', user, comment);
-        }).bind(this));
+        this.emit('comment', comment.subreddit.display_name.toLowerCase(), comment.author, comment);
     }
     onSubmission(submission) {
-        void submission.author.fetch().then(((user) => {
+        this.emit('submission', submission.subreddit.display_name.toLowerCase(), submission.author, submission);
+    }
+    //
+    //  Error Handling
+    //
+    onError(error) {
+        this.emit('error', error);
+    }
+}
+exports.pooledSubredditStream = pooledSubredditStream;
+/* istanbul ignore next */
+class subredditStream extends stream_1.EventEmitter {
+    constructor(redditProvider, subreddit) {
+        super();
+        this._subreddit = subreddit;
+        this._subreddits = subreddit.split("+").map(value => value.toLowerCase());
+        pooledSubredditStream.Instance.addSubreddits(this._subreddits);
+        pooledSubredditStream.Instance.invalidatePolls();
+        pooledSubredditStream.Instance.on('comment', this.onComment.bind(this));
+        pooledSubredditStream.Instance.on('submission', this.onSubmission.bind(this));
+        pooledSubredditStream.Instance.on('error', this.onError.bind(this));
+    }
+    //
+    //  Event Handling
+    //
+    onComment(subreddit, user, comment) {
+        if (this._subreddits.includes(subreddit)) {
+            this.emit('comment', user, comment);
+        }
+    }
+    onSubmission(subreddit, user, submission) {
+        if (this._subreddits.includes(subreddit)) {
             this.emit('submission', user, submission);
-        }).bind(this));
+        }
     }
     //
     //  Error Handling

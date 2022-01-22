@@ -1,9 +1,12 @@
 import Snoowrap from 'snoowrap';
 import Pollify from './pollify.lib';
-declare type tPollFn = (...args: any[]) => Promise<any>;
-interface IPostStreamOptions {
+export declare type tPollFn = (...args: any[]) => Promise<any>;
+export interface IPostStreamOptions {
     rate?: number;
     regex?: RegExp;
+}
+export interface IPostStreamCacheObject {
+    cache: any[];
 }
 export default class SnooStream {
     snoowrap: Snoowrap;
@@ -16,4 +19,3 @@ export default class SnooStream {
     submissionStream(subreddit?: string, opts?: IPostStreamOptions): Pollify;
     modqueueStream(subreddit: string, opts?: IPostStreamOptions): Pollify;
 }
-export {};

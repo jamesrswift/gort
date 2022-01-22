@@ -39,13 +39,6 @@ class gort {
     onComment(user, comment) {
         return __awaiter(this, void 0, void 0, function* () {
             logger.trace(`Comment by ${user.name} received.`);
-            // Ignore moderators
-            /*if (user.is_mod) {
-                logger.info(
-                    `Ignoring comment by ${user.name} as they are are a moderator`
-                );
-                return;
-            }*/
             // check if user is ignored?
             if (yield ignored_manager_1.default.Instance.isUserIgnored(user.name)) {
                 logger.info(`Ignoring comment by ${user.name} as they are on the ignored user list`);
@@ -63,13 +56,6 @@ class gort {
     onSubmission(user, submission) {
         return __awaiter(this, void 0, void 0, function* () {
             logger.trace(`Submission by ${user.name} received.`);
-            // Ignore moderators
-            /*if (user.is_mod) {
-                logger.info(
-                    `Ignoring comment by ${user.name} as they are are a moderator`
-                );
-                return;
-            }*/
             // check if user is ignored?
             if (yield ignored_manager_1.default.Instance.isUserIgnored(user.name)) {
                 logger.info(`Ignoring submission by ${user.name} as they are on the ignored user list`);
@@ -85,14 +71,14 @@ class gort {
         });
     }
     onDiscordMessage(message) {
-        /*logger.trace(
-            `Discord message from ${message.author.username} received.`
-        );*/
         command_class_1.commandHandler.Instance.onMessage(message);
     }
     onError(...data) {
-        discord_provider_1.DiscordProvider.Instance.sendMessage(data.toString(), "931921081667837984");
         logger.error(data.toString());
+        if (data.toString().includes("ratelimit was exceeded")) {
+            return discord_provider_1.DiscordProvider.Instance.sendMessage("Ratelimit exceeded", "931921081667837984");
+        }
+        discord_provider_1.DiscordProvider.Instance.sendMessage(data.toString(), "931921081667837984");
     }
 }
 exports.default = gort;
