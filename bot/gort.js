@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const command_class_1 = require("../core/command.class");
+const helper_lib_1 = require("../core/lib/helper.lib");
 const logging_1 = require("../core/logging");
 const ignored_manager_1 = __importDefault(require("../core/managers/ignored.manager"));
 const discord_provider_1 = require("../core/providers/discord.provider");
@@ -24,7 +25,7 @@ const logger = logging_1.logging.getLogger('bot.gort');
 class gort {
     constructor() {
         this._astroturfBot = new astro_1.default();
-        this._ownSubredditStream = new streamable_provider_1.subredditStream(reddit_provider_1.RedditProvider.Instance, 'coronavirusuk');
+        this._ownSubredditStream = new streamable_provider_1.subredditStream(reddit_provider_1.RedditProvider.Instance, (0, helper_lib_1.OrFail)(process.env.REDDIT_SUBREDDIT));
         this._ownSubredditStream.on('comment', this.onComment.bind(this));
         this._ownSubredditStream.on('submission', this.onSubmission.bind(this));
         this._ownSubredditStream.on('error', this.onError.bind(this));

@@ -35,7 +35,7 @@ class watchedRule extends rule_class_1.default {
         this.Action = new watchedAction({
             message: 'User is on watch list',
             //color?: string;
-            description: 'A watched user has commented on r/CoronavirusUK and has triggered this warning!',
+            description: `A watched user has commented on r/${process.env.REDDIT_SUBREDDIT} and has triggered this warning!`,
             //channelID?: string;
         });
     }

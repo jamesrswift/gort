@@ -48,7 +48,7 @@ class notifyAction extends action_class_1.default {
             const embed = new discord_js_1.default.MessageEmbed()
                 .setTitle('Gort Notification')
                 .setURL('http://reddit.com' + args.target.permalink + '?context=2')
-                .setDescription((0, helper_lib_1.OrDefault)(this._sOpts.description, 'A user has commented on r/CoronavirusUK and has triggered this warning!'))
+                .setDescription((0, helper_lib_1.OrDefault)(this._sOpts.description, `A user has commented on r/${process.env.REDDIT_SUBREDDIT} and has triggered this warning!`))
                 .setTimestamp()
                 .addField('username', args.user.name)
                 // Below relies on undefined behaving as false
