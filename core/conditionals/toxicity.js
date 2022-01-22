@@ -8,15 +8,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.toxitityTrigger = void 0;
-const condition_class_1 = require("../condition.class");
 const perspectiveapi_js_client_1 = require("@conversationai/perspectiveapi-js-client");
+const dotenv_1 = __importDefault(require("dotenv"));
+const condition_class_1 = require("../condition.class");
+const helper_lib_1 = require("../lib/helper.lib");
 class toxitityTrigger extends condition_class_1.executable {
     constructor(options) {
         super();
         this._APIKey = '';
-        this._client = new perspectiveapi_js_client_1.Client(this._APIKey);
+        dotenv_1.default.config();
+        (this._APIKey = (0, helper_lib_1.OrFail)(process.env.PERSPECTIVE_API)),
+            (this._client = new perspectiveapi_js_client_1.Client(this._APIKey));
         this._options = options;
     }
     execute(args) {

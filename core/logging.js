@@ -84,8 +84,7 @@ class Logger {
     }
     log(logLevel, message) {
         const level = this.levelToInt(logLevel);
-        if (level < this._minLevel)
-            return;
+        // if (level < this._minLevel) return;
         const logEntry = {
             level: logLevel,
             module: this._module,
