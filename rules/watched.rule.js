@@ -15,15 +15,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.watchedRule = void 0;
 const notify_1 = __importDefault(require("../core/actions/notify"));
 const watched_1 = require("../core/conditionals/watched");
+const helper_lib_1 = require("../core/lib/helper.lib");
 const watched_manager_1 = __importDefault(require("../core/managers/watched.manager"));
 const rule_class_1 = __importDefault(require("../core/rule.class"));
 class watchedAction extends notify_1.default {
     buildEmbed(args, embed) {
-        var _a, _b;
         return __awaiter(this, void 0, void 0, function* () {
             const info = yield watched_manager_1.default.Instance.getWatchedUserInfo(args.user.name.toLowerCase());
-            embed.addField('Actioner', (_a = info.actioner) !== null && _a !== void 0 ? _a : "UNDEFINED");
-            embed.addField('Message', (_b = info.message) !== null && _b !== void 0 ? _b : "UNDEFINED");
+            embed.addField('Actioner', (0, helper_lib_1.OrDefault)(info.actioner, "UNDEFINED"));
+            embed.addField('Message', (0, helper_lib_1.OrDefault)(info.message, "UNDEFINED"));
         });
     }
 }

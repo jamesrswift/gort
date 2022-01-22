@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.dynamicSort = exports.getProperty = exports.textEllipsis = exports.OrFail = exports.OrDefault = void 0;
 function OrDefault(Arg, Default) {
-    return Arg !== null && Arg !== void 0 ? Arg : Default;
+    return (Arg != null && Arg != undefined) ? Arg : Default;
 }
 exports.OrDefault = OrDefault;
 function OrFail(Arg) {
