@@ -13,8 +13,8 @@ class watchedAction extends notifyAction {
 		const info = await watchedManager.Instance.getWatchedUserInfo(
 			args.user.name.toLowerCase()
 		);
-		embed.addField('Actioner', info.actioner);
-		embed.addField('Message', info.message);
+		embed.addField('Actioner', info.actioner ?? "UNDEFINED");
+		embed.addField('Message', info.message ?? "UNDEFINED");
 	}
 }
 
