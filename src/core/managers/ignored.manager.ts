@@ -51,7 +51,12 @@ export default class ignoredManager {
 	}
 
 	async isUserIgnored(user: string): Promise<boolean> {
-		return IgnoredUser.exists({ name: user.toLowerCase() });
+		try{
+			return IgnoredUser.exists({ name: user.toLowerCase() });
+		} catch(err: any) {
+			return Promise.resolve(false)
+		}
+		
 	}
 
 	public async getIgnoredUserInfo(name: string): Promise<any> {
