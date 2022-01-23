@@ -22,8 +22,8 @@ class watchedAction extends notify_1.default {
     buildEmbed(args, embed) {
         return __awaiter(this, void 0, void 0, function* () {
             const info = yield watched_manager_1.default.Instance.getWatchedUserInfo(args.user.name.toLowerCase());
-            embed.addField('Actioner', (0, helper_lib_1.OrDefault)(info.actioner, "UNDEFINED"));
-            embed.addField('Message', (0, helper_lib_1.OrDefault)(info.message, "UNDEFINED"));
+            embed.addField('Actioner', (0, helper_lib_1.OrDefault_NonEmptyString)(info.actioner, "UNDEFINED"));
+            embed.addField('Message', (0, helper_lib_1.OrDefault_NonEmptyString)(info.message, "UNDEFINED"));
         });
     }
 }

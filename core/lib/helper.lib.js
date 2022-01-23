@@ -1,10 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dynamicSort = exports.getProperty = exports.textEllipsis = exports.OrFail = exports.OrDefault = void 0;
+exports.dynamicSort = exports.getProperty = exports.textEllipsis = exports.OrFail = exports.OrDefault_NonEmptyString = exports.OrDefault = void 0;
 function OrDefault(Arg, Default) {
     return (Arg != null && Arg != undefined) ? Arg : Default;
 }
 exports.OrDefault = OrDefault;
+function OrDefault_NonEmptyString(Arg, Default) {
+    return (Arg != null && Arg != undefined && Arg.length) ? Arg : Default;
+}
+exports.OrDefault_NonEmptyString = OrDefault_NonEmptyString;
 function OrFail(Arg) {
     if (Arg)
         return Arg;

@@ -1,4 +1,5 @@
 export declare function OrDefault<T>(Arg: T | null | undefined, Default: T): T;
+export declare function OrDefault_NonEmptyString(Arg: string | null | undefined, Default: string): string;
 export declare function OrFail<T>(Arg: T | null | undefined): T;
 export interface textEllipsisOptions {
     side: 'end' | 'start' | undefined | void | null;
