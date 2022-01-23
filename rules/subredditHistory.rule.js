@@ -44,7 +44,6 @@ class subredditHistoryRule extends rule_class_1.default {
             'debatevaccines',
             'churchofcovid',
             'covidrebellionuk',
-            'antiwork',
             'joerogan',
             'awakenedtothetruth',
             'testingground4bots',

@@ -36,7 +36,6 @@ class astro {
             'coronavirus',
             'ivermectin',
             'LockdownSceptics',
-            'antiwork',
             'samharris',
             'joerogan',
             'churchofcovid',
