@@ -19,6 +19,7 @@ export class toxitityTrigger extends executable<boolean> {
 		(this._APIKey = OrFail(process.env.PERSPECTIVE_API)),
 			(this._client = new Client(this._APIKey));
 		this._options = options;
+		this._options.attributes = Array.from( this.thresholds.keys() );
 	}
 
 	private thresholds : Map<string, number> = new Map<string,number>([
