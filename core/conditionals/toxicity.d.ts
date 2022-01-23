@@ -5,6 +5,7 @@ export declare class toxitityTrigger extends executable<boolean> {
     private _client;
     private _options;
     constructor(options: IClientOptions);
-    scoresDecision(value: IAttributeScores): boolean;
+    private thresholds;
+    scoresDecision(args: executableArguments, value: IAttributeScores): boolean;
     execute(args: executableArguments): Promise<boolean>;
 }
