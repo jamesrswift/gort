@@ -47,15 +47,17 @@ export class toxitityTrigger extends executable<boolean> {
 	}
 
 	public override async execute(args: executableArguments): Promise<boolean> {
-		return new Promise<boolean>((resolve, reject) => {
-			const html =
-				args.targetType == 'Comment'
-					? (<Snoowrap.Comment>args.target).body
-					: (<Snoowrap.Submission>args.target).selftext;
-			if (html == null) return resolve(false);
 
+		const content = args.targetType == 'Comment'
+		? (<Snoowrap.Comment>args.target).body
+		: (<Snoowrap.Submission>args.target).selftext;
+
+		if ( content == null ) return Promise.resolve(false);
+		if ( content.length == 0 ) return Promise.resolve(false);
+
+		return new Promise<boolean>((resolve, reject) => {
 			this._client
-				.getScores(html.substring(0,2900), this._options)
+				.getScores(content.substring(0,2900), this._options)
 				.then((value: IAttributeScores) => {
 					resolve(this.scoresDecision(value))
 				});
