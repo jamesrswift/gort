@@ -23,7 +23,7 @@ class subredditHistoryRule extends rule_class_1.default {
         this.name = 'UserSubredditHistory';
         this.targetType = 'Both';
         this.badSubreddits = [
-            'nonewnormal',
+            // 'nonewnormal',
             'lockdownskepticism',
             'lockdowncriticalleft',
             'coronaviruscirclejerk',
@@ -31,10 +31,11 @@ class subredditHistoryRule extends rule_class_1.default {
             'ivermectin',
             'nolockdownsnomasks',
             'greenandpleasant',
+            'greenandextreme',
             'latestagecapitalism',
             'communism',
             'genzedong',
-            'leopardsatemyface',
+            // 'leopardsatemyface',
             'badunitedkingdom',
             'newcoronavirusuk',
             'coronavirusuk2',
@@ -46,12 +47,8 @@ class subredditHistoryRule extends rule_class_1.default {
             'covidrebellionuk',
             'joerogan',
             'awakenedtothetruth',
-            'testingground4bots',
+            // 'testingground4bots',
         ];
-        /*Condition = new arrayIncludesAny(
-            new subredditHistory(),
-            this.badSubreddits
-        );*/
         this.Condition = new (class extends condition_class_1.conditional {
             constructor(badSubreddits) {
                 super();

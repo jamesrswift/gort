@@ -23,7 +23,7 @@ class astro {
     constructor() {
         this._channelID = '931921060826349578'; // Brigades channel
         this._listOfSubreddits = [
-            'NoNewNormal',
+            // 'NoNewNormal',
             'LockdownSkepticism',
             'badunitedkingdom',
             'coronaviruscirclejerk',
@@ -31,13 +31,13 @@ class astro {
             'watchredditdie',
             'banned',
             'badmods',
-            'testingground4bots',
+            // 'testingground4bots',
             'europe',
             'coronavirus',
             'ivermectin',
             'LockdownSceptics',
-            'samharris',
-            'joerogan',
+            // 'samharris',
+            // 'joerogan',
             'churchofcovid',
             'awakenedtothetruth',
         ];
