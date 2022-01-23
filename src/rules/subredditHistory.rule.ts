@@ -30,7 +30,6 @@ export class subredditHistoryRule extends ruleBase {
 		'debatevaccines',
 		'churchofcovid',
 		'covidrebellionuk',
-		'antiwork',
 		'joerogan',
 		'awakenedtothetruth',
 		'testingground4bots',
