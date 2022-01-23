@@ -32,6 +32,7 @@ export class subredditHistoryRule extends ruleBase {
 		'covidrebellionuk',
 		'antiwork',
 		'joerogan',
+		'awakenedtothetruth',
 		'testingground4bots',
 	];
 

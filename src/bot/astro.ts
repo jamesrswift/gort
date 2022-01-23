@@ -36,6 +36,7 @@ export default class astro {
 		'samharris',
 		'joerogan',
 		'churchofcovid',
+		'awakenedtothetruth',
 	];
 
 	private _listOfKeywords: string[] = [
