@@ -46,6 +46,7 @@ class subredditHistoryRule extends rule_class_1.default {
             'covidrebellionuk',
             'antiwork',
             'joerogan',
+            'awakenedtothetruth',
             'testingground4bots',
         ];
         /*Condition = new arrayIncludesAny(
