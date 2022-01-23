@@ -52,7 +52,7 @@ class toxitityTrigger extends condition_class_1.executable {
         for (const [key, threshold] of this.thresholds) {
             if (value[key] == undefined || value[key] == null)
                 continue;
-            if (threshold >= value[key]) {
+            if (value[key] >= threshold) {
                 triggered.push(key);
             }
         }
