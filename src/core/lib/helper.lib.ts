@@ -1,5 +1,10 @@
+
 export function OrDefault<T>(Arg: T | null | undefined, Default: T): T {
 	return ( Arg != null && Arg != undefined) ? Arg : Default;
+}
+
+export function OrDefault_NonEmptyString( Arg: string | null | undefined, Default: string): string{
+	return ( Arg != null && Arg != undefined && Arg.length) ? Arg : Default;
 }
 
 export function OrFail<T>(Arg: T | null | undefined): T {
