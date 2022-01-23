@@ -53,7 +53,7 @@ export class toxitityTrigger extends executable<boolean> {
 		for ( const [key, threshold] of this.thresholds ){
 			if ( value[key] == undefined || value[key] == null) continue;
 			if ( value[key] >= threshold ){
-				triggered.push(key)
+				triggered.push(`${key.toLowerCase()} (${value[key]})`)
 			}
 		}
 		args.cookies['toxicity_triggered'] = triggered ?? [];
