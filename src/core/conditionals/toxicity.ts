@@ -51,7 +51,7 @@ export class toxitityTrigger extends executable<boolean> {
 		const triggered : string[] = [];
 		for ( const [key, threshold] of this.thresholds ){
 			if ( value[key] == undefined || value[key] == null) continue;
-			if ( threshold >= value[key] ){
+			if ( value[key] >= threshold ){
 				triggered.push(key)
 			}
 		}
