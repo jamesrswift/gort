@@ -46,6 +46,7 @@ class toxitityTrigger extends condition_class_1.executable {
         (this._APIKey = (0, helper_lib_1.OrFail)(process.env.PERSPECTIVE_API)),
             (this._client = new perspectiveapi_js_client_1.Client(this._APIKey));
         this._options = options;
+        this._options.attributes = Array.from(this.thresholds.keys());
     }
     scoresDecision(args, value) {
         const triggered = [];
