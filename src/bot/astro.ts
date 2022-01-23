@@ -19,7 +19,7 @@ export default class astro {
 	private _channelID: string = '931921060826349578'; // Brigades channel
 
 	private _listOfSubreddits: string[] = [
-		'NoNewNormal',
+		// 'NoNewNormal',
 		'LockdownSkepticism',
 		'badunitedkingdom',
 		'coronaviruscirclejerk',
@@ -27,13 +27,13 @@ export default class astro {
 		'watchredditdie',
 		'banned',
 		'badmods',
-		'testingground4bots',
+		// 'testingground4bots',
 		'europe',
 		'coronavirus',
 		'ivermectin',
 		'LockdownSceptics',
-		'samharris',
-		'joerogan',
+		// 'samharris',
+		// 'joerogan',
 		'churchofcovid',
 		'awakenedtothetruth',
 	];

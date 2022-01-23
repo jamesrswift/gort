@@ -9,7 +9,7 @@ export class subredditHistoryRule extends ruleBase {
 	targetType: targetType = 'Both';
 
 	badSubreddits: string[] = [
-		'nonewnormal',
+		// 'nonewnormal',
 		'lockdownskepticism',
 		'lockdowncriticalleft',
 		'coronaviruscirclejerk',
@@ -17,10 +17,11 @@ export class subredditHistoryRule extends ruleBase {
 		'ivermectin',
 		'nolockdownsnomasks',
 		'greenandpleasant',
+		'greenandextreme',
 		'latestagecapitalism',
 		'communism',
 		'genzedong',
-		'leopardsatemyface',
+		// 'leopardsatemyface',
 		'badunitedkingdom',
 		'newcoronavirusuk',
 		'coronavirusuk2',
@@ -32,13 +33,8 @@ export class subredditHistoryRule extends ruleBase {
 		'covidrebellionuk',
 		'joerogan',
 		'awakenedtothetruth',
-		'testingground4bots',
+		// 'testingground4bots',
 	];
-
-	/*Condition = new arrayIncludesAny(
-		new subredditHistory(),
-		this.badSubreddits
-	);*/
 
 	Condition: conditional = new (class extends conditional {
 		badSubreddits: string[] = [];
