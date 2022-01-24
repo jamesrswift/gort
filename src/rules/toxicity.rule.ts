@@ -12,7 +12,8 @@ class toxicityAction extends notify {
 		args: executableArguments,
 		embed: MessageEmbed
 	): Promise<void> {
-		embed.addField('Message', args.cookies['toxicity_triggered'].join(","));
+		super.buildEmbed(args, embed);
+		embed.addField('AI Output', args.cookies['toxicity_triggered'].join(", "));
 	}
 }
 
