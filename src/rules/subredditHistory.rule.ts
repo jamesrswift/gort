@@ -9,7 +9,6 @@ export class subredditHistoryRule extends ruleBase {
 	targetType: targetType = 'Both';
 
 	badSubreddits: string[] = [
-		// 'nonewnormal',
 		'lockdownskepticism',
 		'lockdowncriticalleft',
 		'coronaviruscirclejerk',
@@ -21,7 +20,6 @@ export class subredditHistoryRule extends ruleBase {
 		'latestagecapitalism',
 		'communism',
 		'genzedong',
-		// 'leopardsatemyface',
 		'badunitedkingdom',
 		'newcoronavirusuk',
 		'coronavirusuk2',
@@ -33,7 +31,8 @@ export class subredditHistoryRule extends ruleBase {
 		'covidrebellionuk',
 		'joerogan',
 		'awakenedtothetruth',
-		// 'testingground4bots',
+		'vaccinelonghauler',
+		'wuhan_flu',
 	];
 
 	Condition: conditional = new (class extends conditional {
