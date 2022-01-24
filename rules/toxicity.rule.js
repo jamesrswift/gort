@@ -18,8 +18,12 @@ const toxicity_1 = require("../core/conditionals/toxicity");
 const rule_class_1 = __importDefault(require("../core/rule.class"));
 class toxicityAction extends actions_1.notify {
     buildEmbed(args, embed) {
+        const _super = Object.create(null, {
+            buildEmbed: { get: () => super.buildEmbed }
+        });
         return __awaiter(this, void 0, void 0, function* () {
-            embed.addField('Message', args.cookies['toxicity_triggered'].join(","));
+            _super.buildEmbed.call(this, args, embed);
+            embed.addField('AI Output', args.cookies['toxicity_triggered'].join(", "));
         });
     }
 }
