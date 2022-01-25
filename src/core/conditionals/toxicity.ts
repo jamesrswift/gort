@@ -39,12 +39,13 @@ export class toxitityTrigger extends executable<boolean> {
 		['ATTACK_ON_COMMENTER', 0.95], // Attack on fellow commenter.
 		['INCOHERENT', 0.95], // Difficult to understand, nonsensical.
 		['INFLAMMATORY', 0.95], // Intending to provoke or inflame.
-		['LIKELY_TO_REJECT', 0.95], // Overall measure of the likelihood for the comment to be rejected according to the NYT's moderation.
-		['OBSCENE', 0.95], // Obscene or vulgar language such as cursing.
-		['SPAM', 0.95], // Irrelevant and unsolicited commercial content.
 
 		// Disabled
 		['UNSUBSTANTIAL', 2], // Trivial or short comments
+
+		['LIKELY_TO_REJECT', 2], // Overall measure of the likelihood for the comment to be rejected according to the NYT's moderation.
+		['OBSCENE', 2], // Obscene or vulgar language such as cursing.
+		['SPAM', 2], // Irrelevant and unsolicited commercial content.
 	])
 
 	public scoresDecision(args: executableArguments, value: IAttributeScores) : boolean{
