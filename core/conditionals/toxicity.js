@@ -36,11 +36,11 @@ class toxitityTrigger extends condition_class_1.executable {
             ['ATTACK_ON_COMMENTER', 0.95],
             ['INCOHERENT', 0.95],
             ['INFLAMMATORY', 0.95],
-            ['LIKELY_TO_REJECT', 0.95],
-            ['OBSCENE', 0.95],
-            ['SPAM', 0.95],
             // Disabled
-            ['UNSUBSTANTIAL', 2], // Trivial or short comments
+            ['UNSUBSTANTIAL', 2],
+            ['LIKELY_TO_REJECT', 2],
+            ['OBSCENE', 2],
+            ['SPAM', 2], // Irrelevant and unsolicited commercial content.
         ]);
         dotenv_1.default.config();
         (this._APIKey = (0, helper_lib_1.OrFail)(process.env.PERSPECTIVE_API)),
