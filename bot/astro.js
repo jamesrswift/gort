@@ -40,6 +40,7 @@ class astro {
             // 'joerogan',
             'churchofcovid',
             'awakenedtothetruth',
+            'srne',
         ];
         this._listOfKeywords = [
             'coughuk',
