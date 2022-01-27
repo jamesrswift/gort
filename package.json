@@ -34,7 +34,7 @@
 		"@conversationai/perspectiveapi-js-client": "^1.0.1",
 		"chalk": "^4.1.2",
 		"discord.js": "^13.5.0",
-		"dotenv": "^14.3.0",
+		"dotenv": "^14.3.2",
 		"mongoose": "^6.1.8",
 		"snoowrap": "^1.23.0",
 		"toolbox-api": "github:eritbh/toolbox-api#builds/main"
