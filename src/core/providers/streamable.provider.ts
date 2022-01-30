@@ -41,8 +41,10 @@ export class pooledSubredditStream extends EventEmitter{
 	private get subreddits() : string { return this._subredditList.join("+") };
 
 	public invalidatePolls(){
-		// Unlisted
+		// Unlisten
+		this._commentStream?.stop();
 		this._commentStream?.removeAllListeners();
+		this._submissionStream?.stop();
 		this._submissionStream?.removeAllListeners()
 
 		this._commentStream = this._streamer.commentStream(this.subreddits, this.streamOptions);
