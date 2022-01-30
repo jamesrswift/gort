@@ -31,13 +31,16 @@ class pooledSubredditStream extends stream_1.EventEmitter {
     get subreddits() { return this._subredditList.join("+"); }
     ;
     invalidatePolls() {
-        var _a, _b, _c, _d;
+        var _a, _b, _c, _d, _e, _f;
+        // Unlisted
+        (_a = this._commentStream) === null || _a === void 0 ? void 0 : _a.removeAllListeners();
+        (_b = this._submissionStream) === null || _b === void 0 ? void 0 : _b.removeAllListeners();
         this._commentStream = this._streamer.commentStream(this.subreddits, this.streamOptions);
-        (_a = this._commentStream) === null || _a === void 0 ? void 0 : _a.on('post', this.onComment.bind(this));
-        (_b = this._commentStream) === null || _b === void 0 ? void 0 : _b.on('error', this.onError.bind(this));
+        (_c = this._commentStream) === null || _c === void 0 ? void 0 : _c.on('post', this.onComment.bind(this));
+        (_d = this._commentStream) === null || _d === void 0 ? void 0 : _d.on('error', this.onError.bind(this));
         this._submissionStream = this._streamer.submissionStream(this.subreddits, this.streamOptions);
-        (_c = this._submissionStream) === null || _c === void 0 ? void 0 : _c.on('post', this.onSubmission.bind(this));
-        (_d = this._submissionStream) === null || _d === void 0 ? void 0 : _d.on('error', this.onError.bind(this));
+        (_e = this._submissionStream) === null || _e === void 0 ? void 0 : _e.on('post', this.onSubmission.bind(this));
+        (_f = this._submissionStream) === null || _f === void 0 ? void 0 : _f.on('error', this.onError.bind(this));
     }
     //
     //  Event Handling
