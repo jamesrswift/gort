@@ -16,6 +16,7 @@ const command_class_1 = __importDefault(require("../core/command.class"));
 const logging_1 = require("../core/logging");
 const reddit_provider_1 = require("../core/providers/reddit.provider");
 const report_banevasion_1 = require("../extensions/report_banevasion");
+const discord_provider_1 = require("../core/providers/discord.provider");
 const logger = logging_1.logging.getLogger('core.commands.report');
 class reportCommand extends command_class_1.default {
     constructor() {
@@ -34,14 +35,11 @@ class reportCommand extends command_class_1.default {
                 logger.warn(`Malformed command, no action taken! Correct usage: ${this.usage}`);
                 return `Malformed command, no action taken! Correct usage: ${this.usage}`;
             }
-            reddit_provider_1.RedditProvider.Instance.getRedditClient().getUser(username)
-                .then((user) => __awaiter(this, void 0, void 0, function* () {
-                const response = yield (0, report_banevasion_1.reportBanEvasion)(user);
-                discordMessage.reply(`Reported ${username} for ban evasion, response: ${response}`);
-            })).catch((reason) => {
-                // Should never need to be called
-                discordMessage.reply(`There was an error reporting user: ${reason}`);
-            });
+            const user = reddit_provider_1.RedditProvider.Instance.getRedditClient().getUser(username);
+            const response = yield (0, report_banevasion_1.reportBanEvasion)(user);
+            console.log(response);
+            discordMessage.reply(`Reported ${username} for ban evasion, response: ${response}`);
+            discord_provider_1.DiscordProvider.Instance.sendMessage(`REPORT: ${username}`, "913364442274725948");
         });
     }
 }
