@@ -2,7 +2,7 @@ import { MessageEmbed } from 'discord.js';
 import notifyAction from '../core/actions/notify';
 import { executableArguments } from '../core/condition.class';
 import { isWatched } from '../core/conditionals/watched';
-import { OrDefault_NonEmptyString } from '../core/lib/helper.lib';
+import { MessageEmbed_NoThrow, OrDefault_NonEmptyString } from '../core/lib/helper.lib';
 import watchedManager from '../core/managers/watched.manager';
 import ruleBase, { targetType } from '../core/rule.class';
 
@@ -14,8 +14,8 @@ class watchedAction extends notifyAction {
 		const info = await watchedManager.Instance.getWatchedUserInfo(
 			args.user.name.toLowerCase()
 		);
-		embed.addField('Actioner', OrDefault_NonEmptyString(info.actioner,"UNDEFINED") )
-		embed.addField('Message', OrDefault_NonEmptyString(info.message,"UNDEFINED"));
+		MessageEmbed_NoThrow( embed, 'Actioner', OrDefault_NonEmptyString(info.actioner,"UNDEFINED") )
+		MessageEmbed_NoThrow( embed, 'Message', OrDefault_NonEmptyString(info.message,"UNDEFINED"));
 	}
 }
 

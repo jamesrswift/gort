@@ -1,8 +1,8 @@
-import Discord, { ColorResolvable } from 'discord.js';
+import Discord, { ColorResolvable, Message } from 'discord.js';
 import Snoowrap from 'snoowrap';
 import action from '../action.class';
 import { executableArguments } from '../condition.class';
-import { OrDefault, textEllipsis } from '../lib/helper.lib';
+import { MessageEmbed_NoThrow, OrDefault, textEllipsis } from '../lib/helper.lib';
 import { logging } from '../logging';
 import { DiscordProvider } from '../providers/discord.provider';
 
@@ -32,20 +32,16 @@ export default class notifyAction extends action {
 		args: executableArguments,
 		embed: Discord.MessageEmbed
 	) {
-		embed
-			.addField(
-				'Account Age (days)',
-				Math.ceil(
-					(Date.now() / 1000 - args.user.created) / (60 * 60 * 24)
-				).toString(),
-				true
-			)
-			.addField('Link Karma', args.user.link_karma.toString(), true)
-			.addField(
-				'Comment Karma',
-				args.user.comment_karma.toString(),
-				true
-			);
+		MessageEmbed_NoThrow(embed, 'Account Age (days)',
+			Math.ceil(
+				(Date.now() / 1000 - args.user.created) / (60 * 60 * 24)
+			).toString(),
+			true );
+
+		MessageEmbed_NoThrow(embed,'Link Karma', args.user.link_karma.toString(), true);
+		MessageEmbed_NoThrow(embed, 'Comment Karma',
+			args.user.comment_karma.toString(),
+			true );
 	}
 
 	public async buildReasonField(
@@ -65,25 +61,20 @@ export default class notifyAction extends action {
 					`A user has commented on r/${process.env.REDDIT_SUBREDDIT} and has triggered this warning!`
 				)
 			)
-			.setTimestamp()
-			.addField('username', args.user.name)
+			.setTimestamp();
 
-			// Below relies on undefined behaving as false
-			.addField(
-				'Content Body',
+			MessageEmbed_NoThrow( embed,'username', args.user.name)
+			MessageEmbed_NoThrow( embed,'Content Body',
 				textEllipsis(
 					(<Snoowrap.Comment>args.target).body ||
 						(<Snoowrap.Submission>args.target).selftext,
 					500
 				)
-			);
+			)
 
 		await this.buildEmbed(args, embed);
 
-		embed.addField(
-			'Trigger Reason',
-			(await this.buildReasonField(args, embed)) ?? 'UNDEFINED'
-		);
+		MessageEmbed_NoThrow( embed, 'Trigger Reason', (await this.buildReasonField(args, embed)) ?? 'UNDEFINED')
 		embed.setFooter({ text: 'Provided by CensorshipCo' });
 		embed.setColor(this._sOpts.color ?? '#0099ff');
 

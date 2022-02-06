@@ -1,3 +1,4 @@
+import Discord from 'discord.js';
 
 export function OrDefault<T>(Arg: T | null | undefined, Default: T): T {
 	return ( Arg != null && Arg != undefined) ? Arg : Default;
@@ -5,6 +6,10 @@ export function OrDefault<T>(Arg: T | null | undefined, Default: T): T {
 
 export function OrDefault_NonEmptyString( Arg: string | null | undefined, Default: string): string{
 	return ( Arg != null && Arg != undefined && Arg.length) ? Arg : Default;
+}
+
+export function MessageEmbed_NoThrow( embed: Discord.MessageEmbed, name: string, value: string, inline?: boolean | undefined ){
+	return embed.addField( name, OrDefault_NonEmptyString(value, "<ERROR>"), inline)
 }
 
 export function OrFail<T>(Arg: T | null | undefined): T {
