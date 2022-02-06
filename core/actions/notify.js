@@ -30,10 +30,9 @@ class notifyAction extends action_class_1.default {
     }
     buildEmbed(args, embed) {
         return __awaiter(this, void 0, void 0, function* () {
-            embed
-                .addField('Account Age (days)', Math.ceil((Date.now() / 1000 - args.user.created) / (60 * 60 * 24)).toString(), true)
-                .addField('Link Karma', args.user.link_karma.toString(), true)
-                .addField('Comment Karma', args.user.comment_karma.toString(), true);
+            (0, helper_lib_1.MessageEmbed_NoThrow)(embed, 'Account Age (days)', Math.ceil((Date.now() / 1000 - args.user.created) / (60 * 60 * 24)).toString(), true);
+            (0, helper_lib_1.MessageEmbed_NoThrow)(embed, 'Link Karma', args.user.link_karma.toString(), true);
+            (0, helper_lib_1.MessageEmbed_NoThrow)(embed, 'Comment Karma', args.user.comment_karma.toString(), true);
         });
     }
     buildReasonField(args, embed) {
@@ -49,13 +48,12 @@ class notifyAction extends action_class_1.default {
                 .setTitle('Gort Notification')
                 .setURL('http://reddit.com' + args.target.permalink + '?context=2')
                 .setDescription((0, helper_lib_1.OrDefault)(this._sOpts.description, `A user has commented on r/${process.env.REDDIT_SUBREDDIT} and has triggered this warning!`))
-                .setTimestamp()
-                .addField('username', args.user.name)
-                // Below relies on undefined behaving as false
-                .addField('Content Body', (0, helper_lib_1.textEllipsis)(args.target.body ||
+                .setTimestamp();
+            (0, helper_lib_1.MessageEmbed_NoThrow)(embed, 'username', args.user.name);
+            (0, helper_lib_1.MessageEmbed_NoThrow)(embed, 'Content Body', (0, helper_lib_1.textEllipsis)(args.target.body ||
                 args.target.selftext, 500));
             yield this.buildEmbed(args, embed);
-            embed.addField('Trigger Reason', (_a = (yield this.buildReasonField(args, embed))) !== null && _a !== void 0 ? _a : 'UNDEFINED');
+            (0, helper_lib_1.MessageEmbed_NoThrow)(embed, 'Trigger Reason', (_a = (yield this.buildReasonField(args, embed))) !== null && _a !== void 0 ? _a : 'UNDEFINED');
             embed.setFooter({ text: 'Provided by CensorshipCo' });
             embed.setColor((_b = this._sOpts.color) !== null && _b !== void 0 ? _b : '#0099ff');
             discord_provider_1.DiscordProvider.Instance.sendMessage({ embeds: [embed] }, this._sOpts.channelID);

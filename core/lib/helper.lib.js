@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dynamicSort = exports.getProperty = exports.textEllipsis = exports.OrFail = exports.OrDefault_NonEmptyString = exports.OrDefault = void 0;
+exports.dynamicSort = exports.getProperty = exports.textEllipsis = exports.OrFail = exports.MessageEmbed_NoThrow = exports.OrDefault_NonEmptyString = exports.OrDefault = void 0;
 function OrDefault(Arg, Default) {
     return (Arg != null && Arg != undefined) ? Arg : Default;
 }
@@ -9,6 +9,10 @@ function OrDefault_NonEmptyString(Arg, Default) {
     return (Arg != null && Arg != undefined && Arg.length) ? Arg : Default;
 }
 exports.OrDefault_NonEmptyString = OrDefault_NonEmptyString;
+function MessageEmbed_NoThrow(embed, name, value, inline) {
+    return embed.addField(name, OrDefault_NonEmptyString(value, "<ERROR>"), inline);
+}
+exports.MessageEmbed_NoThrow = MessageEmbed_NoThrow;
 function OrFail(Arg) {
     if (Arg)
         return Arg;
