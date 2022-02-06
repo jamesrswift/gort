@@ -2,8 +2,8 @@ import commandBase, { commandHandler } from '../core/command.class';
 import Discord from 'discord.js';
 import { logging } from '../core/logging';
 import { RedditProvider } from '../core/providers/reddit.provider';
-import Snoowrap from 'snoowrap';
 import { reportBanEvasion } from '../extensions/report_banevasion';
+import { DiscordProvider } from '../core/providers/discord.provider';
 
 const logger = logging.getLogger('core.commands.report');
 
@@ -29,15 +29,11 @@ class reportCommand extends commandBase {
 			return `Malformed command, no action taken! Correct usage: ${this.usage}`;
 		}
 
-        RedditProvider.Instance.getRedditClient().getUser( username )
-        .then( async (user: Snoowrap.RedditUser) => {
-            const response = await reportBanEvasion( user );
-            discordMessage.reply( `Reported ${username} for ban evasion, response: ${response}`)
-        }).catch( (reason:any) => {
-            // Should never need to be called
-            discordMessage.reply( `There was an error reporting user: ${reason}`)
-        })
-
+        const user = RedditProvider.Instance.getRedditClient().getUser( username )
+        const response = await reportBanEvasion( user );
+        console.log(response)
+        discordMessage.reply( `Reported ${username} for ban evasion, response: ${response}`)
+        DiscordProvider.Instance.sendMessage( `REPORT: ${username}`, "913364442274725948")
     }
 }
 
