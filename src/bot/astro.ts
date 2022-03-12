@@ -29,7 +29,7 @@ export default class astro {
 		'badmods',
 		// 'testingground4bots',
 		'europe',
-		'coronavirus',
+		// 'coronavirus',
 		'ivermectin',
 		'LockdownSceptics',
 		// 'samharris',
