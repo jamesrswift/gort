@@ -408,7 +408,7 @@
 		},
 		"node_modules/@conversationai/perspectiveapi-js-client": {
 			"version": "1.0.1",
-			"resolved": "git+ssh://git@github.com/JamesxX/perspectiveapi-js-client.git#6d8be5478c3efc176465754a94658ee1fe763018",
+			"resolved": "git+ssh://git@github.com/JamesxX/perspectiveapi-js-client.git#5d7ca7aee84a520be4a5670d56120f16258a401c",
 			"license": "Apache-2.0",
 			"dependencies": {
 				"axios": "^0.26.1",
@@ -4001,8 +4001,8 @@
 			}
 		},
 		"@conversationai/perspectiveapi-js-client": {
-			"version": "git+ssh://git@github.com/JamesxX/perspectiveapi-js-client.git#6d8be5478c3efc176465754a94658ee1fe763018",
-			"from": "@conversationai/perspectiveapi-js-client@https://github.com/JamesxX/perspectiveapi-js-client.git#Fix-Security",
+			"version": "git+ssh://git@github.com/JamesxX/perspectiveapi-js-client.git#5d7ca7aee84a520be4a5670d56120f16258a401c",
+			"from": "@conversationai/perspectiveapi-js-client@github:JamesxX/perspectiveapi-js-client#Fix-Security",
 			"requires": {
 				"axios": "^0.26.1",
 				"striptags": "^3.0.1"
