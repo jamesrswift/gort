@@ -35,7 +35,7 @@
 		"chalk": "^4.1.2",
 		"discord.js": "^13.5.0",
 		"dotenv": "^15.0.0",
-		"mongoose": "^6.1.10",
+		"mongoose": "^6.2.6",
 		"snoowrap": "^1.23.0",
 		"toolbox-api": "github:eritbh/toolbox-api#builds/main"
 	}
