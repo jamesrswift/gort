@@ -52,7 +52,7 @@ export default class ignoredManager {
 
 	async isUserIgnored(user: string): Promise<boolean> {
 		try{
-			return IgnoredUser.exists({ name: user.toLowerCase() });
+			return IgnoredUser.exists({ name: user.toLowerCase() }) != null;
 		} catch(err: any) {
 			return Promise.resolve(false)
 		}

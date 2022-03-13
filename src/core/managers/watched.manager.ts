@@ -51,7 +51,7 @@ export default class watchedManager {
 	}
 
 	public async isUserWatched(user: string): Promise<boolean> {
-		return WatchedUser.exists({ name: user.toLowerCase() });
+		return WatchedUser.exists({ name: user.toLowerCase() }) != null;
 	}
 
 	public async getWatchedUserInfo(name: string): Promise<any> {
