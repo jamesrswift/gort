@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -79,7 +83,7 @@ class DiscordProvider extends stream_1.EventEmitter {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
             // Check if muted first
-            return (_a = (yield this.getChannel((0, helper_lib_1.OrDefault)(channelID, (0, helper_lib_1.OrFail)(process.env.DISCORD_CHANNEL))))) === null || _a === void 0 ? void 0 : _a.send(options);
+            return (_a = ((yield this.getChannel((0, helper_lib_1.OrDefault)(channelID, (0, helper_lib_1.OrFail)(process.env.DISCORD_CHANNEL)))))) === null || _a === void 0 ? void 0 : _a.send(options);
         });
     }
 }

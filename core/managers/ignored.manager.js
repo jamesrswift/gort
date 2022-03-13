@@ -54,7 +54,7 @@ class ignoredManager {
     isUserIgnored(user) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return exports.IgnoredUser.exists({ name: user.toLowerCase() });
+                return exports.IgnoredUser.exists({ name: user.toLowerCase() }) != null;
             }
             catch (err) {
                 return Promise.resolve(false);
