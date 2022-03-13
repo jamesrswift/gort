@@ -39,7 +39,7 @@ export default class brigadeManager {
 	}
 
 	public async isTargetOnBrigadeList(target: string): Promise<boolean> {
-		return BrigadeEntry.exists({ target: target.toLowerCase() }) != null;
+		return (await BrigadeEntry.exists({ target: target.toLowerCase() }).exec()) != null;
 	}
 
 	public async getBrigadeEntryInfo(target: string): Promise<any> {
