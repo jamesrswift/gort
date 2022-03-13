@@ -42,7 +42,7 @@ class brigadeManager {
     }
     isTargetOnBrigadeList(target) {
         return __awaiter(this, void 0, void 0, function* () {
-            return exports.BrigadeEntry.exists({ target: target.toLowerCase() }) != null;
+            return (yield exports.BrigadeEntry.exists({ target: target.toLowerCase() }).exec()) != null;
         });
     }
     getBrigadeEntryInfo(target) {

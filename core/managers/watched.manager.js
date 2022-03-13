@@ -52,7 +52,7 @@ class watchedManager {
     }
     isUserWatched(user) {
         return __awaiter(this, void 0, void 0, function* () {
-            return exports.WatchedUser.exists({ name: user.toLowerCase() }) != null;
+            return (yield exports.WatchedUser.exists({ name: user.toLowerCase() }).exec()) != null;
         });
     }
     getWatchedUserInfo(name) {
