@@ -50,6 +50,8 @@ class astro {
             'covuk',
             'coronauk',
             'ronauk',
+            'monkeypoxuk',
+            'lassafeveruk',
         ];
         this._stream = new streamable_provider_1.subredditStream(reddit_provider_1.RedditProvider.Instance, this._listOfSubreddits.join('+'));
         this._stream.on('comment', this.onComment.bind(this));
