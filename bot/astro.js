@@ -63,6 +63,9 @@ class astro {
             type: 'Comment',
             target: comment,
         };
+        // Ignore automoderator
+        if (user.name == "AutoModerator")
+            return;
         // Check comment body for link
         result.linked = this.containsLinkToSubreddit(comment.body_html);
         // Check comment body for keyword
