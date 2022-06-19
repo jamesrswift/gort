@@ -47,6 +47,8 @@ export default class astro {
 		'covuk',
 		'coronauk',
 		'ronauk',
+		'monkeypoxuk',
+		'lassafeveruk',
 	];
 
 	private _stream: subredditStream;
