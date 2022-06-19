@@ -67,6 +67,9 @@ export default class astro {
 			target: comment,
 		};
 
+		// Ignore automoderator
+		if ( user.name == "AutoModerator" ) return;
+
 		// Check comment body for link
 		result.linked = this.containsLinkToSubreddit(comment.body_html);
 
