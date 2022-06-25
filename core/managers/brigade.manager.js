@@ -52,7 +52,7 @@ class brigadeManager {
     }
     static stringContainsBrigadeLink(text) {
         let results = [];
-        const Regex = new RegExp(`(?:(?:https?:\/\/)?(?:(?:www|old|new|i|m|[a-z]{2})\\.)?reddit\\.com)?\/r\/${process.env.REDDIT_SUBREDDIT}\/(?:comments\/)?(?<target>[a-z0-9]{6})`, "gm");
+        const Regex = new RegExp(`(?:(?:https?:\/\/)?(?:(?:www|old|new|i|m|[a-z]{2})\\.)?(?:reddit|reveddit)\\.com)?\/(?:r|v)\/${process.env.REDDIT_SUBREDDIT}\/(?:comments\/)?(?<target>[a-z0-9]{6})`, "gm");
         const matches = text.matchAll(Regex);
         for (const match of matches) {
             results.push({
