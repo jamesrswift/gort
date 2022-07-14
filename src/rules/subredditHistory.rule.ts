@@ -35,6 +35,7 @@ export class subredditHistoryRule extends ruleBase {
 		'wuhan_flu',
 		'srne',
 		'2007scape',
+		'LocksownScepticism',
 	];
 
 	Condition: conditional = new (class extends conditional {
