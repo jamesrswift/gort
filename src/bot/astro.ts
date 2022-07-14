@@ -37,6 +37,7 @@ export default class astro {
 		'churchofcovid',
 		'awakenedtothetruth',
 		'srne',
+		'LockdownSkepticism',
 	];
 
 	private _listOfKeywords: string[] = [
