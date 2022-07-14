@@ -41,6 +41,7 @@ class astro {
             'churchofcovid',
             'awakenedtothetruth',
             'srne',
+            'LockdownSkepticism',
         ];
         this._listOfKeywords = [
             'coughuk',

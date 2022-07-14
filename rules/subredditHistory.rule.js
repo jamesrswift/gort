@@ -49,6 +49,7 @@ class subredditHistoryRule extends rule_class_1.default {
             'wuhan_flu',
             'srne',
             '2007scape',
+            'LocksownScepticism',
         ];
         this.Condition = new (class extends condition_class_1.conditional {
             constructor(badSubreddits) {
